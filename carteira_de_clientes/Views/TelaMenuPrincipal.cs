@@ -93,7 +93,7 @@ namespace carteira_de_clientes
             picboxPremyer = new PictureBox();
             picboxPremyer.Location = new System.Drawing.Point(15, 1);
             picboxPremyer.Size = new System.Drawing.Size(350, 300);
-            picboxPremyer.Image = Image.FromFile(@"C:\Users\vitor\Desktop\Img\Premyer.png");
+            picboxPremyer.Image = Image.FromFile(@"Views\assets\Premyer.png");
             picboxPremyer.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(picboxPremyer);
 
@@ -163,7 +163,7 @@ namespace carteira_de_clientes
             picboxTabela = new PictureBox();
             picboxTabela.Location = new System.Drawing.Point(380, 0);
             picboxTabela.Size = new System.Drawing.Size(1550, 1080);
-            picboxTabela.Image = Image.FromFile(@"C:\Users\vitor\Desktop\Img\Tabela.png");
+            picboxTabela.Image = Image.FromFile(@"Views\assets\Tabela.png");
             picboxTabela.SizeMode = PictureBoxSizeMode.StretchImage;
             lblBemVindo = new Label();
             lblBemVindo.Location = new System.Drawing.Point(900, 500);

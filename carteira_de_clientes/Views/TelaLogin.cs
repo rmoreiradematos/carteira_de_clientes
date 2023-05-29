@@ -82,15 +82,15 @@ namespace carteira_de_clientes
             picboxPremyer = new PictureBox();
             picboxPremyer.Location = new System.Drawing.Point(150, 20);
             picboxPremyer.Size = new System.Drawing.Size(250, 200);
-            picboxPremyer.Image = Image.FromFile(@"C:\Users\vitor\Desktop\Img\Premyer.png");
+            picboxPremyer.Image = Image.FromFile(@"Views\assets\Premyer.png");
             picboxPremyer.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(picboxPremyer);
         }
 
         private void BtnSenha_Click(object sender, EventArgs e)
         {
-            TelaEsqueceuSenha telaEsqueceuSenha = new TelaEsqueceuSenha();
-            telaEsqueceuSenha.Show();
+            // TelaEsqueceuSenha telaEsqueceuSenha = new TelaEsqueceuSenha();
+            // telaEsqueceuSenha.Show();
             this.Hide();
         }
         private void BtnEntrar_Click(object sender, EventArgs e)
