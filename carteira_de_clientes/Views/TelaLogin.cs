@@ -89,8 +89,8 @@ namespace carteira_de_clientes
 
         private void BtnSenha_Click(object sender, EventArgs e)
         {
-            // TelaEsqueceuSenha telaEsqueceuSenha = new TelaEsqueceuSenha();
-            // telaEsqueceuSenha.Show();
+            TelaEsqueceuSenha telaEsqueceuSenha = new TelaEsqueceuSenha();
+            telaEsqueceuSenha.Show();
             this.Hide();
         }
         private void BtnEntrar_Click(object sender, EventArgs e)
