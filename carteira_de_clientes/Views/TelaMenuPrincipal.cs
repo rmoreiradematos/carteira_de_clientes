@@ -16,7 +16,6 @@ namespace carteira_de_clientes
         private DataGridView dataGridViewFuncionario;
         private DataGridView dataGridViewCliente;
         private DataGridView dataGridViewOrdemServico;
-        private DataGridView dataGridViewGrafico;
         private Label lblBemVindo;
 
 
@@ -179,7 +178,6 @@ namespace carteira_de_clientes
         {
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = false;
-            //dataGridViewGrafico.Visible = false;
             dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
 
             btnFuncionario.ForeColor = Color.Red;
@@ -191,7 +189,6 @@ namespace carteira_de_clientes
         private void btnCliente_Click(object sender, EventArgs e)
         {
             dataGridViewOrdemServico.Visible = false;
-            //dataGridViewGrafico.Visible = false;
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
 
@@ -203,15 +200,15 @@ namespace carteira_de_clientes
 
         private void btnGrafico_Click(object sender, EventArgs e)
         {
-            //dataGridViewOrdemServico.Visible = false;
-            //dataGridViewFuncionario.Visible = false;
-            //dataGridViewCliente.Visible = false;
-            //dataGridViewGrafico.Visible =!dataGridViewGrafico.Visible;
+            dataGridViewOrdemServico.Visible = false;
+            dataGridViewFuncionario.Visible = false;
+            dataGridViewCliente.Visible = false;
 
-            //btnFuncionario.ForeColor = Color.Black;
-            //btnCliente.ForeColor = Color.Black;
-            //btnGrafico.ForeColor = Color.Red;
-            //btnOrdemServico.ForeColor = Color.Black;
+
+            btnFuncionario.ForeColor = Color.Black;
+            btnCliente.ForeColor = Color.Black;
+            btnGrafico.ForeColor = Color.Red;
+            btnOrdemServico.ForeColor = Color.Black;
         }
 
         private void btnOrdemServico_Click(object sender, EventArgs e)
@@ -219,7 +216,6 @@ namespace carteira_de_clientes
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = !dataGridViewOrdemServico.Visible;
-            //dataGridViewGrafico.Visible = false;
 
             btnFuncionario.ForeColor = Color.Black;
             btnCliente.ForeColor = Color.Black;
