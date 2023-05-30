@@ -45,24 +45,32 @@ namespace carteira_de_clientes
             txbSenha.Name = "txbSenha";
             this.Controls.Add(txbSenha);
 
-            // Botao Entrar
-            btnEntrar = new Button();
-            btnEntrar.Location = new System.Drawing.Point(325, 500);
-            btnEntrar.Size = new System.Drawing.Size(100, 30);
-            btnEntrar.Text = "Entrar";
-            btnEntrar.UseVisualStyleBackColor = true;
-            btnEntrar.Click += BtnEntrar_Click;
-            this.Controls.Add(btnEntrar);
+            // // Botao Entrar
+            // btnEntrar = new Button();
+            // btnEntrar.Location = new System.Drawing.Point(325, 500);
+            // btnEntrar.Size = new System.Drawing.Size(100, 30);
+            // btnEntrar.Text = "Entrar";
+            // btnEntrar.UseVisualStyleBackColor = true;
+            // btnEntrar.Click += BtnEntrar_Click;
+            // this.Controls.Add(btnEntrar);
 
             // Botao Esqueceu a Senha
-            btnSenha = new Button();
-            btnSenha.Location = new System.Drawing.Point(100, 500);
-            btnSenha.Size = new System.Drawing.Size(120, 30);
-            btnSenha.Text = "Esqueceu a senha?";
-            btnSenha.UseVisualStyleBackColor = true;
-            txbSenha.UseSystemPasswordChar = true;
-            btnSenha.Click += BtnSenha_Click;
-            this.Controls.Add(btnSenha);
+            // btnSenha = new Button();
+            // btnSenha.Location = new System.Drawing.Point(100, 500);
+            // btnSenha.Size = new System.Drawing.Size(120, 30);
+            // btnSenha.Text = "Esqueceu a senha?";
+            // btnSenha.UseVisualStyleBackColor = true;
+            // txbSenha.UseSystemPasswordChar = true;
+            // btnSenha.Click += BtnSenha_Click;
+            // this.Controls.Add(btnSenha);
+            Dictionary<string, EventHandler> labels = new Dictionary<string, EventHandler>();
+            labels.Add("Esqueceu a senha?", BtnSenha_Click);
+            labels.Add("Entrar", BtnEntrar_Click);
+
+            new Botoes(labels, 2, this, false );
+
+
+
 
             // Label Login
             lblLogin = new Label();
