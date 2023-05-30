@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-
 namespace carteira_de_clientes
 {
     public partial class TelaMenuPrincipal : Form
@@ -177,7 +176,7 @@ namespace carteira_de_clientes
             dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
             //change the label
             sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
-            Botoes text = GetButton("CLIENTES");
+            // Botoes text = GetButton("CLIENTES");
             // sender.GetType().GetProperty("Text").SetValue(sender, text);
             // btnCliente.ForeColor = Color.Black;  
             // btnGrafico.ForeColor = Color.Black;

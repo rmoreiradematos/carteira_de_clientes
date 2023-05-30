@@ -34,18 +34,6 @@ namespace carteira_de_clientes
             return null; // Button not found
         }
 
-        public Button GetButton(string label)
-        {
-            foreach (Control control in form.Controls)
-            {
-                if (control is Button button && button.Text == label)
-                {
-                    return button;
-                }
-            }
-
-            return null; // If button not found, return null or throw an exception if appropriate
-        }
 
         private void GenerateButtons(
             Dictionary<string, EventHandler> labels,
@@ -77,7 +65,7 @@ namespace carteira_de_clientes
                     {
                         y = 950;
                     }
-                    buttonDictionary[label.Value] = button;
+                    // buttonDictionary[label.Value] = button;
                 }
             }
             else
@@ -104,7 +92,7 @@ namespace carteira_de_clientes
                         x = 10;
                         i = 0;
                     }
-                    buttonDictionary[label.Value] = button;
+                    // buttonDictionary[label.Value] = button;
                 }
             }
         }

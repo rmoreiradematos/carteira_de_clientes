@@ -181,3 +181,4 @@ C:\Users\maria.silva101\Desktop\Trabalho final\carteira_de_clientes\carteira_de_
 C:\Users\maria.silva101\Desktop\Trabalho final\carteira_de_clientes\carteira_de_clientes\obj\Debug\net7.0-windows\carteira_de_clientes.genruntimeconfig.cache
 C:\Users\maria.silva101\Desktop\Trabalho final\carteira_de_clientes\carteira_de_clientes\obj\Debug\net7.0-windows\ref\carteira_de_clientes.dll
 C:\Users\maria.silva101\Desktop\Trabalho final\carteira_de_clientes\carteira_de_clientes\bin\Debug\net7.0-windows\System.Windows.Forms.DataVisualization.dll
+C:\Users\vitor.silva16\Desktop\trabalho final\carteira_de_clientes\carteira_de_clientes\bin\Debug\net7.0-windows\System.Windows.Forms.DataVisualization.dll
