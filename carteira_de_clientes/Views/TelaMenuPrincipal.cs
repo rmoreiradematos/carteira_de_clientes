@@ -17,7 +17,6 @@ namespace carteira_de_clientes
         private bool isActiveBtnCliente = false;
         private bool isActiveBtnGrafico = false;
         private bool isActiveBtnOrdemServico = false;
-        private Chart chart1;
 
 
         public TelaMenuPrincipal()
@@ -27,18 +26,6 @@ namespace carteira_de_clientes
 
         private void InitializeComponent()
         {
-
-            // Inicialize o controle Chart
-            chart1 = new Chart();
-            chart1.Size = new System.Drawing.Size(650, 400);
-            chart1.Location = new System.Drawing.Point(800, 400);
-
-            // Adicione o controle Chart ao formulário
-            this.Controls.Add(chart1);
-
-            // Chame o método para preencher o gráfico com dados
-            PreencherGrafico();
-
 
             //TelaMenuPrincipal
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -147,41 +134,22 @@ namespace carteira_de_clientes
         }
 
 
-        private void PreencherGrafico()
-        {
-            // Defina os dados para o gráfico
-            int[] valores = { 10, 20, 30, 40, 50 };
-            string[] categorias = { "Categoria 1", "Categoria 2", "Categoria 3", "Categoria 4", "Categoria 5" };
-
-            // Limpe os pontos de dados existentes (se houver)
-            chart1.Series.Clear();
-
-            // Crie uma série para o gráfico de barras
-            Series serie = chart1.Series.Add("Série 1");
-
-            // Defina o tipo de gráfico como "Barras"
-            serie.ChartType = SeriesChartType.Bar;
-
-            // Adicione os pontos de dados ao gráfico
-            for (int i = 0; i < valores.Length; i++)
-            {
-                serie.Points.AddXY(categorias[i], valores[i]);
-            }
-        }
-
         private void btnFuncionario_Click(object sender, EventArgs e)
         {
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = false;
             dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
-            //change the label
-            sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
-            // Botoes text = GetButton("CLIENTES");
-            // sender.GetType().GetProperty("Text").SetValue(sender, text);
-            // btnCliente.ForeColor = Color.Black;  
-            // btnGrafico.ForeColor = Color.Black;
-            // btnOrdemServico.ForeColor = Color.Red;
 
+            Button clickedButton = (Button)sender;
+            clickedButton.ForeColor = Color.Red;
+
+            foreach (Control control in Controls)
+            {
+                if (control is Button button && button != clickedButton)
+                {
+                    button.ForeColor = Color.Black;
+                }
+            }
         }
 
         private void btnCliente_Click(object sender, EventArgs e)
@@ -189,24 +157,32 @@ namespace carteira_de_clientes
             dataGridViewOrdemServico.Visible = false;
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
-            sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
-            SetActiveBtnCliente(true);
-            
-            if(sender.GetType().GetProperty("Text").GetValue(sender).ToString() != "CLIENTES")
+
+            Button clickedButton = (Button)sender;
+            clickedButton.ForeColor = Color.Red;
+
+            foreach (Control control in Controls)
             {
-                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Black);
+                if (control is Button button && button != clickedButton)
+                {
+                    button.ForeColor = Color.Black;
+                }
             }
-            
+
         }
 
         private void btnGrafico_Click(object sender, EventArgs e)
         {
 
-            sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
-            SetActiveBtnGrafico(true);
-            if(sender.GetType().GetProperty("Text").GetValue(sender).ToString() != "GRAFICOS")
+            Button clickedButton = (Button)sender;
+            clickedButton.ForeColor = Color.Red;
+
+            foreach (Control control in Controls)
             {
-                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Black);
+                if (control is Button button && button != clickedButton)
+                {
+                    button.ForeColor = Color.Black;
+                }
             }
 
         }
@@ -216,15 +192,17 @@ namespace carteira_de_clientes
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = !dataGridViewOrdemServico.Visible;
-            if(GetActiveBtnOrdemServico() == false)
+
+            Button clickedButton = (Button)sender;
+            clickedButton.ForeColor = Color.Red;
+
+            // Define a cor preta para os outros botões
+            foreach (Control control in Controls)
             {
-                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
-                SetActiveBtnOrdemServico(true);
-            }
-            else
-            {
-                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Black);
-                SetActiveBtnOrdemServico(false);
+                if (control is Button button && button != clickedButton)
+                {
+                    button.ForeColor = Color.Black;
+                }
             }
         }
 
