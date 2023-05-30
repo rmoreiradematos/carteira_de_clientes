@@ -244,6 +244,10 @@ namespace carteira_de_clientes
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = false;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 452fc779a5fa1e919b6f268ace50844935615e14
             btnFuncionario.ForeColor = Color.Black;
             btnCliente.ForeColor = Color.Black;
             btnGrafico.ForeColor = Color.Red;
