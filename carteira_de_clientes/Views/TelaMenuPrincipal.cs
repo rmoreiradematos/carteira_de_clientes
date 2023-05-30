@@ -1,6 +1,8 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+
 
 namespace carteira_de_clientes
 {
@@ -16,8 +18,8 @@ namespace carteira_de_clientes
         private DataGridView dataGridViewFuncionario;
         private DataGridView dataGridViewCliente;
         private DataGridView dataGridViewOrdemServico;
-        private DataGridView dataGridViewGrafico;
         private Label lblBemVindo;
+        private Chart chart1;
 
 
         public TelaMenuPrincipal()
@@ -27,6 +29,17 @@ namespace carteira_de_clientes
 
         private void InitializeComponent()
         {
+
+            // Inicialize o controle Chart
+            chart1 = new Chart();
+            chart1.Size = new System.Drawing.Size(650, 400);
+            chart1.Location = new System.Drawing.Point(800, 400);
+
+            // Adicione o controle Chart ao formulário
+            this.Controls.Add(chart1);
+
+            // Chame o método para preencher o gráfico com dados
+            PreencherGrafico();
 
 
             //TelaMenuPrincipal
@@ -38,6 +51,7 @@ namespace carteira_de_clientes
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             this.FormClosing += TelaLogin_FormClosing;
+
 
             //Botao do Funcionario
             btnFuncionario = new Button();
@@ -67,6 +81,7 @@ namespace carteira_de_clientes
             btnGrafico.UseVisualStyleBackColor = true;
             btnGrafico.Click += btnGrafico_Click;
             btnGrafico.Font = new Font(btnGrafico.Font.FontFamily, 20, FontStyle.Bold);
+
             this.Controls.Add(btnGrafico);
 
             //Botao do Ordem Serviço
@@ -158,7 +173,6 @@ namespace carteira_de_clientes
             dataGridViewOrdemServico.Visible = false;
             this.Controls.Add(dataGridViewOrdemServico);
 
-
             //PictureBox Tabela
             picboxTabela = new PictureBox();
             picboxTabela.Location = new System.Drawing.Point(380, 0);
@@ -173,13 +187,37 @@ namespace carteira_de_clientes
             this.Controls.Add(lblBemVindo);
             this.Controls.Add(picboxTabela);
 
+
+
+        }
+
+
+        private void PreencherGrafico()
+        {
+            // Defina os dados para o gráfico
+            int[] valores = { 10, 20, 30, 40, 50 };
+            string[] categorias = { "Categoria 1", "Categoria 2", "Categoria 3", "Categoria 4", "Categoria 5" };
+
+            // Limpe os pontos de dados existentes (se houver)
+            chart1.Series.Clear();
+
+            // Crie uma série para o gráfico de barras
+            Series serie = chart1.Series.Add("Série 1");
+
+            // Defina o tipo de gráfico como "Barras"
+            serie.ChartType = SeriesChartType.Bar;
+
+            // Adicione os pontos de dados ao gráfico
+            for (int i = 0; i < valores.Length; i++)
+            {
+                serie.Points.AddXY(categorias[i], valores[i]);
+            }
         }
 
         private void btnFuncionario_Click(object sender, EventArgs e)
         {
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = false;
-            //dataGridViewGrafico.Visible = false;
             dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
 
             btnFuncionario.ForeColor = Color.Red;
@@ -191,7 +229,6 @@ namespace carteira_de_clientes
         private void btnCliente_Click(object sender, EventArgs e)
         {
             dataGridViewOrdemServico.Visible = false;
-            //dataGridViewGrafico.Visible = false;
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
 
@@ -203,15 +240,14 @@ namespace carteira_de_clientes
 
         private void btnGrafico_Click(object sender, EventArgs e)
         {
-            //dataGridViewOrdemServico.Visible = false;
-            //dataGridViewFuncionario.Visible = false;
-            //dataGridViewCliente.Visible = false;
-            //dataGridViewGrafico.Visible =!dataGridViewGrafico.Visible;
+            dataGridViewOrdemServico.Visible = false;
+            dataGridViewFuncionario.Visible = false;
+            dataGridViewCliente.Visible = false;
 
-            //btnFuncionario.ForeColor = Color.Black;
-            //btnCliente.ForeColor = Color.Black;
-            //btnGrafico.ForeColor = Color.Red;
-            //btnOrdemServico.ForeColor = Color.Black;
+            btnFuncionario.ForeColor = Color.Black;
+            btnCliente.ForeColor = Color.Black;
+            btnGrafico.ForeColor = Color.Red;
+            btnOrdemServico.ForeColor = Color.Black;
         }
 
         private void btnOrdemServico_Click(object sender, EventArgs e)
@@ -219,7 +255,6 @@ namespace carteira_de_clientes
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = !dataGridViewOrdemServico.Visible;
-            //dataGridViewGrafico.Visible = false;
 
             btnFuncionario.ForeColor = Color.Black;
             btnCliente.ForeColor = Color.Black;
@@ -234,7 +269,7 @@ namespace carteira_de_clientes
 
             if (result == DialogResult.Cancel)
             {
-                
+
             }
             else if (result == DialogResult.No)
             {
@@ -242,7 +277,7 @@ namespace carteira_de_clientes
             }
             else if (result == DialogResult.Yes)
             {
-                //COLOCAR UMA LOGICA DE SALVAMENTO DE DATAGRIDVIEW
+                //COLOCAR UMA LOGICA DE SALVAMENTO
                 Application.Exit();
             }
         }
