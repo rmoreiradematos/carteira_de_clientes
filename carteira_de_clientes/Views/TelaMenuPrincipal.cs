@@ -6,18 +6,16 @@ namespace carteira_de_clientes
 {
     public partial class TelaMenuPrincipal : Form
     {
-        private Button btnFuncionario;
-        private Button btnCliente;
-        private Button btnGrafico;
-        private Button btnOrdemServico;
-        private Button btnSair;
         private PictureBox picboxPremyer;
         private PictureBox picboxTabela;
         private DataGridView dataGridViewFuncionario;
         private DataGridView dataGridViewCliente;
         private DataGridView dataGridViewOrdemServico;
-        private DataGridView dataGridViewGrafico;
         private Label lblBemVindo;
+        private bool isActiveBtnFuncionario = false;
+        private bool isActiveBtnCliente = false;
+        private bool isActiveBtnGrafico = false;
+        private bool isActiveBtnOrdemServico = false;
 
 
         public TelaMenuPrincipal()
@@ -39,55 +37,14 @@ namespace carteira_de_clientes
             this.WindowState = FormWindowState.Maximized;
             this.FormClosing += TelaLogin_FormClosing;
 
-            //Botao do Funcionario
-            btnFuncionario = new Button();
-            btnFuncionario.Text = "FUNCIONARIOS";
-            btnFuncionario.Location = new System.Drawing.Point(15, 350);
-            btnFuncionario.Size = new System.Drawing.Size(350, 80);
-            btnFuncionario.UseVisualStyleBackColor = true;
-            btnFuncionario.Click += btnFuncionario_Click;
-            btnFuncionario.Font = new Font(btnFuncionario.Font.FontFamily, 20, FontStyle.Bold);
-            this.Controls.Add(btnFuncionario);
+            Dictionary<string, EventHandler> labels = new Dictionary<string, EventHandler>();
+            labels.Add("FUNCIONARIOS", btnFuncionario_Click);
+            labels.Add("CLIENTES", btnCliente_Click);
+            labels.Add("GRAFICOS", btnGrafico_Click);
+            labels.Add("ORDEM DE SERVIÇO", btnOrdemServico_Click);
+            labels.Add("SAIR", btnSair_Click);
 
-            //Botao do Cliente
-            btnCliente = new Button();
-            btnCliente.Text = "CLIENTES";
-            btnCliente.Location = new System.Drawing.Point(15, 450);
-            btnCliente.Size = new System.Drawing.Size(350, 80);
-            btnCliente.UseVisualStyleBackColor = true;
-            btnCliente.Click += btnCliente_Click;
-            btnCliente.Font = new Font(btnCliente.Font.FontFamily, 20, FontStyle.Bold);
-            this.Controls.Add(btnCliente);
-
-            //Botao do Grafico
-            btnGrafico = new Button();
-            btnGrafico.Text = "GRAFICOS";
-            btnGrafico.Location = new System.Drawing.Point(15, 550);
-            btnGrafico.Size = new System.Drawing.Size(350, 80);
-            btnGrafico.UseVisualStyleBackColor = true;
-            btnGrafico.Click += btnGrafico_Click;
-            btnGrafico.Font = new Font(btnGrafico.Font.FontFamily, 20, FontStyle.Bold);
-            this.Controls.Add(btnGrafico);
-
-            //Botao do Ordem Serviço
-            btnOrdemServico = new Button();
-            btnOrdemServico.Text = "ORDEM DE SERVIÇO";
-            btnOrdemServico.Location = new System.Drawing.Point(15, 650);
-            btnOrdemServico.Size = new System.Drawing.Size(350, 80);
-            btnOrdemServico.UseVisualStyleBackColor = true;
-            btnOrdemServico.Click += btnOrdemServico_Click;
-            btnOrdemServico.Font = new Font(btnOrdemServico.Font.FontFamily, 20, FontStyle.Bold);
-            this.Controls.Add(btnOrdemServico);
-
-            //Botao do Sair
-            btnSair = new Button();
-            btnSair.Text = "SAIR";
-            btnSair.Location = new System.Drawing.Point(15, 950);
-            btnSair.Size = new System.Drawing.Size(350, 80);
-            btnSair.UseVisualStyleBackColor = true;
-            btnSair.Click += btnSair_Click;
-            btnSair.Font = new Font(btnSair.Font.FontFamily, 20, FontStyle.Bold);
-            this.Controls.Add(btnSair);
+            new Botoes(labels, 5, this, true);
 
             //PictureBox Premyer
             picboxPremyer = new PictureBox();
@@ -179,39 +136,41 @@ namespace carteira_de_clientes
         {
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = false;
-            //dataGridViewGrafico.Visible = false;
             dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
+            //change the label
+            sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
+            Botoes text = GetButton("CLIENTES");
+            // sender.GetType().GetProperty("Text").SetValue(sender, text);
+            // btnCliente.ForeColor = Color.Black;  
+            // btnGrafico.ForeColor = Color.Black;
+            // btnOrdemServico.ForeColor = Color.Red;
 
-            btnFuncionario.ForeColor = Color.Red;
-            btnCliente.ForeColor = Color.Black;
-            btnGrafico.ForeColor = Color.Black;
-            btnOrdemServico.ForeColor = Color.Black;
         }
 
         private void btnCliente_Click(object sender, EventArgs e)
         {
             dataGridViewOrdemServico.Visible = false;
-            //dataGridViewGrafico.Visible = false;
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
-
-            btnFuncionario.ForeColor = Color.Black;
-            btnCliente.ForeColor = Color.Red;
-            btnGrafico.ForeColor = Color.Black;
-            btnOrdemServico.ForeColor = Color.Black;
+            sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
+            SetActiveBtnCliente(true);
+            
+            if(sender.GetType().GetProperty("Text").GetValue(sender).ToString() != "CLIENTES")
+            {
+                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Black);
+            }
+            
         }
 
         private void btnGrafico_Click(object sender, EventArgs e)
         {
-            //dataGridViewOrdemServico.Visible = false;
-            //dataGridViewFuncionario.Visible = false;
-            //dataGridViewCliente.Visible = false;
-            //dataGridViewGrafico.Visible =!dataGridViewGrafico.Visible;
-
-            //btnFuncionario.ForeColor = Color.Black;
-            //btnCliente.ForeColor = Color.Black;
-            //btnGrafico.ForeColor = Color.Red;
-            //btnOrdemServico.ForeColor = Color.Black;
+            sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
+            SetActiveBtnGrafico(true);
+            if(sender.GetType().GetProperty("Text").GetValue(sender).ToString() != "GRAFICOS")
+            {
+                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Black);
+            }
+    
         }
 
         private void btnOrdemServico_Click(object sender, EventArgs e)
@@ -219,13 +178,16 @@ namespace carteira_de_clientes
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = !dataGridViewOrdemServico.Visible;
-            //dataGridViewGrafico.Visible = false;
-
-            btnFuncionario.ForeColor = Color.Black;
-            btnCliente.ForeColor = Color.Black;
-            btnGrafico.ForeColor = Color.Black;
-            btnOrdemServico.ForeColor = Color.Red;
-
+            if(GetActiveBtnOrdemServico() == false)
+            {
+                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Red);
+                SetActiveBtnOrdemServico(true);
+            }
+            else
+            {
+                sender.GetType().GetProperty("ForeColor").SetValue(sender, Color.Black);
+                SetActiveBtnOrdemServico(false);
+            }
         }
 
         private void btnSair_Click(object sender, EventArgs e)
@@ -253,6 +215,46 @@ namespace carteira_de_clientes
             {
                 Application.Exit();
             }
+        }
+
+        public void SetActiveBtnFuncionario(bool isActive)
+        {
+            isActiveBtnFuncionario = isActive;
+        }
+
+        public void SetActiveBtnCliente(bool isActive)
+        {
+            isActiveBtnCliente = isActive;
+        }
+
+        public void SetActiveBtnGrafico(bool isActive)
+        {
+            isActiveBtnGrafico = isActive;
+        }
+
+        public void SetActiveBtnOrdemServico(bool isActive)
+        {
+            isActiveBtnOrdemServico = isActive;
+        }
+
+        public bool GetActiveBtnFuncionario()
+        {
+            return isActiveBtnFuncionario;
+        }
+
+        public bool GetActiveBtnCliente()
+        {
+            return isActiveBtnCliente;
+        }
+
+        public bool GetActiveBtnGrafico()
+        {
+            return isActiveBtnGrafico;
+        }
+
+        public bool GetActiveBtnOrdemServico()
+        {
+            return isActiveBtnOrdemServico;
         }
     }
 }

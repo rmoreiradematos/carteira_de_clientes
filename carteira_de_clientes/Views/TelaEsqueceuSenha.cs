@@ -44,23 +44,27 @@ namespace carteira_de_clientes
             this.Controls.Add(lblEmail);
 
             //button Enviar
-            btnEnviar = new Button();
-            btnEnviar.Text = "Enviar";
-            btnEnviar.Location = new System.Drawing.Point(325, 500);
-            btnEnviar.Size = new System.Drawing.Size(75, 23);
-            btnEnviar.UseVisualStyleBackColor = true;
-            btnEnviar.Click += btnEnviar_Click;
-            this.Controls.Add(btnEnviar);
+            // btnEnviar = new Button();
+            // btnEnviar.Text = "Enviar";
+            // btnEnviar.Location = new System.Drawing.Point(325, 500);
+            // btnEnviar.Size = new System.Drawing.Size(75, 23);
+            // btnEnviar.UseVisualStyleBackColor = true;
+            // btnEnviar.Click += btnEnviar_Click;
+            // this.Controls.Add(btnEnviar);
 
-            //button Voltar
-            btnVoltar = new Button();
-            btnVoltar.Text = "Voltar";
-            btnVoltar.Location = new System.Drawing.Point(150, 500);
-            btnVoltar.Size = new System.Drawing.Size(75, 23);
-            btnVoltar.UseVisualStyleBackColor = true;
-            btnVoltar.Click += btnVoltar_Click;
-            this.Controls.Add(btnVoltar);
+            // //button Voltar
+            // btnVoltar = new Button();
+            // btnVoltar.Text = "Voltar";
+            // btnVoltar.Location = new System.Drawing.Point(150, 500);
+            // btnVoltar.Size = new System.Drawing.Size(75, 23);
+            // btnVoltar.UseVisualStyleBackColor = true;
+            // btnVoltar.Click += btnVoltar_Click;
+            // this.Controls.Add(btnVoltar);
+            Dictionary<string, EventHandler> labels = new Dictionary<string, EventHandler>();
+            labels.Add("Enviar", btnEnviar_Click);
+            labels.Add("Voltar", btnVoltar_Click);
 
+            new Botoes(labels, 2, this, false );
 
             //PictureBox Premyer
             picboxPremyer = new PictureBox();

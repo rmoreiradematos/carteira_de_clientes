@@ -6,6 +6,9 @@ namespace carteira_de_clientes
         public Form form { get; set; }
         public bool isLateral { get; set; }
         public Dictionary<string, EventHandler> labels { get; set; }
+        public Dictionary<string, Button> buttonDictionary = new Dictionary<string, Button>();
+
+        public Botoes() { }
 
         public Botoes(
             Dictionary<string, EventHandler> labels,
@@ -21,6 +24,29 @@ namespace carteira_de_clientes
             GenerateButtons(this.labels, this.quantity, this.form, this.isLateral);
         }
 
+        public Button GetButton(string label)
+        {
+            if (buttonDictionary.ContainsKey(label))
+            {
+                return buttonDictionary[label];
+            }
+
+            return null; // Button not found
+        }
+
+        public Button GetButton(string label)
+        {
+            foreach (Control control in form.Controls)
+            {
+                if (control is Button button && button.Text == label)
+                {
+                    return button;
+                }
+            }
+
+            return null; // If button not found, return null or throw an exception if appropriate
+        }
+
         private void GenerateButtons(
             Dictionary<string, EventHandler> labels,
             int quantity,
@@ -30,27 +56,28 @@ namespace carteira_de_clientes
         {
             if (isLateral)
             {
-                int x = 250;
-                int y = 10;
-                int buttonWidth = 150;
-                int buttonHeight = 30;
+                int x = 15;
+                int y = 350;
+                int buttonWidth = 350;
+                int buttonHeight = 80;
                 int i = 0;
                 foreach (var label in labels)
                 {
                     Button button = new Button();
                     button.Text = label.Key;
+                    button.UseVisualStyleBackColor = true;
+                    button.Font = new Font(button.Font.FontFamily, 20, FontStyle.Bold);
                     button.Location = new System.Drawing.Point(x, y);
                     button.Size = new System.Drawing.Size(buttonWidth, buttonHeight);
                     button.Click += label.Value;
                     form.Controls.Add(button);
-                    y += buttonHeight + 10;
+                    y += buttonHeight + 20;
                     i++;
-                    if (i == quantity)
+                    if (i == quantity - 1)
                     {
-                        x += buttonHeight + 10;
-                        y = 10;
-                        i = 0;
+                        y = 950;
                     }
+                    buttonDictionary[label.Value] = button;
                 }
             }
             else
@@ -61,7 +88,7 @@ namespace carteira_de_clientes
                 int buttonHeight = 30;
                 int i = 0;
                 foreach (var label in labels)
-                {   
+                {
                     Button button = new Button();
                     button.Text = label.Key;
                     button.UseVisualStyleBackColor = true;
@@ -77,6 +104,7 @@ namespace carteira_de_clientes
                         x = 10;
                         i = 0;
                     }
+                    buttonDictionary[label.Value] = button;
                 }
             }
         }
