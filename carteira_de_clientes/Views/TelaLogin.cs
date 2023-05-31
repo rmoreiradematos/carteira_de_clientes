@@ -32,7 +32,7 @@ namespace carteira_de_clientes
             this.FormClosing += TelaLogin_FormClosing;
             // TextBox Login
             txbLogin = new TextBox();
-            txbLogin.Location = new System.Drawing.Point(200, 270);
+            txbLogin.Location = new System.Drawing.Point(220, 310);
             txbLogin.Size = new System.Drawing.Size(150, 30);
             txbLogin.Name = "txbLogin";
             txbLogin.Focus();
@@ -40,7 +40,7 @@ namespace carteira_de_clientes
 
             // TextBox Senha
             txbSenha = new TextBox();
-            txbSenha.Location = new System.Drawing.Point(200, 370);
+            txbSenha.Location = new System.Drawing.Point(220, 360);
             txbSenha.Size = new System.Drawing.Size(150, 30);
             txbSenha.Name = "txbSenha";
             this.Controls.Add(txbSenha);
@@ -66,15 +66,17 @@ namespace carteira_de_clientes
 
             // Label Login
             lblLogin = new Label();
-            lblLogin.Location = new System.Drawing.Point(150, 271);
+            lblLogin.Location = new System.Drawing.Point(170, 311);
             lblLogin.Size = new System.Drawing.Size(100, 40);
+            lblLogin.Font = new Font(lblLogin.Font.FontFamily, 10, FontStyle.Regular);
             lblLogin.Text = "Login:";
             this.Controls.Add(lblLogin);
 
             // Label Senha
             lblSenha = new Label();
-            lblSenha.Location = new System.Drawing.Point(150, 371);
+            lblSenha.Location = new System.Drawing.Point(170, 361);
             lblSenha.Size = new System.Drawing.Size(100, 40);
+            lblSenha.Font = new Font(lblSenha.Font.FontFamily, 10, FontStyle.Regular);
             lblSenha.Text = "Senha:";
             this.Controls.Add(lblSenha);
 

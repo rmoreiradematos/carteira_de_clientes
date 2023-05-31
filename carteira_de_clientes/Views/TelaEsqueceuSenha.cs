@@ -12,6 +12,7 @@ namespace carteira_de_clientes
         private TextBox txbEmail;
         private PictureBox picboxPremyer;
         private Label lblRecuperarSenha;
+        private Label lblRecuperarSenha1;
 
         public TelaEsqueceuSenha()
         {
@@ -31,14 +32,15 @@ namespace carteira_de_clientes
 
             //textbox Email
             txbEmail = new TextBox();
-            txbEmail.Location = new System.Drawing.Point(215, 350);
+            txbEmail.Location = new System.Drawing.Point(215, 380);
             txbEmail.Size = new System.Drawing.Size(150, 30);
             this.Controls.Add(txbEmail);
 
             //label Email
             lblEmail = new Label();
-            lblEmail.Location = new System.Drawing.Point(175, 353);
+            lblEmail.Location = new System.Drawing.Point(175, 381);
             lblEmail.Size = new System.Drawing.Size(150, 30);
+            lblEmail.Font = new Font(lblEmail.Font.FontFamily, 10, FontStyle.Regular);
             lblEmail.Text = "Email:";
             this.Controls.Add(lblEmail);
 
@@ -63,7 +65,7 @@ namespace carteira_de_clientes
             labels.Add("Enviar", btnEnviar_Click);
             labels.Add("Voltar", btnVoltar_Click);
 
-            new Botoes(labels, 2, this, false );
+            new Botoes(labels, 2, this, false);
 
             //PictureBox Premyer
             picboxPremyer = new PictureBox();
@@ -75,10 +77,23 @@ namespace carteira_de_clientes
 
             //lblRecuperarSenha
             lblRecuperarSenha = new Label();
-            lblRecuperarSenha.Location = new System.Drawing.Point(140, 280);
-            lblRecuperarSenha.Size = new System.Drawing.Size(300, 100);
-            lblRecuperarSenha.Text = "DIGITE SEU EMAIL PARA RECUPERAR SUA SENHA!";
-            this.Controls.Add(lblRecuperarSenha);
+            lblRecuperarSenha.Location = new System.Drawing.Point(210, 240);
+            lblRecuperarSenha.Size = new System.Drawing.Size(350, 30);
+            lblRecuperarSenha.Text = "Recuperar senha";
+            lblRecuperarSenha.ForeColor = Color.Blue;
+            lblRecuperarSenha.Font = new Font(lblRecuperarSenha.Font.FontFamily, 10, FontStyle.Regular);
+            //this.Controls.Add(lblRecuperarSenha);
+
+            //lblRecuperarSenha1
+            lblRecuperarSenha1 = new Label();
+            lblRecuperarSenha1.Location = new System.Drawing.Point(120, 260);
+            lblRecuperarSenha1.Font = new Font(lblRecuperarSenha1.Font.FontFamily, 10, FontStyle.Regular);
+            lblRecuperarSenha1.Size = new System.Drawing.Size(300, 100);
+            lblRecuperarSenha1.ForeColor = Color.White;
+            lblRecuperarSenha1.TextAlign = ContentAlignment.MiddleCenter;
+            lblRecuperarSenha1.BackColor = Color.Gray;
+            lblRecuperarSenha1.Text = "Para recuperar sua senha, informe seu endereço de email que nós enviaremos um link para a alteração da senha.";
+            this.Controls.Add(lblRecuperarSenha1);
 
         }
 
