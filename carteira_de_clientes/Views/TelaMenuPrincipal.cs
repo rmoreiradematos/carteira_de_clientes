@@ -13,10 +13,12 @@ namespace carteira_de_clientes
         private DataGridView dataGridViewCliente;
         private DataGridView dataGridViewOrdemServico;
         private Label lblBemVindo;
+        private Chart chart;
         private bool isActiveBtnFuncionario = false;
         private bool isActiveBtnCliente = false;
         private bool isActiveBtnGrafico = false;
         private bool isActiveBtnOrdemServico = false;
+        private Button btnGrafico;
 
 
         public TelaMenuPrincipal()
@@ -129,8 +131,6 @@ namespace carteira_de_clientes
             this.Controls.Add(lblBemVindo);
             this.Controls.Add(picboxTabela);
 
-
-
         }
 
 
@@ -173,6 +173,38 @@ namespace carteira_de_clientes
 
         private void btnGrafico_Click(object sender, EventArgs e)
         {
+            dataGridViewCliente.Visible = false;
+            dataGridViewOrdemServico.Visible = false;
+            dataGridViewFuncionario.Visible = false;
+
+
+            // Configuração do gráfico
+            try{
+
+                chart = new Chart();
+                chart.ChartAreas.Add(new ChartArea());
+                chart.Location = new System.Drawing.Point(200, 300);
+                chart.Size = new System.Drawing.Size(200, 200);
+
+                // Dados do gráfico
+                Series series = new Series();
+                series.ChartType = SeriesChartType.Line;
+                series.Points.AddXY(1, 2);
+                series.Points.AddXY(2, 4);
+                series.Points.AddXY(3, 1);
+                series.Points.AddXY(4, 6);
+                series.Points.AddXY(5, 3);
+
+                // Adiciona a série ao gráfico
+                chart.Series.Add(series);
+
+                // Adiciona o gráfico ao formulário
+                this.Controls.Add(chart);
+                chart.BringToFront();
+            }catch(Exception er){
+                MessageBox.Show(er.Message);
+            }
+
 
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
