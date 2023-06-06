@@ -1,60 +1,53 @@
-using System;
-using System.Collections.Generic;
-
 namespace carteira_de_clientes
 {
-    public class Contract
+  public class Contract
+  {
+    public static Model.Contract CadastrarContrato(
+      int clientId, int userId, int serviceId, string dateLimit, string dateDone, string dateContract
+    )
     {
-        public int Id { get; set; }
-        public int ClientId { get; set; }
-        public int UserId { get; set; }
-        public int ServiceId { get; set; }
-        public string DateLimit { get; set; }
-        public string DateDone { get; set; }
-        public string DateContract { get; set; }
+      int idClienteInt = int.Parse(idCliente);
+      Model.Client cliente = Model.Client.BuscarCliente(idClienteInt);
+
+      int idUsuarioInt = int.Parse(idUsuario);
+      Model.Usuario usuario = Model.Usuario.BuscarUsuario(idUsuarioInt);
+
+      int idServicoInt = int.Parse(idServico);
+      Model.Servico servico = Model.Servico.BuscarServico(idServicoInt);
+      
+      return new Model.Contract(cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
     }
 
-    public class ContractManager
+    public static void ExcluirContrato(
+      string id
+    )
     {
-        private List<Contract> contracts;
-
-        public ContractManager()
-        {
-            contracts = new List<Contract>();
-        }
-
-        // Create a new contract
-        public void CreateContract(Contract contract)
-        {
-            contracts.Add(contract);
-        }
-
-       
-        // Update a contract
-        public void UpdateContract(int id, Contract updatedContract)
-        {
-            Contract contract = contracts.Find(c => c.Id == id);
-            if (contract != null)
-            {
-                contract.ClientId = updatedContract.ClientId;
-                contract.UserId = updatedContract.UserId;
-                contract.ServiceId = updatedContract.ServiceId;
-                contract.DateLimit = updatedContract.DateLimit;
-                contract.DateDone = updatedContract.DateDone;
-                contract.DateContract = updatedContract.DateContract;
-            }
-        }
-
-        // Delete a contract
-        public void DeleteContract(int id)
-        {
-            Contract contract = contracts.Find(c => c.Id == id);
-            if (contract != null)
-            {
-                contracts.Remove(contract);
-            }
-        }
+      int idInt = int.Parse(id);
+      Model.Contract.ExcluirContrato(idInt);
     }
+
+    public static List<Model.Contract> ListarContratos()
+    {
+      return Model.Contract.ListarContratos();
+    }
+
+    public static Model.Contract EditarContract(
+      int clientId, int userId, int serviceId, string dateLimit, string dateDone, string dateContract
+    )
+    {
+      int idInt = int.Parse(id);
+      Model.Contract contrato = Model.Contract.BuscarContrato(idInt);
+
+      int idClienteInt = int.Parse(idCliente);
+      Model.Client cliente = Model.Client.BuscarCliente(idClienteInt);
+
+      int idUsuarioInt = int.Parse(idUsuario);
+      Model.Usuario usuario = Model.Usuario.BuscarUsuario(idUsuarioInt);
+
+      int idServicoInt = int.Parse(idServico);
+      Model.Servico servico = Model.Servico.BuscarServico(idServicoInt);
+
+      return Model.Contract.EditarContrato(idInt, cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
+    }
+  }
 }
-
-   

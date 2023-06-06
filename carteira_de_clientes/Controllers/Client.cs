@@ -5,72 +5,49 @@ namespace carteira_de_clientes
 {
     public class Client
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string Phone { get; set; }
-
-        public Client()
+        public static Model.Client CadastrarCliente(
+            string nome,
+            string cpf,
+            string email,
+            string telefone,
+            string endereco,
+            string cidade,
+            string estado,
+            string cep,
+            string pais
+        )
         {
-            
+            return new Model.Client(nome, cpf, email, telefone, endereco, cidade, estado, cep, pais);
         }
 
-        public Client(int id, string name, string address, string phone)
+        public static Model.Client ExcluirCliente(
+            string id
+        )
         {
-            this.Id = id;
-            this.Name = name;
-            this.Address = address;
-            this.Phone = phone;
-        }
-    }
-
-    public class ClientManager
-    {
-        private List<Client> clients;
-
-        public ClientManager()
-        {
-            clients = new List<Client>();
+            int idInt = int.Parse(id);
+            Model.Client.ExcluirCliente(idInt);
         }
 
-        // Create a new client
-        public void CreateClient(Client client)
+        public static List<Model.Client> ListarClientes()
         {
-            clients.Add(client);
+            return Model.Client.ListarClientes();
         }
 
-        // Read all clients
-        public List<Client> GetAllClients()
+        public static Model.Client EditarCliente(
+            string id,
+            string nome,
+            string cpf,
+            string email,
+            string telefone,
+            string endereco,
+            string cidade,
+            string estado,
+            string cep,
+            string pais
+        )
         {
-            return clients;
-        }
-
-        // Read a client by ID
-        public Client GetClientById(int id)
-        {
-            return clients.Find(client => client.Id == id);
-        }
-
-        // Update a client
-        public void UpdateClient(int id, Client updatedClient)
-        {
-            Client client = clients.Find(client => client.Id == id);
-            if (client != null)
-            {
-                client.Name = updatedClient.Name;
-                client.Address = updatedClient.Address;
-                client.Phone = updatedClient.Phone;
-            }
-        }
-
-        // Delete a client
-        public void DeleteClient(int id)
-        {
-            Client client = clients.Find(client => client.Id == id);
-            if (client != null)
-            {
-                clients.Remove(client);
-            }
+            int idInt = int.Parse(id);
+            return Model.Client.EditarCliente(idInt, nome, cpf, email, telefone, endereco, cidade, estado, cep, pais);
         }
     }
 
