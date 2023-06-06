@@ -10,11 +10,13 @@ namespace Models
     {
     }
 
-    public Order(int id, int clientId, int serviceId)
+    public Order(int clientId, int serviceId)
     {
-      this.Id = id;
       this.ClientId = clientId;
       this.ServiceId = serviceId;
+      Database db = new Database();
+      db.Orders.Add(this);
+      db.SaveChanges();
     }
 
     public override string ToString()
@@ -40,6 +42,38 @@ namespace Models
       }
       Order order = (Order) obj;
       return this.Id == order.Id;
+    }
+
+    public static List<Order> ListarOrders()
+    {
+      Database db = new Database();
+      return db.Orders.Include("Orders").ToList();  
+    }
+
+    public static Order BuscarOrder(int id)
+    {
+      Database db = new Database();
+
+      Order order = BuscarOrder(id);
+
+      return order;
+    }
+
+    public static void ExcluirOrder(int id)
+    {
+      Database db = new Database();
+      Order order = db.Orders.Find(id);
+      db.Orders.Remove(order);
+      db.SaveChanges();
+    }
+
+    public static void EditarOrder(int id, int clientId, int serviceId)
+    {
+      Database db = new Database();
+      Order order = db.Orders.Find(id);
+      order.ClientId = clientId;
+      order.ServiceId = serviceId;
+      db.SaveChanges();
     }
   }
 }
