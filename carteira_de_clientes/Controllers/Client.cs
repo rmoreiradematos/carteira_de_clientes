@@ -3,25 +3,49 @@ namespace carteira_de_clientes
 
     public class Client
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string phone { get; set; }
-        public Client()
+        public static Model.Client CadastrarCliente(
+            string nome,
+            string cpf,
+            string email,
+            string telefone,
+            string endereco,
+            string cidade,
+            string estado,
+            string cep,
+            string pais
+        )
         {
-            
-
+            return new Model.Client(nome, cpf, email, telefone, endereco, cidade, estado, cep, pais);
         }
 
-        public Client(int id, string name, string address, string phone)
+        public static Model.Client ExcluirCliente(
+            string id
+        )
         {
-            this.Id = id;
-            this.Name = name;
-            this.Address = address;
-            this.phone = phone;
+            int idInt = int.Parse(id);
+            Model.Client.ExcluirCliente(idInt);
         }
 
+        public static List<Model.Client> ListarClientes()
+        {
+            return Model.Client.ListarClientes();
+        }
 
-
+        public static Model.Client EditarCliente(
+            string id,
+            string nome,
+            string cpf,
+            string email,
+            string telefone,
+            string endereco,
+            string cidade,
+            string estado,
+            string cep,
+            string pais
+        )
+        {
+            int idInt = int.Parse(id);
+            return Model.Client.EditarCliente(idInt, nome, cpf, email, telefone, endereco, cidade, estado, cep, pais);
+        }
     }
 }
