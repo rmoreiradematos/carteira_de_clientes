@@ -1,41 +1,58 @@
+using System;
+using System.Collections.Generic;
+
 namespace carteira_de_clientes
 {
-  public class Order
-  {
-    public static Model.Order CadastrarOrdem(
-      int contractId, int serviceId
-    )
+    public class Order
     {
-      int idContratoInt = int.Parse(idContrato);
-      Model.Contract contrato = Model.Contract.BuscarContrato(idContratoInt);
+        public static Models.Order CadastrarOrdem(string contractId, string serviceId)
+        {
+            int idContratoInt = int.Parse(contractId);
+            Models.Contract contrato = Models.Contract.BuscarContrato(idContratoInt);
 
-      int idServicoInt = int.Parse(idServico);
-      Model.Servico servico = Model.Servico.BuscarServico(idServicoInt);
-      return new Model.Order();
+            int idServicoInt = int.Parse(serviceId);
+            Models.Service servico = Models.Service.BuscarServico(idServicoInt);
+
+            return new Models.Order(idContratoInt, idServicoInt);
+        }
+
+        public static Models.Order ExcluirOrder(int id)
+        {
+            try
+            {
+                Models.Order ordem = Models.Order.BuscarOrdem(id);
+                if (ordem != null)
+                {
+                    throw new Exception("Ordem não cadastrada");
+                }
+
+                Models.Order.ExcluirOrdem(id);
+
+                return ordem;
+            }
+            catch (System.Exception)
+            {
+
+                throw new Exception("Erro ao buscar ordem");
+            }
+        }
+
+
+        public static List<Models.Order> ListarOrdens()
+        {
+            return Models.Order.ListarOrders();
+        }
+
+        public static Models.Order EditarOrdem(string id, string clientId, string serviceId)
+        {
+            int idInt = int.Parse(id);
+            int clientIdInt = int.Parse(clientId);
+            int serviceIdInt = int.Parse(serviceId);
+            Models.Order order = Models.Order.BuscarOrdem(idInt);
+
+            Models.Order.EditarOrdem(idInt, clientIdInt, serviceIdInt);
+
+            return order;
+        }
     }
-
-    public static void ExcluirPedido(
-      string id
-    )
-    {
-      int idInt = int.Parse(id);
-      Model.Order.ExcluirPedido(idInt);
-    }
-
-    public static List<Model.Order> ListarPedidos()
-    {
-      return Model.Order.ListarPedidos();
-    }
-
-    public static Model.Order EditarPedido(
-      int contractId, int serviceId
-    )
-    {
-     
-      int idServiceId = int.Parse(serviceId);
-      int idContratoInt = int.Parse(idContrato);
-
-      return Model.Order.EditarPedido(idContratoInt, idServicoInt);
-    }
-  }
 }
