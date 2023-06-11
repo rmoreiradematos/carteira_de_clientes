@@ -1,33 +1,31 @@
+using Repository;
+
 namespace Models
 {
-
-    public enum UserType
+    public class ServiceOrder
     {
-        Commom = 0,
-        Admin = 1
-    }
-    public class User
-    {
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public UserType Role { get; set; }
+        public int Id { get; set; }
+        public bool Done { get; set; }
+        public int UserId { get; set; }
+        public int ServiceId { get; set; }
 
-        public User()
+        public ServiceOrder()
         {
         }
-        public User(string name, string password, UserType role)
+
+        public ServiceOrder(bool done, int userId, int serviceId)
         {
-            this.Name = name;
-            this.Password = password;
-            this.Role = role;
+            this.Done = done;
+            this.UserId = userId;
+            this.ServiceId = serviceId;
             Database db = new Database();
-            db.Users.Add(this);
+            db.ServiceOrders.Add(this);
             db.SaveChanges();
         }
 
         public override string ToString()
         {
-            return $"Id: {Id}, Name: {Name}, Password: {Password}, Role: {Role}";
+            return $"Id: {Id}, Done: {Done}, UserId: {UserId}, ServiceId: {ServiceId}";
         }
 
         public override int GetHashCode()
@@ -49,51 +47,50 @@ namespace Models
             {
                 return false;
             }
-            User user = (User)obj;
-            return this.Id == user.Id;
+            ServiceOrder serviceOrder = (ServiceOrder)obj;
+            return this.Id == serviceOrder.Id;
         }
 
-        public static List<User> ListarUsers()
+        public static List<ServiceOrder> ListarServicoOrdens()
         {
             Database db = new Database();
-            return db.Users.Include("Users").ToList();
+            return db.ServiceOrders.ToList();
         }
 
-        public static User BuscarUser(int id)
+        public static ServiceOrder BuscarServicoOrdem(int id)
         {
             Database db = new Database();
-
-            User user = BuscarUser(id);
-
-            return user;
-
+            try
+            {
+                ServiceOrder serviceOrder = (from p in db.ServiceOrders
+                                            where p.Id == id
+                                            select p).First();
+                return serviceOrder;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Ordem de serviço não encontrada");
+            }
         }
 
-        public static User EditarUser(int id, string name, string password, UserType role)
+        public static void ExcluirServicoOrdem(int id)
         {
             Database db = new Database();
 
-            User user = BuscarUser(id);
+            ServiceOrder serviceOrder = BuscarServicoOrdem(id);
 
-            user.Name = name;
-            user.Password = password;
-            user.Role = role;
-
+            db.ServiceOrders.Remove(serviceOrder);
             db.SaveChanges();
-
-            return user;
         }
 
-        public static User ExcluirUser(int id)
+        public static void EditarServicoOrdem(int id, bool done, int userId, int serviceId)
         {
             Database db = new Database();
-
-            User user = BuscarUser(id);
-
-            db.Users.Remove(user);
+            ServiceOrder serviceOrder = BuscarServicoOrdem(id);
+            serviceOrder.Done = done;
+            serviceOrder.UserId = userId;
+            serviceOrder.ServiceId = serviceId;
             db.SaveChanges();
-
-            return user;
         }
     }
 }
