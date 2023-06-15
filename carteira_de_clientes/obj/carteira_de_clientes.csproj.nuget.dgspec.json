@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vitor\\Documents\\GitHub\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {}
+    "C:\\Users\\vitor\\Desktop\\ProjetoJackson\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vitor\\Documents\\GitHub\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {
+    "C:\\Users\\vitor\\Desktop\\ProjetoJackson\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vitor\\Documents\\GitHub\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
+        "projectUniqueName": "C:\\Users\\vitor\\Desktop\\ProjetoJackson\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
         "projectName": "carteira_de_clientes",
-        "projectPath": "C:\\Users\\vitor\\Documents\\GitHub\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
+        "projectPath": "C:\\Users\\vitor\\Desktop\\ProjetoJackson\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
         "packagesPath": "C:\\Users\\vitor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vitor\\Documents\\GitHub\\carteira_de_clientes\\carteira_de_clientes\\obj\\",
+        "outputPath": "C:\\Users\\vitor\\Desktop\\ProjetoJackson\\carteira_de_clientes\\carteira_de_clientes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vitor\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -59,6 +59,10 @@
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
             },
             "System.Windows.Forms.DataVisualization": {
               "target": "Package",

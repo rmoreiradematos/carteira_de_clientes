@@ -5,9 +5,11 @@ namespace carteira_de_clientes
 {
     public class User
     {
-        public static Models.User CadastrarUsuario(string nome, string senha, string email, UserType role)
+        public static Models.User CadastrarUsuario(string nome, string senha, string email, string role)
         {
-            return new Models.User(nome, senha, email, role);
+            int intNome = int.Parse(nome);
+            UserType userTypeRole = (UserType)Enum.Parse(typeof(UserType), role);
+            return new Models.User(intNome, senha, email, userTypeRole);
         }
 
         public static Models.User ExcluirUsuario(int id)
@@ -20,7 +22,7 @@ namespace carteira_de_clientes
                     throw new Exception("Usuário não cadastrado");
                 }
 
-                Models.User.ExcluirUser(id);
+                Models.User.ExcluirUsuario(id);
 
                 return user;
             }
@@ -36,12 +38,13 @@ namespace carteira_de_clientes
             return Models.User.ListarUsuarios();
         }
 
-        public static Models.User EditarUsuario(string id, string nome, string email, string senha, UserType role)
+        public static Models.User EditarUsuario(string id, string name, string password, string role)
         {
             int idInt = int.Parse(id);
             Models.User usuario = Models.User.BuscarUsuario(idInt);
 
-            Models.User.EditarUsuario(idInt, nome, senha, email, role);
+            UserType userTypeRole = (UserType)Enum.Parse(typeof(UserType), role);
+            Models.User.EditarUsuario(idInt, name, password, userTypeRole);
 
             return usuario;
         }

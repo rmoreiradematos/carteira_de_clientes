@@ -133,11 +133,29 @@ namespace carteira_de_clientes
 
         }
 
+        private void btnExcluir_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnAlterar_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnCadastrar_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void btnFuncionario_Click(object sender, EventArgs e)
         {
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = false;
+            if (chart != null)
+            {
+                chart.Visible = false;
+            }
             dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
 
             Button clickedButton = (Button)sender;
@@ -150,12 +168,17 @@ namespace carteira_de_clientes
                     button.ForeColor = Color.Black;
                 }
             }
+
         }
 
         private void btnCliente_Click(object sender, EventArgs e)
         {
             dataGridViewOrdemServico.Visible = false;
             dataGridViewFuncionario.Visible = false;
+            if (chart != null)
+            {
+                chart.Visible = false;
+            }
             dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
 
             Button clickedButton = (Button)sender;
@@ -178,30 +201,40 @@ namespace carteira_de_clientes
             dataGridViewFuncionario.Visible = false;
 
 
+
             // Configuração do gráfico
-            try{
+            try
+            {
+                if (chart == null)
+                {
+                    chart = new Chart();
+                    chart.ChartAreas.Add(new ChartArea());
+                    chart.Location = new System.Drawing.Point(700, 300);
+                    chart.Size = new System.Drawing.Size(800, 600);
 
-                chart = new Chart();
-                chart.ChartAreas.Add(new ChartArea());
-                chart.Location = new System.Drawing.Point(200, 300);
-                chart.Size = new System.Drawing.Size(200, 200);
+                    // Dados do gráfico
+                    Series series = new Series();
+                    series.ChartType = SeriesChartType.Line;
+                    series.Points.AddXY(1, 2);
+                    series.Points.AddXY(2, 4);
+                    series.Points.AddXY(3, 1);
+                    series.Points.AddXY(4, 6);
+                    series.Points.AddXY(5, 3);
 
-                // Dados do gráfico
-                Series series = new Series();
-                series.ChartType = SeriesChartType.Line;
-                series.Points.AddXY(1, 2);
-                series.Points.AddXY(2, 4);
-                series.Points.AddXY(3, 1);
-                series.Points.AddXY(4, 6);
-                series.Points.AddXY(5, 3);
+                    // Adiciona a série ao gráfico
+                    chart.Series.Add(series);
 
-                // Adiciona a série ao gráfico
-                chart.Series.Add(series);
-
-                // Adiciona o gráfico ao formulário
-                this.Controls.Add(chart);
-                chart.BringToFront();
-            }catch(Exception er){
+                    // Adiciona o gráfico ao formulário
+                    this.Controls.Add(chart);
+                    chart.BringToFront();
+                }
+                else
+                {
+                    chart.Visible = !chart.Visible;
+                }
+            }
+            catch (Exception er)
+            {
                 MessageBox.Show(er.Message);
             }
 
@@ -223,6 +256,10 @@ namespace carteira_de_clientes
         {
             dataGridViewFuncionario.Visible = false;
             dataGridViewCliente.Visible = false;
+            if (chart != null)
+            {
+                chart.Visible = false;
+            }
             dataGridViewOrdemServico.Visible = !dataGridViewOrdemServico.Visible;
 
             Button clickedButton = (Button)sender;
