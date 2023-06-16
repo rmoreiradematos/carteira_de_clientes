@@ -203,40 +203,41 @@ namespace carteira_de_clientes
 
 
             // Configuração do gráfico
-            try
-            {
-                if (chart == null)
-                {
-                    chart = new Chart();
-                    chart.ChartAreas.Add(new ChartArea());
-                    chart.Location = new System.Drawing.Point(700, 300);
-                    chart.Size = new System.Drawing.Size(800, 600);
+           try
+    {
+        if (chart == null)
+        {
+            chart = new Chart();
+            chart.ChartAreas.Add(new ChartArea());
+            chart.Location = new System.Drawing.Point(700, 300);
+            chart.Size = new System.Drawing.Size(800, 600);
 
-                    // Dados do gráfico
-                    Series series = new Series();
-                    series.ChartType = SeriesChartType.Line;
-                    series.Points.AddXY(1, 2);
-                    series.Points.AddXY(2, 4);
-                    series.Points.AddXY(3, 1);
-                    series.Points.AddXY(4, 6);
-                    series.Points.AddXY(5, 3);
+            // Dados do gráfico
+            Series series = new Series();
+            series.ChartType = SeriesChartType.Pie;
 
-                    // Adiciona a série ao gráfico
-                    chart.Series.Add(series);
+            // Adiciona os pontos ao gráfico
+            series.Points.AddXY("Serviços ", 20);
+            series.Points.AddXY("Categoria 2", 30);
+            series.Points.AddXY("Categoria 3", 15);
+            series.Points.AddXY("Categoria 4", 35);
 
-                    // Adiciona o gráfico ao formulário
-                    this.Controls.Add(chart);
-                    chart.BringToFront();
-                }
-                else
-                {
-                    chart.Visible = !chart.Visible;
-                }
-            }
-            catch (Exception er)
-            {
-                MessageBox.Show(er.Message);
-            }
+            // Adiciona a série ao gráfico
+            chart.Series.Add(series);
+
+            // Adiciona o gráfico ao formulário
+            this.Controls.Add(chart);
+            chart.BringToFront();
+        }
+        else
+        {
+            chart.Visible = !chart.Visible;
+        }
+    }
+    catch (Exception er)
+    {
+        MessageBox.Show(er.Message);
+    }
 
 
             Button clickedButton = (Button)sender;
