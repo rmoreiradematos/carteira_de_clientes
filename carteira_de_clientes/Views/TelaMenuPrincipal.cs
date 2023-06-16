@@ -21,6 +21,29 @@ namespace carteira_de_clientes
         private Button btnGrafico;
 
 
+        //Funcionario
+        public Label lblNomeFuncionario;
+        public Label lblSenhaFuncionario;
+        public Label lblAdminFuncionario;
+        public Label lblUsuarioFuncionario;
+        public TextBox txbNomeFuncionario;
+        public TextBox txbSenhaFuncionario;
+        public CheckBox cbAdminFuncionario;
+        public CheckBox cbUsuarioFuncionario;
+
+
+        //Clientes
+        public Label lblNomeCliente;
+        public Label lblEnderecoCliente;
+        public Label lblTelefoneCliente;
+        public TextBox txbNomeCliente;
+        public TextBox txbEnderecoCliente;
+        public TextBox txbTelefoneCliente;
+
+
+        //Ordem de Servico
+
+
         public TelaMenuPrincipal()
         {
             InitializeComponent();
@@ -46,7 +69,90 @@ namespace carteira_de_clientes
             labels.Add("ORDEM DE SERVIÇO", btnOrdemServico_Click);
             labels.Add("SAIR", btnSair_Click);
 
-            new Botoes(labels, 5, this, true);
+            new Botoes(labels, 5, this, 15, 350, true);
+
+
+
+            //Label e TextBox do Funcionario
+            lblNomeFuncionario = new Label();
+            lblNomeFuncionario.Location = new System.Drawing.Point(700, 700);
+            lblNomeFuncionario.Text = "Nome: ";
+            lblNomeFuncionario.Size = new System.Drawing.Size(50, 20);
+            lblNomeFuncionario.Font = new Font(lblNomeFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            lblNomeFuncionario.Visible = false;
+            lblNomeFuncionario.BringToFront();
+            this.Controls.Add(lblNomeFuncionario);
+
+            lblSenhaFuncionario = new Label();
+            lblSenhaFuncionario.Location = new System.Drawing.Point(700, 730);
+            lblSenhaFuncionario.Size = new System.Drawing.Size(50, 20);
+            lblSenhaFuncionario.Text = "Senha: ";
+            lblSenhaFuncionario.Font = new Font(lblSenhaFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            lblSenhaFuncionario.Visible = false;
+            lblSenhaFuncionario.BringToFront();
+            this.Controls.Add(lblSenhaFuncionario);
+
+            lblAdminFuncionario = new Label();
+            lblAdminFuncionario.Location = new System.Drawing.Point(715, 760);
+            lblAdminFuncionario.Size = new System.Drawing.Size(50, 20);
+            lblAdminFuncionario.Text = "Admin";
+            lblAdminFuncionario.Font = new Font(lblAdminFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            lblAdminFuncionario.Visible = false;
+            lblAdminFuncionario.BringToFront();
+            this.Controls.Add(lblAdminFuncionario);
+
+            lblUsuarioFuncionario = new Label();                        
+            lblUsuarioFuncionario.Location = new System.Drawing.Point(865, 760);
+            lblUsuarioFuncionario.Size = new System.Drawing.Size(60, 20);
+            lblUsuarioFuncionario.Text = "Usuario";
+            lblUsuarioFuncionario.Font = new Font(lblUsuarioFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            lblUsuarioFuncionario.Visible = false;
+            lblUsuarioFuncionario.BringToFront();
+            this.Controls.Add(lblUsuarioFuncionario);
+
+
+            cbAdminFuncionario = new CheckBox();
+            cbAdminFuncionario.Location = new System.Drawing.Point(700, 760);
+            cbAdminFuncionario.Size = new System.Drawing.Size(15, 20);
+            cbAdminFuncionario.Font = new Font(cbAdminFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            cbAdminFuncionario.Visible = false;
+            cbAdminFuncionario.BringToFront();
+            this.Controls.Add(cbAdminFuncionario);
+
+            
+            cbUsuarioFuncionario = new CheckBox();
+            cbUsuarioFuncionario.Location = new System.Drawing.Point(850, 760);
+            cbUsuarioFuncionario.Size = new System.Drawing.Size(15, 20);
+            cbUsuarioFuncionario.Font = new Font(cbUsuarioFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            cbUsuarioFuncionario.Visible = false;
+            cbUsuarioFuncionario.BringToFront();
+            this.Controls.Add(cbUsuarioFuncionario);
+
+
+
+
+            txbNomeFuncionario = new TextBox();
+            txbNomeFuncionario.Location = new System.Drawing.Point(750, 698);
+            txbNomeFuncionario.Size = new System.Drawing.Size(200, 20);
+            txbNomeFuncionario.Font = new Font(txbNomeFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            txbNomeFuncionario.Visible = false;
+            txbNomeFuncionario.BringToFront();
+            this.Controls.Add(txbNomeFuncionario);
+
+            txbSenhaFuncionario = new TextBox();
+            txbSenhaFuncionario.Location = new System.Drawing.Point(750, 728);
+            txbSenhaFuncionario.Size = new System.Drawing.Size(200, 20);
+            txbSenhaFuncionario.Font = new Font(txbSenhaFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            txbSenhaFuncionario.Visible = false;
+            txbSenhaFuncionario.BringToFront();
+            this.Controls.Add(txbSenhaFuncionario);
+
+
+
+
+
+
+
 
             //PictureBox Premyer
             picboxPremyer = new PictureBox();
@@ -128,39 +234,33 @@ namespace carteira_de_clientes
             lblBemVindo.Text = "Seja bem vindo!";
             lblBemVindo.AutoSize = true;
             lblBemVindo.Font = new Font(lblBemVindo.Font.FontFamily, 50, FontStyle.Bold);
-            this.Controls.Add(lblBemVindo);
+            //this.Controls.Add(lblBemVindo);
             this.Controls.Add(picboxTabela);
 
         }
 
-        private void btnExcluir_Click(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void btnAlterar_Click(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void btnCadastrar_Click(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void btnFuncionario_Click(object sender, EventArgs e)
         {
+            //Aparecer e desaparecer os Data Grid Views
+            lblAdminFuncionario.Visible = !lblAdminFuncionario.Visible;
+            lblUsuarioFuncionario.Visible = !lblUsuarioFuncionario.Visible;
+            cbAdminFuncionario.Visible = !cbAdminFuncionario.Visible;
+            cbUsuarioFuncionario.Visible = !cbUsuarioFuncionario.Visible;
+            lblSenhaFuncionario.Visible = !lblSenhaFuncionario.Visible;
+            txbSenhaFuncionario.Visible = !txbSenhaFuncionario.Visible;
+            txbNomeFuncionario.Visible = !txbNomeFuncionario.Visible;
+            lblNomeFuncionario.Visible = !lblNomeFuncionario.Visible;
             dataGridViewCliente.Visible = false;
             dataGridViewOrdemServico.Visible = false;
             if (chart != null)
             {
                 chart.Visible = false;
             }
-            dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
+            //dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
 
+            //Muda a cor do botao
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
-
             foreach (Control control in Controls)
             {
                 if (control is Button button && button != clickedButton)
@@ -169,6 +269,33 @@ namespace carteira_de_clientes
                 }
             }
 
+
+            //Botoes do Funcionario
+            Dictionary<string, EventHandler> labels1 = new Dictionary<string, EventHandler>();
+            labels1.Add("ADICIONAR", btnAdicionar_Click);
+            labels1.Add("EDITAR", btnEditar_Click);
+            labels1.Add("EXCLUIR", btnExcluir_Click);
+            new Botoes(labels1, 3, this, 700, 920, false);
+
+
+
+
+
+        }
+
+        private void btnExcluir_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnEditar_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnAdicionar_Click(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void btnCliente_Click(object sender, EventArgs e)

@@ -65,7 +65,7 @@ namespace carteira_de_clientes
             labels.Add("Enviar", btnEnviar_Click);
             labels.Add("Voltar", btnVoltar_Click);
 
-            new Botoes(labels, 2, this, false);
+            new Botoes(labels, 2, this, 75 , 500, false);
 
             //PictureBox Premyer
             picboxPremyer = new PictureBox();

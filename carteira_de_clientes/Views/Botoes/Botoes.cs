@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace carteira_de_clientes
 {
     public class Botoes
@@ -7,13 +12,16 @@ namespace carteira_de_clientes
         public bool isLateral { get; set; }
         public Dictionary<string, EventHandler> labels { get; set; }
         public Dictionary<string, Button> buttonDictionary = new Dictionary<string, Button>();
-
+        public int newX { get; set; }
+        public int newY { get; set;}
         public Botoes() { }
 
         public Botoes(
             Dictionary<string, EventHandler> labels,
             int quantity,
             Form form,
+            int newX,
+            int newY,
             bool isLateral = false
         )
         {
@@ -21,7 +29,9 @@ namespace carteira_de_clientes
             this.form = form;
             this.isLateral = isLateral;
             this.labels = labels;
-            GenerateButtons(this.labels, this.quantity, this.form, this.isLateral);
+            this.newX = newX;
+            this.newY = newY;
+            GenerateButtons(this.labels, this.quantity, this.form, this.newX, this.newY, this.isLateral);
         }
 
         public Button GetButton(string label)
@@ -39,6 +49,8 @@ namespace carteira_de_clientes
             Dictionary<string, EventHandler> labels,
             int quantity,
             Form form,
+            int newX,
+            int newY,
             bool isLateral = false
         )
         {
@@ -70,8 +82,10 @@ namespace carteira_de_clientes
             }
             else
             {
-                int x = 75;
-                int y = 500;
+                int x = newX;
+                int y = newY;
+                Console.WriteLine(newX);
+                Console.WriteLine(newY);
                 int buttonWidth = 150;
                 int buttonHeight = 30;
                 int i = 0;
@@ -92,6 +106,7 @@ namespace carteira_de_clientes
                         x = 10;
                         i = 0;
                     }
+                    button.BringToFront();
                     // buttonDictionary[label.Value] = button;
                 }
             }
