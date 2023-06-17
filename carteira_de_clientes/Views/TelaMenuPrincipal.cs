@@ -23,13 +23,17 @@ namespace carteira_de_clientes
 
         //Funcionario
         public Label lblNomeFuncionario;
+        public Label lblCpfFuncionario;
         public Label lblSenhaFuncionario;
         public Label lblAdminFuncionario;
         public Label lblUsuarioFuncionario;
         public TextBox txbNomeFuncionario;
+        public TextBox txbCpfFuncionario;
         public TextBox txbSenhaFuncionario;
         public CheckBox cbAdminFuncionario;
         public CheckBox cbUsuarioFuncionario;
+        public Button btnShowSenhaFuncionario;
+
 
 
         //Clientes
@@ -42,6 +46,10 @@ namespace carteira_de_clientes
 
 
         //Ordem de Servico
+        public Label lblNomeOrdemServico;
+        public Label lblPrecoOrdemServico;
+        public Label lblDoneOrdemServico;
+
 
 
         public TelaMenuPrincipal()
@@ -73,7 +81,7 @@ namespace carteira_de_clientes
 
 
 
-            //Label e TextBox do Funcionario
+            //Label Funcionario
             lblNomeFuncionario = new Label();
             lblNomeFuncionario.Location = new System.Drawing.Point(700, 700);
             lblNomeFuncionario.Text = "Nome: ";
@@ -101,8 +109,8 @@ namespace carteira_de_clientes
             lblAdminFuncionario.BringToFront();
             this.Controls.Add(lblAdminFuncionario);
 
-            lblUsuarioFuncionario = new Label();                        
-            lblUsuarioFuncionario.Location = new System.Drawing.Point(865, 760);
+            lblUsuarioFuncionario = new Label();
+            lblUsuarioFuncionario.Location = new System.Drawing.Point(715, 790);
             lblUsuarioFuncionario.Size = new System.Drawing.Size(60, 20);
             lblUsuarioFuncionario.Text = "Usuario";
             lblUsuarioFuncionario.Font = new Font(lblUsuarioFuncionario.Font.FontFamily, 10, FontStyle.Regular);
@@ -110,19 +118,42 @@ namespace carteira_de_clientes
             lblUsuarioFuncionario.BringToFront();
             this.Controls.Add(lblUsuarioFuncionario);
 
+            lblCpfFuncionario = new Label();
+            lblCpfFuncionario.Location = new System.Drawing.Point(700, 760);
+            lblCpfFuncionario.Size = new System.Drawing.Size(50, 20);
+            lblCpfFuncionario.Text = "CPF: ";
+            lblCpfFuncionario.Font = new Font(lblCpfFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            lblCpfFuncionario.Visible = false;
+            lblCpfFuncionario.BringToFront();
+            this.Controls.Add(lblCpfFuncionario);
 
+
+            //Botao ShowSenhaFuncionario para mostrar a senha
+            btnShowSenhaFuncionario = new Button();
+            btnShowSenhaFuncionario.Location = new System.Drawing.Point(810, 788);
+            btnShowSenhaFuncionario.Size = new System.Drawing.Size(140, 27);
+            btnShowSenhaFuncionario.Text = "Mostrar senha";
+            btnShowSenhaFuncionario.Font = new Font(btnShowSenhaFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            btnShowSenhaFuncionario.BringToFront();
+            btnShowSenhaFuncionario.Click += new EventHandler(btnShowSenhaFuncionario_Click);
+            btnShowSenhaFuncionario.Visible = false;
+            this.Controls.Add(btnShowSenhaFuncionario);
+
+
+            //CheckBox Funcionario
             cbAdminFuncionario = new CheckBox();
-            cbAdminFuncionario.Location = new System.Drawing.Point(700, 760);
-            cbAdminFuncionario.Size = new System.Drawing.Size(15, 20);
+            cbAdminFuncionario.Location = new System.Drawing.Point(700, 790);
+            cbAdminFuncionario.Size = new System.Drawing.Size(90, 20);
             cbAdminFuncionario.Font = new Font(cbAdminFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            cbAdminFuncionario.Text = "ADMIN";
             cbAdminFuncionario.Visible = false;
             cbAdminFuncionario.BringToFront();
             this.Controls.Add(cbAdminFuncionario);
 
-            
             cbUsuarioFuncionario = new CheckBox();
-            cbUsuarioFuncionario.Location = new System.Drawing.Point(850, 760);
-            cbUsuarioFuncionario.Size = new System.Drawing.Size(15, 20);
+            cbUsuarioFuncionario.Location = new System.Drawing.Point(700, 815);
+            cbUsuarioFuncionario.Size = new System.Drawing.Size(90, 20);
+            cbUsuarioFuncionario.Text = "USUARIO";
             cbUsuarioFuncionario.Font = new Font(cbUsuarioFuncionario.Font.FontFamily, 10, FontStyle.Regular);
             cbUsuarioFuncionario.Visible = false;
             cbUsuarioFuncionario.BringToFront();
@@ -130,7 +161,7 @@ namespace carteira_de_clientes
 
 
 
-
+            //TextBox Funcionario
             txbNomeFuncionario = new TextBox();
             txbNomeFuncionario.Location = new System.Drawing.Point(750, 698);
             txbNomeFuncionario.Size = new System.Drawing.Size(200, 20);
@@ -143,10 +174,73 @@ namespace carteira_de_clientes
             txbSenhaFuncionario.Location = new System.Drawing.Point(750, 728);
             txbSenhaFuncionario.Size = new System.Drawing.Size(200, 20);
             txbSenhaFuncionario.Font = new Font(txbSenhaFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            txbSenhaFuncionario.UseSystemPasswordChar = true;
             txbSenhaFuncionario.Visible = false;
             txbSenhaFuncionario.BringToFront();
             this.Controls.Add(txbSenhaFuncionario);
 
+            txbCpfFuncionario = new TextBox();
+            txbCpfFuncionario.Location = new System.Drawing.Point(750, 758);
+            txbCpfFuncionario.Size = new System.Drawing.Size(200, 20);
+            txbCpfFuncionario.Font = new Font(txbCpfFuncionario.Font.FontFamily, 10, FontStyle.Regular);
+            txbCpfFuncionario.Visible = false;
+            txbCpfFuncionario.BringToFront();
+            this.Controls.Add(txbCpfFuncionario);
+
+
+            //Label Cliente
+            lblNomeCliente = new Label();
+            lblNomeCliente.Location = new System.Drawing.Point(700, 700);
+            lblNomeCliente.Text = "Nome: ";
+            lblNomeCliente.Size = new System.Drawing.Size(68, 20);
+            lblNomeCliente.Font = new Font(lblNomeCliente.Font.FontFamily, 10, FontStyle.Regular);
+            lblNomeCliente.Visible = false;
+            lblNomeCliente.BringToFront();
+            this.Controls.Add(lblNomeCliente);
+
+            lblEnderecoCliente = new Label();
+            lblEnderecoCliente.Location = new System.Drawing.Point(700, 730);
+            lblEnderecoCliente.Size = new System.Drawing.Size(68, 20);
+            lblEnderecoCliente.Text = "Endereco: ";
+            lblEnderecoCliente.Font = new Font(lblEnderecoCliente.Font.FontFamily, 10, FontStyle.Regular);
+            lblEnderecoCliente.Visible = false;
+            lblEnderecoCliente.BringToFront();
+            this.Controls.Add(lblEnderecoCliente);
+
+            lblTelefoneCliente = new Label();
+            lblTelefoneCliente.Location = new System.Drawing.Point(700, 760);
+            lblTelefoneCliente.Size = new System.Drawing.Size(68, 20);
+            lblTelefoneCliente.Text = "Telefone: ";
+            lblTelefoneCliente.Font = new Font(lblTelefoneCliente.Font.FontFamily, 10, FontStyle.Regular);
+            lblTelefoneCliente.Visible = false;
+            lblTelefoneCliente.BringToFront();
+            this.Controls.Add(lblTelefoneCliente);
+
+
+            //TextBox Cliente
+            txbNomeCliente = new TextBox();
+            txbNomeCliente.Location = new System.Drawing.Point(770, 698);
+            txbNomeCliente.Size = new System.Drawing.Size(200, 20);
+            txbNomeCliente.Font = new Font(txbNomeCliente.Font.FontFamily, 10, FontStyle.Regular);
+            txbNomeCliente.Visible = false;
+            txbNomeCliente.BringToFront();
+            this.Controls.Add(txbNomeCliente);
+
+            txbEnderecoCliente = new TextBox();
+            txbEnderecoCliente.Location = new System.Drawing.Point(770, 728);
+            txbEnderecoCliente.Size = new System.Drawing.Size(200, 20);
+            txbEnderecoCliente.Font = new Font(txbEnderecoCliente.Font.FontFamily, 10, FontStyle.Regular);
+            txbEnderecoCliente.Visible = false;
+            txbEnderecoCliente.BringToFront();
+            this.Controls.Add(txbEnderecoCliente);
+
+            txbTelefoneCliente = new TextBox();
+            txbTelefoneCliente.Location = new System.Drawing.Point(770, 758);
+            txbTelefoneCliente.Size = new System.Drawing.Size(200, 20);
+            txbTelefoneCliente.Font = new Font(txbTelefoneCliente.Font.FontFamily, 10, FontStyle.Regular);
+            txbTelefoneCliente.Visible = false;
+            txbTelefoneCliente.BringToFront();
+            this.Controls.Add(txbTelefoneCliente);
 
 
 
@@ -164,8 +258,8 @@ namespace carteira_de_clientes
 
             //dataGridView
             dataGridViewFuncionario = new DataGridView();
-            dataGridViewFuncionario.Location = new System.Drawing.Point(400, 350);
-            dataGridViewFuncionario.Size = new System.Drawing.Size(1500, 700);
+            dataGridViewFuncionario.Location = new System.Drawing.Point(400, 20);
+            dataGridViewFuncionario.Size = new System.Drawing.Size(1500, 600);
             dataGridViewFuncionario.Columns.Add("ID", "ID");
             dataGridViewFuncionario.Columns[0].Width = 77;
             dataGridViewFuncionario.Columns.Add("NOME", "NOME");
@@ -239,11 +333,20 @@ namespace carteira_de_clientes
 
         }
 
+        private void btnShowSenhaFuncionario_Click(object sender, EventArgs e)
+        {
+            // Mostra A SENHA
+            txbSenhaFuncionario.UseSystemPasswordChar = !txbSenhaFuncionario.UseSystemPasswordChar;
+        }
+
         private void btnFuncionario_Click(object sender, EventArgs e)
         {
             //Aparecer e desaparecer os Data Grid Views
-            lblAdminFuncionario.Visible = !lblAdminFuncionario.Visible;
-            lblUsuarioFuncionario.Visible = !lblUsuarioFuncionario.Visible;
+            //lblAdminFuncionario.Visible = !lblAdminFuncionario.Visible;
+            //lblUsuarioFuncionario.Visible = !lblUsuarioFuncionario.Visible;
+            btnShowSenhaFuncionario.Visible = !btnShowSenhaFuncionario.Visible;
+            lblCpfFuncionario.Visible = !lblCpfFuncionario.Visible;
+            txbCpfFuncionario.Visible = !txbCpfFuncionario.Visible;
             cbAdminFuncionario.Visible = !cbAdminFuncionario.Visible;
             cbUsuarioFuncionario.Visible = !cbUsuarioFuncionario.Visible;
             lblSenhaFuncionario.Visible = !lblSenhaFuncionario.Visible;
@@ -256,7 +359,7 @@ namespace carteira_de_clientes
             {
                 chart.Visible = false;
             }
-            //dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
+            dataGridViewFuncionario.Visible = !dataGridViewFuncionario.Visible;
 
             //Muda a cor do botao
             Button clickedButton = (Button)sender;
@@ -269,8 +372,6 @@ namespace carteira_de_clientes
                 }
             }
 
-
-            //Botoes do Funcionario
             Dictionary<string, EventHandler> labels1 = new Dictionary<string, EventHandler>();
             labels1.Add("ADICIONAR", btnAdicionar_Click);
             labels1.Add("EDITAR", btnEditar_Click);
@@ -278,14 +379,11 @@ namespace carteira_de_clientes
             new Botoes(labels1, 3, this, 700, 920, false);
 
 
-
-
-
         }
 
         private void btnExcluir_Click(object? sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         private void btnEditar_Click(object? sender, EventArgs e)
@@ -300,13 +398,19 @@ namespace carteira_de_clientes
 
         private void btnCliente_Click(object sender, EventArgs e)
         {
+            lblNomeCliente.Visible = !lblNomeCliente.Visible;
+            lblEnderecoCliente.Visible = !lblEnderecoCliente.Visible;
+            lblTelefoneCliente.Visible = !lblTelefoneCliente.Visible;
+            txbNomeCliente.Visible = !txbNomeCliente.Visible;
+            txbEnderecoCliente.Visible = !txbEnderecoCliente.Visible;
+            txbTelefoneCliente.Visible = !txbTelefoneCliente.Visible;
             dataGridViewOrdemServico.Visible = false;
             dataGridViewFuncionario.Visible = false;
             if (chart != null)
             {
                 chart.Visible = false;
             }
-            dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
+            //dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
 
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
