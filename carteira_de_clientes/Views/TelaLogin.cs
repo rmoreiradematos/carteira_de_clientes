@@ -30,6 +30,7 @@ namespace carteira_de_clientes
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.FormClosing += TelaLogin_FormClosing;
+            
             // TextBox Login
             txbLogin = new TextBox();
             txbLogin.Location = new System.Drawing.Point(220, 310);

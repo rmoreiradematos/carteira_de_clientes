@@ -277,8 +277,8 @@ namespace carteira_de_clientes
 
             //dataGridViewCliente
             dataGridViewCliente = new DataGridView();
-            dataGridViewCliente.Location = new System.Drawing.Point(400, 350);
-            dataGridViewCliente.Size = new System.Drawing.Size(1500, 700);
+            dataGridViewCliente.Location = new System.Drawing.Point(400, 20);
+            dataGridViewCliente.Size = new System.Drawing.Size(1500, 600);
             dataGridViewCliente.Columns.Add("ID", "ID");
             dataGridViewCliente.Columns[0].Width = 77;
             dataGridViewCliente.Columns.Add("NOME", "NOME");
@@ -410,7 +410,7 @@ namespace carteira_de_clientes
             {
                 chart.Visible = false;
             }
-            //dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
+            dataGridViewCliente.Visible = !dataGridViewCliente.Visible;
 
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
