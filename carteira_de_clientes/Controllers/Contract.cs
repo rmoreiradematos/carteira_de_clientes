@@ -1,53 +1,60 @@
+using System;
+using System.Collections.Generic;
+
 namespace carteira_de_clientes
 {
-  public class Contract
-  {
-    public static Model.Contract CadastrarContrato(
-      int clientId, int userId, int serviceId, string dateLimit, string dateDone, string dateContract
-    )
+    public class Contract
     {
-      int idClienteInt = int.Parse(idCliente);
-      Model.Client cliente = Model.Client.BuscarCliente(idClienteInt);
+        public static Models.Contract CadastrarContrato(
+        string idCliente, string idUsuario, string idServico, string dateLimit, string dateDone, string dateContract)
+        {
+            int clientId = int.Parse(idCliente);
+            int userId = int.Parse(idUsuario);
+            int serviceId = int.Parse(idServico);
 
-      int idUsuarioInt = int.Parse(idUsuario);
-      Model.Usuario usuario = Model.Usuario.BuscarUsuario(idUsuarioInt);
+            Models.Client cliente = Models.Client.BuscarCliente(clientId);
+            Models.User usuario = Models.User.BuscarUsuario(userId);
+            Models.Service servico = Models.Service.BuscarServico(serviceId);
 
-      int idServicoInt = int.Parse(idServico);
-      Model.Servico servico = Model.Servico.BuscarServico(idServicoInt);
-      
-      return new Model.Contract(cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
+            return new Models.Contract(cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
+        }
+
+        public static Models.Contract ExcluirContrato(int id)
+        {
+            try
+            {
+                Models.Contract contrato = Models.Contract.BuscarContrato(id);
+                if (contrato != null)
+                {
+                    throw new Exception("Contrato não cadastrado");
+                }
+
+                Models.Contract.ExcluirContrato(id);
+
+                return contrato;
+            }
+            catch (System.Exception)
+            {
+
+                throw new Exception("Erro ao buscar contrato");
+            }
+        }
+
+        public static List<Models.Contract> ListarContratos()
+        {
+            return Models.Contract.ListarContratos();
+        }
+
+        public static Models.Contract EditarContrato(int id, int clientId, int userId, int serviceId, string dateLimit, string dateDone, string dateContract)
+        {
+            Models.Contract contrato = Models.Contract.BuscarContrato(id);
+            Models.Client cliente = Models.Client.BuscarCliente(clientId);
+            Models.User usuario = Models.User.BuscarUsuario(userId);
+            Models.Service servico = Models.Service.BuscarServico(serviceId);
+
+            Models.Contract.EditarContrato(id, cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
+
+            return contrato;
+        }
     }
-
-    public static void ExcluirContrato(
-      string id
-    )
-    {
-      int idInt = int.Parse(id);
-      Model.Contract.ExcluirContrato(idInt);
-    }
-
-    public static List<Model.Contract> ListarContratos()
-    {
-      return Model.Contract.ListarContratos();
-    }
-
-    public static Model.Contract EditarContract(
-      int clientId, int userId, int serviceId, string dateLimit, string dateDone, string dateContract
-    )
-    {
-      int idInt = int.Parse(id);
-      Model.Contract contrato = Model.Contract.BuscarContrato(idInt);
-
-      int idClienteInt = int.Parse(idCliente);
-      Model.Client cliente = Model.Client.BuscarCliente(idClienteInt);
-
-      int idUsuarioInt = int.Parse(idUsuario);
-      Model.Usuario usuario = Model.Usuario.BuscarUsuario(idUsuarioInt);
-
-      int idServicoInt = int.Parse(idServico);
-      Model.Servico servico = Model.Servico.BuscarServico(idServicoInt);
-
-      return Model.Contract.EditarContrato(idInt, cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
-    }
-  }
 }
