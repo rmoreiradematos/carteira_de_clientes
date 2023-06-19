@@ -1,51 +1,61 @@
+using System;
+using System.Collections.Generic;
+
 namespace carteira_de_clientes
 {
 
     public class Client
     {
-        public static Model.Client CadastrarCliente(
+        public static Models.Client CadastrarCliente(
             string nome,
-            string cpf,
-            string email,
             string telefone,
-            string endereco,
-            string cidade,
-            string estado,
-            string cep,
-            string pais
+            string endereco
         )
         {
-            return new Model.Client(nome, cpf, email, telefone, endereco, cidade, estado, cep, pais);
+            return new Models.Client(nome, endereco, telefone);
         }
 
-        public static Model.Client ExcluirCliente(
-            string id
-        )
+        public static Models.Client ExcluirCliente(int id)
         {
-            int idInt = int.Parse(id);
-            Model.Client.ExcluirCliente(idInt);
+
+            try
+            {
+                Models.Client cliente = Models.Client.BuscarCliente(id);
+                if (cliente != null)
+                {
+                    throw new Exception("Cliente não cadastrado");
+                }
+
+                Models.Client.ExcluirCliente(id);
+
+                return cliente;
+            }
+            catch (System.Exception)
+            {
+
+                throw new Exception("Erro ao buscar cliente");
+            }
+
         }
 
-        public static List<Model.Client> ListarClientes()
+        public static List<Models.Client> ListarClientes()
         {
-            return Model.Client.ListarClientes();
+            return Models.Client.ListarClientes();
         }
 
-        public static Model.Client EditarCliente(
+        public static Models.Client EditarCliente(
             string id,
             string nome,
-            string cpf,
-            string email,
             string telefone,
-            string endereco,
-            string cidade,
-            string estado,
-            string cep,
-            string pais
+            string endereco
+
         )
         {
             int idInt = int.Parse(id);
-            return Model.Client.EditarCliente(idInt, nome, cpf, email, telefone, endereco, cidade, estado, cep, pais);
+            Models.Client cliente = Models.Client.BuscarCliente(idInt);
+            Models.Client.EditarCliente(idInt, nome, endereco, telefone);
+
+            return cliente;
         }
     }
 }

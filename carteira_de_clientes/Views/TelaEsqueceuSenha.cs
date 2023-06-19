@@ -6,10 +6,10 @@ namespace carteira_de_clientes
 {
     public partial class TelaEsqueceuSenha : Form
     {
-        private Label lblEmail;
+        private Label lblCpf;
         private Button btnVoltar;
         private Button btnEnviar;
-        private TextBox txbEmail;
+        private TextBox txbCpf;
         private PictureBox picboxPremyer;
         private Label lblRecuperarSenha;
         private Label lblRecuperarSenha1;
@@ -30,19 +30,21 @@ namespace carteira_de_clientes
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.FormClosing += TelaEsqueceuSenha_FormClosing;
 
-            //textbox Email
-            txbEmail = new TextBox();
-            txbEmail.Location = new System.Drawing.Point(215, 380);
-            txbEmail.Size = new System.Drawing.Size(150, 30);
-            this.Controls.Add(txbEmail);
+            //textbox CPF
+            txbCpf = new TextBox();
+            txbCpf.Location = new System.Drawing.Point(215, 380);
+            txbCpf.Size = new System.Drawing.Size(150, 30);
+            this.Controls.Add(txbCpf);
 
-            //label Email
-            lblEmail = new Label();
-            lblEmail.Location = new System.Drawing.Point(175, 381);
-            lblEmail.Size = new System.Drawing.Size(150, 30);
-            lblEmail.Font = new Font(lblEmail.Font.FontFamily, 10, FontStyle.Regular);
-            lblEmail.Text = "Email:";
-            this.Controls.Add(lblEmail);
+
+
+            //label CPF
+            lblCpf = new Label();
+            lblCpf.Location = new System.Drawing.Point(175, 381);
+            lblCpf.Size = new System.Drawing.Size(150, 30);
+            lblCpf.Font = new Font(lblCpf.Font.FontFamily, 10, FontStyle.Regular);
+            lblCpf.Text = "CPF:";
+            this.Controls.Add(lblCpf);
 
             //button Enviar
             // btnEnviar = new Button();
@@ -65,7 +67,7 @@ namespace carteira_de_clientes
             labels.Add("Enviar", btnEnviar_Click);
             labels.Add("Voltar", btnVoltar_Click);
 
-            new Botoes(labels, 2, this, false);
+            new Botoes(labels, 2, this, 75, 500, false);
 
             //PictureBox Premyer
             picboxPremyer = new PictureBox();
@@ -92,10 +94,11 @@ namespace carteira_de_clientes
             lblRecuperarSenha1.ForeColor = Color.White;
             lblRecuperarSenha1.TextAlign = ContentAlignment.MiddleCenter;
             lblRecuperarSenha1.BackColor = Color.Gray;
-            lblRecuperarSenha1.Text = "Para recuperar sua senha, informe seu endereço de email que nós enviaremos um link para a alteração da senha.";
+            lblRecuperarSenha1.Text = "Para recuperar sua senha, informe seu CPF para a alteração da senha.";
             this.Controls.Add(lblRecuperarSenha1);
 
         }
+
 
         private void btnVoltar_Click(object sender, EventArgs e)
         {
@@ -105,10 +108,22 @@ namespace carteira_de_clientes
         }
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Email enviado com SUCESSO!\n\nVerifique seu email cadastrado!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            TelaLogin telaLogin = new TelaLogin();
-            telaLogin.Show();
-            this.Hide();
+
+            string cpf = txbCpf.Text;
+
+            // Verifica se o CPF possui 11 dígitos numéricos
+            if (cpf.Length == 11 && cpf.All(char.IsDigit))
+            {
+                MessageBox.Show("CPF validado com SUCESSO!\n\nRedefina sua senha!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TelaRedefinirSenha telaRedefinirSenha = new TelaRedefinirSenha();
+                telaRedefinirSenha.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Verifique seu CPF se está correto,\n Deve conter APENAS numeros!", "AVISO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        
         }
 
         private void TelaEsqueceuSenha_FormClosing(object sender, FormClosingEventArgs e)
