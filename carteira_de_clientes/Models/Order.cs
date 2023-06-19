@@ -5,16 +5,18 @@ namespace Models
     public class Order
     {
         public int Id { get; set; }
-        public int ClientId { get; set; }
+        public int ContractId { get; set; }
         public int ServiceId { get; set; }
+        public Contract Contract { get; set; }
+        public Service Service { get; set; }
 
         public Order()
         {
         }
 
-        public Order(int clientId, int serviceId)
+        public Order(int contractId, int serviceId)
         {
-            this.ClientId = clientId;
+            this.ContractId = contractId;
             this.ServiceId = serviceId;
             Database db = new Database();
             db.Orders.Add(this);
@@ -23,7 +25,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"Id: {Id}, ClientId: {ClientId}, ServiceId: {ServiceId}";
+            return $"Id: {Id}, ContractId: {ContractId}, ServiceId: {ServiceId}";
         }
 
         public override int GetHashCode()
@@ -79,11 +81,11 @@ namespace Models
             db.SaveChanges();
         }
 
-        public static void EditarOrdem(int id, int clientId, int serviceId)
+        public static void EditarOrdem(int id, int contractId, int serviceId)
         {
             Database db = new Database();
             Order order = BuscarOrdem(id);
-            order.ClientId = clientId;
+            order.ContractId = contractId;
             order.ServiceId = serviceId;
             db.SaveChanges();
         }

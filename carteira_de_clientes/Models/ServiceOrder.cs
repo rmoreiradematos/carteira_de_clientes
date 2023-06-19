@@ -8,6 +8,8 @@ namespace Models
         public bool Done { get; set; }
         public int UserId { get; set; }
         public int ServiceId { get; set; }
+        public Service Service { get; set; }
+        public User User { get; set; }
 
         public ServiceOrder()
         {

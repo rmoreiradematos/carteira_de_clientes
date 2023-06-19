@@ -15,9 +15,15 @@ namespace Repository
         public DbSet<ServiceOrder> ServiceOrders { get; set; }
         public DbSet<User> Users { get; set; }
 
-        private string _connectionString = "Server=localhost;User Id=root;Database=senhas;";
-
+        private IConfiguration Configuration { get; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
+        {
+            string connectionString = "Server=localhost;Database=dbCarteiraClientes;Uid=root;";
+            ServerVersion version = ServerVersion.AutoDetect(connectionString);
+
+ 
+
+            optionsBuilder.UseMySql(connectionString, version);
+        }
     }
 }
