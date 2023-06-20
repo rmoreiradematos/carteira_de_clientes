@@ -32,7 +32,7 @@ namespace carteira_de_clientes
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.FormClosing += TelaEsqueceuSenha_FormClosing;
+            this.FormClosing += TelaRedefinirSenha_FormClosing;
 
             //textbox CPF
             txbCpf = new TextBox();
@@ -40,17 +40,17 @@ namespace carteira_de_clientes
             txbCpf.Size = new System.Drawing.Size(150, 30);
             this.Controls.Add(txbCpf);
 
+            //textbox Senha
             txbSenha = new TextBox();
             txbSenha.Location = new System.Drawing.Point(215, 410);
             txbSenha.Size = new System.Drawing.Size(150, 30);
             this.Controls.Add(txbSenha);
 
+            //textBox Confirmar Senha
             txbConfirmarSenha = new TextBox();
             txbConfirmarSenha.Location = new System.Drawing.Point(215, 440);
             txbConfirmarSenha.Size = new System.Drawing.Size(150, 30);
             this.Controls.Add(txbConfirmarSenha);
-
-
 
             //label CPF
             lblCpf = new Label();
@@ -114,22 +114,13 @@ namespace carteira_de_clientes
 
             string senha = txbSenha.Text;
             string ConfirmSenha = txbConfirmarSenha.Text;
-
-
-
-            if (senha == null || ConfirmSenha == null)
+            
+            if (senha == ConfirmSenha && senha != null && ConfirmSenha != null && senha.Length >= 8 && senha.All(char.IsDigit))
             {
-                if (senha == ConfirmSenha)
-                {
-                    if (senha.Length >= 8 && senha.All(char.IsDigit))
-                    {
-                        MessageBox.Show("Senha alterada com Sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        TelaLogin telaLogin = new TelaLogin();
-                        telaLogin.Show();
-                        this.Hide();
-                    }
-
-                }
+                MessageBox.Show("Senha alterada com Sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TelaLogin telaLogin = new TelaLogin();
+                telaLogin.Show();
+                this.Hide();
             }
 
             else
@@ -140,7 +131,7 @@ namespace carteira_de_clientes
 
         }
 
-        private void TelaEsqueceuSenha_FormClosing(object sender, FormClosingEventArgs e)
+        private void TelaRedefinirSenha_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {

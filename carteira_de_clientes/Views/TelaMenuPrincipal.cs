@@ -73,11 +73,12 @@ namespace carteira_de_clientes
             Dictionary<string, EventHandler> labels = new Dictionary<string, EventHandler>();
             labels.Add("FUNCIONARIOS", btnFuncionario_Click);
             labels.Add("CLIENTES", btnCliente_Click);
-            labels.Add("GRAFICOS", btnGrafico_Click);
+            labels.Add("SERVIÇO", btnServico_Click);
             labels.Add("ORDEM DE SERVIÇO", btnOrdemServico_Click);
+            labels.Add("GRAFICOS", btnGrafico_Click);
             labels.Add("SAIR", btnSair_Click);
 
-            new Botoes(labels, 5, this, 15, 350, true);
+            new Botoes(labels, 6, this, 15, 350, true);
 
 
 
@@ -147,6 +148,7 @@ namespace carteira_de_clientes
             cbAdminFuncionario.Font = new Font(cbAdminFuncionario.Font.FontFamily, 10, FontStyle.Regular);
             cbAdminFuncionario.Text = "ADMIN";
             cbAdminFuncionario.Visible = false;
+            cbAdminFuncionario.Click += new EventHandler(cbAdminFuncionario_Checked);
             cbAdminFuncionario.BringToFront();
             this.Controls.Add(cbAdminFuncionario);
 
@@ -156,6 +158,7 @@ namespace carteira_de_clientes
             cbUsuarioFuncionario.Text = "USUARIO";
             cbUsuarioFuncionario.Font = new Font(cbUsuarioFuncionario.Font.FontFamily, 10, FontStyle.Regular);
             cbUsuarioFuncionario.Visible = false;
+            cbUsuarioFuncionario.Click += new EventHandler(cbUsuarioFuncionario_Checked);
             cbUsuarioFuncionario.BringToFront();
             this.Controls.Add(cbUsuarioFuncionario);
 
@@ -296,8 +299,8 @@ namespace carteira_de_clientes
 
             //dataGridViewOrdemServico
             dataGridViewOrdemServico = new DataGridView();
-            dataGridViewOrdemServico.Location = new System.Drawing.Point(400, 350);
-            dataGridViewOrdemServico.Size = new System.Drawing.Size(1500, 700);
+            dataGridViewOrdemServico.Location = new System.Drawing.Point(400, 20);
+            dataGridViewOrdemServico.Size = new System.Drawing.Size(1500, 600);
             dataGridViewOrdemServico.Columns.Add("ID", "ID");
             dataGridViewOrdemServico.Columns[0].Width = 208;
             dataGridViewOrdemServico.Columns.Add("ID USUARIO", "ID USUARIO");
@@ -331,6 +334,35 @@ namespace carteira_de_clientes
             //this.Controls.Add(lblBemVindo);
             this.Controls.Add(picboxTabela);
 
+        }
+
+        private void btnServico_Click(object? sender, EventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+            clickedButton.ForeColor = Color.Red;
+
+            foreach (Control control in Controls)
+            {
+                if (control is Button button && button != clickedButton)
+                {
+                    button.ForeColor = Color.Black;
+                }
+            }
+        }
+
+        private void cbAdminFuncionario_Checked(object sender, EventArgs e)
+        {
+            if (cbAdminFuncionario.Checked == true)
+            {
+                cbUsuarioFuncionario.Checked = false;
+            }
+        }
+        private void cbUsuarioFuncionario_Checked(object sender, EventArgs e)
+        {
+            if (cbUsuarioFuncionario.Checked == true)
+            {
+                cbAdminFuncionario.Checked = false;
+            }
         }
 
         private void btnShowSenhaFuncionario_Click(object sender, EventArgs e)
