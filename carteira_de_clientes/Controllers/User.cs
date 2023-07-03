@@ -1,52 +1,93 @@
 using System;
-using System.Collections.Generic;
-using Models;
-namespace carteira_de_clientes
+using System.Security.Cryptography;
+using System.Text;
+
+namespace Carteira_De_Clientes.Controllers
 {
     public class User
     {
-        public static Models.User CadastrarUsuario(string nome, string senha, string email, string role)
+        public static Models.Funcionario funcionarioCrud = new();
+
+        public static Models.Funcionario CadastrarFuncionario(string nome, string senha, string email, string role, string salario)
         {
-            int intNome = int.Parse(nome);
-            UserType userTypeRole = (UserType)Enum.Parse(typeof(UserType), role);
-            return new Models.User(intNome, senha, email, userTypeRole);
+            Models.Funcionario funcionario = new(nome, Controllers.Login.GenerateHashCode(StringToInt(senha)).ToString(), email, role, double.Parse(salario));
+            return funcionarioCrud.Cadastrar(funcionario);
         }
 
-        public static Models.User ExcluirUsuario(int id)
+        public static int StringToInt(string input)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
+                int result = BitConverter.ToInt32(hashBytes, 0);
+                return result;
+            }
+        }
+
+        public static IEnumerable<Models.Funcionario> GetAllFuncionarios()
+        {
+            IEnumerable<Models.Funcionario> funcionario = funcionarioCrud.GetAll();
+
+            return funcionario;
+        }
+
+        public static Models.Funcionario GetFuncionario(string id)
         {
             try
             {
-                Models.User user = Models.User.BuscarUsuario(id);
-                if (user != null)
-                {
-                    throw new Exception("Usuário não cadastrado");
-                }
+                int idInt = int.Parse(id);
+                Models.Funcionario funcionario = funcionarioCrud.Get(idInt);
 
-                Models.User.ExcluirUsuario(id);
-
-                return user;
+                return funcionario;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw new Exception("Erro ao buscar o usuário");
+                throw new Exception("Erro ao buscar Funcionario: " + e.Message);
             }
         }
 
-        public static List<Models.User> ListarUsuarios()
+        public static Models.Funcionario GetFuncionarioByEmail(string email)
         {
-            return Models.User.ListarUsuarios();
+            Models.Funcionario funcionario = funcionarioCrud.GetAll().FirstOrDefault(x => x.Email == email) ?? throw new Exception("Funcionario não encontrado");
+            return funcionario;
         }
 
-        public static Models.User EditarUsuario(string id, string name, string password, string role)
+        public static Models.Funcionario AlterarFuncionario(string funcionarioId, string nome, string email, string role, string salario)
         {
-            int idInt = int.Parse(id);
-            Models.User usuario = Models.User.BuscarUsuario(idInt);
+            try
+            {
+                int idInt = int.Parse(funcionarioId);
+                Models.Funcionario funcionario = funcionarioCrud.Get(idInt);
 
-            UserType userTypeRole = (UserType)Enum.Parse(typeof(UserType), role);
-            Models.User.EditarUsuario(idInt, name, password, userTypeRole);
+                funcionario.Nome = nome;
+                funcionario.Email = email;
+                funcionario.Role = (Models.Generic.Roles)Enum.Parse(typeof(Models.Generic.Roles), role);
+                funcionario.Salario = Double.Parse(salario);
 
-            return usuario;
+                funcionarioCrud.Alterar(funcionario);
+
+                return funcionario;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao alterar Funcionario: " + e.Message);
+            }
+        }
+
+        public static Models.Funcionario ExcluirFuncionario(string id)
+        {
+            try
+            {
+                int idInt = int.Parse(id);
+                Models.Funcionario funcionario = funcionarioCrud.Get(idInt);
+                funcionarioCrud.Excluir(idInt);
+
+                return funcionario;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao excluir Funcionario: " + e.Message);
+            }
         }
     }
 }

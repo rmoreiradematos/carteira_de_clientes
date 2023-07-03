@@ -1,29 +1,39 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Models;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
+using MySql.Data.EntityFrameworkCore.Extensions;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Carteira_De_Clientes.Models;
+using MySql.Data.EntityFrameworkCore.Extensions;
+using System.Data.SqlClient;
+using System.Linq;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
+using MySqlConnector;
 
-namespace Repository
+
+namespace Banco
 {
-    public class Database : DbContext
+    public class DataBase : DbContext
     {
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Contract> Contracts { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceOrder> ServiceOrders { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DataBase() { }
+        public DataBase(DbContextOptions<DataBase> options) : base(options) { }
 
-        private IConfiguration Configuration { get; }
+        public DbSet<OrdemDeServico> OrdemDeServicos { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<Contrato> Contratos { get; set; }
+        public DbSet<Ordem> Ordens { get; set; }
+        public DbSet<Servico> Servicos { get; set; }
+        private string _connectionString = "Server=localhost;User Id=root;Database=senhas;";
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = "Server=localhost;Database=dbCarteiraClientes;Uid=root;";
-            ServerVersion version = ServerVersion.AutoDetect(connectionString);
-
- 
-
-            optionsBuilder.UseMySql(connectionString, version);
+            optionsBuilder.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
         }
+
+
     }
 }

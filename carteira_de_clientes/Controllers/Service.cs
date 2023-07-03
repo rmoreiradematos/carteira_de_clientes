@@ -1,48 +1,72 @@
 using System;
-using System.Collections.Generic;
-
-namespace carteira_de_clientes
+namespace Carteira_De_Clientes.Controllers
 {
+
     public class Service
     {
-        public static Models.Service CadastrarServico(string nome, string preco)
+        public static Models.Servico servicoCrud = new();
+        public static Models.Servico CadastrarCliente(string nome, string preco)
         {
-            return new Models.Service(nome, preco);
+            Models.Servico servico = new(nome, preco);
+            return servicoCrud.Cadastrar(servico);
         }
 
-        public static Models.Service ExcluirServico(int id)
+        public static Models.Servico GetServico(string id)
         {
             try
             {
-                Models.Service service = Models.Service.BuscarServico(id);
-                if (service != null)
-                {
-                    throw new Exception("Serviço não cadastrado");
-                }
+                Models.Servico servico = servicoCrud.Get(int.Parse(id));
 
-                Models.Service.ExcluirServico(id);
-
-                return service;
+                return servico;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw new Exception("Erro ao buscar serviço");
+                throw new Exception("Erro ao buscar Servico: " + e.Message);
             }
         }
 
-        public static List<Models.Service> ListarServicos()
+        public static IEnumerable<Models.Servico> GetAllServicos()
         {
-            return Models.Service.ListarServicos();
+            IEnumerable<Models.Servico> servicos = servicoCrud.GetAll();
+
+            return servicos;
         }
 
-        public static Models.Service EditarServico(string id, string nome, string preco)
+        public static Models.Servico AlterarServico(string servicoId, string nome, string preco)
         {
-            int idInt = int.Parse(id);
-            Models.Service service = Models.Service.BuscarServico(idInt);
-            Models.Service.EditarService(idInt, nome, preco);
 
-            return service;
+            try
+            {
+                int idInt = int.Parse(servicoId);
+                Models.Servico servico = servicoCrud.Get(idInt);
+
+                servico.Nome = nome;
+                servico.Preco = preco;
+
+                servicoCrud.Alterar(servico);
+
+                return servico;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao alterar Servico: " + e.Message);
+            }
+        }
+
+        public static Models.Servico ExcluirServico(string id)
+        {
+            try
+            {
+                int idInt = int.Parse(id);
+                Models.Servico servico = servicoCrud.Get(idInt);
+                servicoCrud.Excluir(servico.Id);
+
+                return servico;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao excluir Servico: " + e.Message);
+            }
         }
     }
 }

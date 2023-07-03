@@ -1,60 +1,88 @@
 using System;
-using System.Collections.Generic;
-
-namespace carteira_de_clientes
+namespace Carteira_De_Clientes.Controllers
 {
+
     public class Contract
     {
-        public static Models.Contract CadastrarContrato(
-        string idCliente, string idUsuario, string idServico, string dateLimit, string dateDone, string dateContract)
+        public static Models.Cliente clienteCrud = new();
+        public static Models.Funcionario funcionarioCrud = new();
+        public static Models.Servico servicoCrud = new();
+        public static Models.Contrato contratoCrud = new();
+        public static Models.Contrato CadastrarContrato(string clienteId, string funcionarioId, string servicoId, string dateLimit, string dateDone, string dateContract)
         {
-            int clientId = int.Parse(idCliente);
-            int userId = int.Parse(idUsuario);
-            int serviceId = int.Parse(idServico);
+            int intClienteId = int.Parse(clienteId);
+            Models.Cliente cliente = clienteCrud.Get(intClienteId);
 
-            Models.Client cliente = Models.Client.BuscarCliente(clientId);
-            Models.User usuario = Models.User.BuscarUsuario(userId);
-            Models.Service servico = Models.Service.BuscarServico(serviceId);
+            int intFuncionarioId = int.Parse(funcionarioId);
+            Models.Funcionario funcionario = funcionarioCrud.Get(intFuncionarioId);
 
-            return new Models.Contract(cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
+            int intServicoId = int.Parse(servicoId);
+            Models.Servico servico = servicoCrud.Get(intServicoId);
+
+            Models.Contrato contrato = new(cliente.Id, funcionario.Id, servico.Id, dateLimit, dateDone, dateContract);
+            return contratoCrud.Cadastrar(contrato);
         }
 
-        public static Models.Contract ExcluirContrato(int id)
+        public static Models.Contrato GetContrato(string id)
         {
             try
             {
-                Models.Contract contrato = Models.Contract.BuscarContrato(id);
-                if (contrato != null)
-                {
-                    throw new Exception("Contrato não cadastrado");
-                }
-
-                Models.Contract.ExcluirContrato(id);
+                Models.Contrato contrato = contratoCrud.Get(int.Parse(id));
 
                 return contrato;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw new Exception("Erro ao buscar contrato");
+                throw new Exception("Erro ao buscar Contrato: " + e.Message);
             }
         }
 
-        public static List<Models.Contract> ListarContratos()
+        public static IEnumerable<Models.Contrato> GetAllContratos()
         {
-            return Models.Contract.ListarContratos();
+            IEnumerable<Models.Contrato> contratos = contratoCrud.GetAll();
+
+            return contratos;
         }
 
-        public static Models.Contract EditarContrato(int id, int clientId, int userId, int serviceId, string dateLimit, string dateDone, string dateContract)
+        public static Models.Contrato AlterarContrato(string contratoId, string clienteId, string funcionarioId, string servicoId, string dateLimit, string dateDone, string dateContract)
         {
-            Models.Contract contrato = Models.Contract.BuscarContrato(id);
-            Models.Client cliente = Models.Client.BuscarCliente(clientId);
-            Models.User usuario = Models.User.BuscarUsuario(userId);
-            Models.Service servico = Models.Service.BuscarServico(serviceId);
 
-            Models.Contract.EditarContrato(id, cliente.Id, usuario.Id, servico.Id, dateLimit, dateDone, dateContract);
+            try
+            {
+                int idInt = int.Parse(contratoId);
+                Models.Contrato contrato = contratoCrud.Get(idInt);
 
-            return contrato;
+                contrato.ClienteId = int.Parse(clienteId);
+                contrato.FuncionarioId = int.Parse(funcionarioId);
+                contrato.ServicoId = int.Parse(servicoId);
+                contrato.DateLimit = dateLimit;
+                contrato.DateDone = dateDone;
+                contrato.DateContract = dateContract;
+
+                contratoCrud.Alterar(contrato);
+
+                return contrato;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao alterar Contrato: " + e.Message);
+            }
+        }
+
+        public static Models.Contrato ExcluirContrato(string id)
+        {
+            try
+            {
+                int idInt = int.Parse(id);
+                Models.Contrato contrato = contratoCrud.Get(idInt);
+                contratoCrud.Excluir(contrato.Id);
+
+                return contrato;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao excluir Contrato: " + e.Message);
+            }
         }
     }
 }

@@ -1,61 +1,73 @@
 using System;
-using System.Collections.Generic;
-
-namespace carteira_de_clientes
+namespace Carteira_De_Clientes.Controllers
 {
 
     public class Client
     {
-        public static Models.Client CadastrarCliente(
-            string nome,
-            string telefone,
-            string endereco
-        )
+        public static Models.Cliente clienteCrud = new();
+        public static Models.Cliente CadastrarCliente(string nome, string telefone, string endereco)
         {
-            return new Models.Client(nome, endereco, telefone);
+            Models.Cliente cliente = new(nome, telefone, endereco);
+            return clienteCrud.Cadastrar(cliente);
         }
 
-        public static Models.Client ExcluirCliente(int id)
+        public static Models.Cliente GetCliente(string id)
+        {
+            try
+            {
+                Models.Cliente cliente = clienteCrud.Get(int.Parse(id));
+
+                return cliente;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao buscar Cliente: " + e.Message);
+            }
+        }
+
+        public static IEnumerable<Models.Cliente> GetAllClientes()
+        {
+            IEnumerable<Models.Cliente> clientes = clienteCrud.GetAll();
+
+            return clientes;
+        }
+
+        public static Models.Cliente AlterarCliente(string clienteId, string nome, string telefone, string endereco)
         {
 
             try
             {
-                Models.Client cliente = Models.Client.BuscarCliente(id);
-                if (cliente != null)
-                {
-                    throw new Exception("Cliente não cadastrado");
-                }
+                int idInt = int.Parse(clienteId);
+                Models.Cliente cliente = clienteCrud.Get(idInt);
 
-                Models.Client.ExcluirCliente(id);
+                cliente.Nome = nome;
+                cliente.Telefone = telefone;
+                cliente.Endereco = endereco;
+
+                clienteCrud.Alterar(cliente);
 
                 return cliente;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw new Exception("Erro ao buscar cliente");
+                throw new Exception("Erro ao alterar Cliente: " + e.Message);
             }
-
         }
 
-        public static List<Models.Client> ListarClientes()
+        public static Models.Cliente ExcluirCliente(string id)
         {
-            return Models.Client.ListarClientes();
-        }
+            try
+            {
+                int idInt = int.Parse(id);
+                Models.Cliente cliente = clienteCrud.Get(idInt);
+                clienteCrud.Excluir(cliente.Id);
 
-        public static Models.Client EditarCliente(
-            string id,
-            string nome,
-            string telefone,
-            string endereco
-
-        )
-        {
-            int idInt = int.Parse(id);
-            Models.Client cliente = Models.Client.BuscarCliente(idInt);
-            Models.Client.EditarCliente(idInt, nome, endereco, telefone);
-
-            return cliente;
+                return cliente;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao excluir Cliente: " + e.Message);
+            }
         }
     }
 }

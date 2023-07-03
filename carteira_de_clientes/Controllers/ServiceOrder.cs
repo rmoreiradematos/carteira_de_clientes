@@ -1,63 +1,82 @@
 using System;
-using System.Collections.Generic;
-
-namespace carteira_de_clientes
+namespace Carteira_De_Clientes.Controllers
 {
+
     public class ServiceOrder
     {
-        public static Models.ServiceOrder CadastrarServicoOrdem(bool done, string userId, string serviceId)
+        public static Models.OrdemDeServico ordemDeServicoCrud = new();
+        public static Models.Funcionario funcionarioCrud = new();
+        public static Models.Servico servicoCrud = new();
+        public static Models.OrdemDeServico CadastrarContrato(string done, string funcionarioId, string servicoId)
         {
-            // Models.ServiceOrder feito = Models.ServiceOrder.BuscarServicoOrdem(done);
+            int intFuncionarioId = int.Parse(funcionarioId);
+            Models.Funcionario funcionario = funcionarioCrud.Get(intFuncionarioId);
 
-            int idUsuarioInt = int.Parse(userId);
-            Models.User usuario = Models.User.BuscarUsuario(idUsuarioInt);
+            int intServicoId = int.Parse(servicoId);
+            Models.Servico servico = servicoCrud.Get(intServicoId);
 
-            int idServicoInt = int.Parse(serviceId);
-            Models.Service servico = Models.Service.BuscarServico(idServicoInt);
-
-            return new Models.ServiceOrder(done, usuario.Id, servico.Id);
+            Models.OrdemDeServico ordemDeServico = new(done, funcionario.Id, servico.Id);
+            return ordemDeServicoCrud.Cadastrar(ordemDeServico);
         }
 
-        public static Models.ServiceOrder ExcluirOrdemDeServico(int id)
+        public static Models.OrdemDeServico GetOrdemDeServico(string id)
         {
             try
             {
-                Models.ServiceOrder serviceOrder = Models.ServiceOrder.BuscarServicoOrdem(id);
-                if (serviceOrder != null)
-                {
-                    throw new Exception("Ordem de serviço não cadastrada");
-                }
+                Models.OrdemDeServico ordemDeServico = ordemDeServicoCrud.Get(int.Parse(id));
 
-                Models.ServiceOrder.ExcluirServicoOrdem(id);
-
-                return serviceOrder;
+                return ordemDeServico;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw new Exception("Erro ao buscar Ordem de serviço");
+                throw new Exception("Erro ao buscar Ordem de Servico: " + e.Message);
             }
         }
 
-        public static List<Models.ServiceOrder> ListarOrdensDeServico()
+        public static IEnumerable<Models.OrdemDeServico> GetAllOrdemDeServicos()
         {
-            return Models.ServiceOrder.ListarServicoOrdens();
+            IEnumerable<Models.OrdemDeServico> ordemDeServicos = ordemDeServicoCrud.GetAll();
+
+            return ordemDeServicos;
         }
 
-        public static Models.ServiceOrder EditarServicoOrdem(string id, bool done, string userId, string serviceId)
+        public static Models.OrdemDeServico AlterarOrdemDeServico(string ordemDeServicoId ,string done, string funcionarioId, string servicoId)
         {
-            int idInt = int.Parse(id);
-            Models.ServiceOrder serviceOrder = Models.ServiceOrder.BuscarServicoOrdem(idInt);
 
-            int idUsuarioInt = int.Parse(userId);
-            Models.ServiceOrder ordemDeServico = Models.ServiceOrder.BuscarServicoOrdem(idUsuarioInt);
+            try
+            {
+                int idInt = int.Parse(ordemDeServicoId);
+                Models.OrdemDeServico ordemDeServico = ordemDeServicoCrud.Get(idInt);
 
-            int idServicoInt = int.Parse(serviceId);
-            Models.Service servico = Models.Service.BuscarServico(idServicoInt);
 
-            Models.ServiceOrder.EditarServicoOrdem(idInt, done, ordemDeServico.Id, servico.Id);
+                ordemDeServico.FuncionarioId = int.Parse(funcionarioId);
+                ordemDeServico.ServicoId = int.Parse(servicoId);
+                ordemDeServico.Done = (Models.Generic.Dones)Enum.Parse(typeof(Models.Generic.Dones), done);
 
-            return serviceOrder;
+                ordemDeServicoCrud.Alterar(ordemDeServico);
+
+                return ordemDeServico;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao alterar Ordem de Servico: " + e.Message);
+            }
+        }
+
+        public static Models.OrdemDeServico ExcluirOrdemDeServico(string id)
+        {
+            try
+            {
+                int idInt = int.Parse(id);
+                Models.OrdemDeServico ordemDeServico = ordemDeServicoCrud.Get(idInt);
+                ordemDeServico.Excluir(ordemDeServico.Id);
+
+                return ordemDeServico;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao excluir Ordem de Servico: " + e.Message);
+            }
         }
     }
 }

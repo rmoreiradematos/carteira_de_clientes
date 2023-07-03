@@ -1,58 +1,80 @@
 using System;
-using System.Collections.Generic;
-
-namespace carteira_de_clientes
+namespace Carteira_De_Clientes.Controllers
 {
+
     public class Order
     {
-        public static Models.Order CadastrarOrdem(string contractId, string serviceId)
+        public static Models.Cliente clienteCrud = new();
+        public static Models.Servico servicoCrud = new();
+        public static Models.Ordem ordemCrud = new();
+        public static Models.Ordem CadastrarOrdem(string clienteId, string servicoId)
         {
-            int idContratoInt = int.Parse(contractId);
-            Models.Contract contrato = Models.Contract.BuscarContrato(idContratoInt);
+            int intClienteId = int.Parse(clienteId);
+            Models.Cliente cliente = clienteCrud.Get(intClienteId);
 
-            int idServicoInt = int.Parse(serviceId);
-            Models.Service servico = Models.Service.BuscarServico(idServicoInt);
+            int intServicoId = int.Parse(servicoId);
+            Models.Servico servico = servicoCrud.Get(intServicoId);
 
-            return new Models.Order(idContratoInt, idServicoInt);
+            Models.Ordem ordem = new(cliente.Id, servico.Id);
+            return ordemCrud.Cadastrar(ordem);
         }
 
-        public static Models.Order ExcluirOrder(int id)
+        public static Models.Ordem GetOrdem(string id)
         {
             try
             {
-                Models.Order ordem = Models.Order.BuscarOrdem(id);
-                if (ordem != null)
-                {
-                    throw new Exception("Ordem não cadastrada");
-                }
-
-                Models.Order.ExcluirOrdem(id);
+                Models.Ordem ordem = ordemCrud.Get(int.Parse(id));
 
                 return ordem;
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw new Exception("Erro ao buscar ordem");
+                throw new Exception("Erro ao buscar Ordem: " + e.Message);
             }
         }
 
-
-        public static List<Models.Order> ListarOrdens()
+        public static IEnumerable<Models.Ordem> GetAllOrdens()
         {
-            return Models.Order.ListarOrders();
+            IEnumerable<Models.Ordem> ordens = ordemCrud.GetAll();
+
+            return ordens;
         }
 
-        public static Models.Order EditarOrdem(string id, string clientId, string serviceId)
+        public static Models.Ordem AlterarOrdem(string ordemId, string clienteId, string servicoId)
         {
-            int idInt = int.Parse(id);
-            int clientIdInt = int.Parse(clientId);
-            int serviceIdInt = int.Parse(serviceId);
-            Models.Order order = Models.Order.BuscarOrdem(idInt);
 
-            Models.Order.EditarOrdem(idInt, clientIdInt, serviceIdInt);
+            try
+            {
+                int idInt = int.Parse(ordemId);
+                Models.Ordem ordem = ordemCrud.Get(idInt);
 
-            return order;
+                ordem.ClienteId = int.Parse(clienteId);
+                ordem.ServicoId = int.Parse(servicoId);
+
+                ordemCrud.Alterar(ordem);
+
+                return ordem;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao alterar Ordem: " + e.Message);
+            }
+        }
+
+        public static Models.Ordem ExcluirOrdem(string id)
+        {
+            try
+            {
+                int idInt = int.Parse(id);
+                Models.Ordem ordem = ordemCrud.Get(idInt);
+                ordemCrud.Excluir(ordem.Id);
+
+                return ordem;
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception("Erro ao excluir Ordem: " + e.Message);
+            }
         }
     }
 }
