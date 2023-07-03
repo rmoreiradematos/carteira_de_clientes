@@ -11,6 +11,7 @@ namespace Models
         public string DateLimit { get; set; }
         public string DateDone { get; set; }
         public string DateContract { get; set; }
+        public Client Client { get; set; }
 
         public Contract()
         {
