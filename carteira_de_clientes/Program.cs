@@ -1,4 +1,4 @@
-namespace carteira_de_clientes;
+namespace Carteira_De_Clientes;
 
 static class Program
 {
@@ -6,6 +6,6 @@ static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
-        Application.Run(new TelaLogin());
+        Application.Run(new Login());
     }    
 }

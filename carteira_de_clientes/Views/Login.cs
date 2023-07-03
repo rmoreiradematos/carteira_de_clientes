@@ -1,10 +1,7 @@
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace carteira_de_clientes
+namespace Carteira_De_Clientes
 {
-    public partial class TelaLogin : Form
+
+    public class Login : Form
     {
         private Button btnEntrar;
         private Button btnSenha;
@@ -13,15 +10,16 @@ namespace carteira_de_clientes
         private TextBox txbLogin;
         private TextBox txbSenha;
         private PictureBox picboxPremyer;
-
-        public TelaLogin()
+        
+        public Login()
         {
             InitializeComponent();
         }
 
         private void InitializeComponent()
         {
-            //Form1
+
+            //Formulario Login
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ClientSize = new System.Drawing.Size(525, 600);
             this.Text = "Carteira de Clientes";
@@ -30,7 +28,8 @@ namespace carteira_de_clientes
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.FormClosing += TelaLogin_FormClosing;
-            
+
+
             // TextBox Login
             txbLogin = new TextBox();
             txbLogin.Location = new System.Drawing.Point(220, 310);
@@ -39,12 +38,15 @@ namespace carteira_de_clientes
             txbLogin.Focus();
             this.Controls.Add(txbLogin);
 
+
             // TextBox Senha
             txbSenha = new TextBox();
             txbSenha.Location = new System.Drawing.Point(220, 360);
             txbSenha.Size = new System.Drawing.Size(150, 30);
             txbSenha.Name = "txbSenha";
+            txbSenha.UseSystemPasswordChar = true;
             this.Controls.Add(txbSenha);
+
 
             // Botao Entrar
             btnEntrar = new Button();
@@ -55,15 +57,6 @@ namespace carteira_de_clientes
             btnEntrar.Click += BtnEntrar_Click;
             this.Controls.Add(btnEntrar);
 
-            // Botao Esqueceu a Senha
-            btnSenha = new Button();
-            btnSenha.Location = new System.Drawing.Point(100, 500);
-            btnSenha.Size = new System.Drawing.Size(120, 30);
-            btnSenha.Text = "Esqueceu a senha?";
-            btnSenha.UseVisualStyleBackColor = true;
-            txbSenha.UseSystemPasswordChar = true;
-            btnSenha.Click += BtnSenha_Click;
-            this.Controls.Add(btnSenha);
 
             // Label Login
             lblLogin = new Label();
@@ -73,6 +66,7 @@ namespace carteira_de_clientes
             lblLogin.Text = "Login:";
             this.Controls.Add(lblLogin);
 
+
             // Label Senha
             lblSenha = new Label();
             lblSenha.Location = new System.Drawing.Point(170, 361);
@@ -81,6 +75,7 @@ namespace carteira_de_clientes
             lblSenha.Text = "Senha:";
             this.Controls.Add(lblSenha);
 
+
             // PictureBox Premyer
             picboxPremyer = new PictureBox();
             picboxPremyer.Location = new System.Drawing.Point(150, 20);
@@ -88,19 +83,27 @@ namespace carteira_de_clientes
             picboxPremyer.Image = Image.FromFile(@"Views\assets\Premyer.png");
             picboxPremyer.SizeMode = PictureBoxSizeMode.StretchImage;
             this.Controls.Add(picboxPremyer);
-        }
 
-        private void BtnSenha_Click(object sender, EventArgs e)
-        {
-            TelaEsqueceuSenha telaEsqueceuSenha = new TelaEsqueceuSenha();
-            telaEsqueceuSenha.Show();
-            this.Hide();
         }
         private void BtnEntrar_Click(object sender, EventArgs e)
         {
-            TelaMenuPrincipal telaMenuPrincipal = new TelaMenuPrincipal();
-            telaMenuPrincipal.Show();
-            this.Hide();
+            try
+            {
+                if (Controllers.Login.GetLogin(txbLogin.Text, txbSenha.Text))
+                {
+                    Menu menu = new Menu();
+                    menu.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Usuário ou senha inválidos");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void TelaLogin_FormClosing(object sender, FormClosingEventArgs e)
@@ -110,6 +113,5 @@ namespace carteira_de_clientes
                 Application.Exit();
             }
         }
-
     }
 }
