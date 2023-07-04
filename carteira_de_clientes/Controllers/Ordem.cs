@@ -7,15 +7,18 @@ namespace Carteira_De_Clientes.Controllers
         public static Models.Cliente clienteCrud = new();
         public static Models.Servico servicoCrud = new();
         public static Models.Ordem ordemCrud = new();
-        public static Models.Ordem CadastrarOrdem(string clienteId, string servicoId)
+        public static Models.FuncionarioServico funcionarioServicoCrud = new();
+        public static Models.Ordem CadastrarOrdem(string clienteId, string funcionarioServicoId, string precoOrdem, string dataRealizada, string pago, string descricao, string dataLimite)
         {
             int intClienteId = int.Parse(clienteId);
             Models.Cliente cliente = clienteCrud.Get(intClienteId);
 
-            int intServicoId = int.Parse(servicoId);
-            Models.Servico servico = servicoCrud.Get(intServicoId);
+            int intfuncionarioServicoId = int.Parse(funcionarioServicoId);
+            Models.FuncionarioServico funcionarioServico = funcionarioServicoCrud.Get(intfuncionarioServicoId);
 
-            Models.Ordem ordem = new(cliente.Id, servico.Id);
+            bool boolPago = bool.Parse(pago);
+
+            Models.Ordem ordem = new(intClienteId, intfuncionarioServicoId, precoOrdem, dataRealizada, boolPago, descricao, dataLimite);
             return ordemCrud.Cadastrar(ordem);
         }
 
@@ -40,7 +43,7 @@ namespace Carteira_De_Clientes.Controllers
             return ordens;
         }
 
-        public static Models.Ordem AlterarOrdem(string ordemId, string clienteId, string servicoId)
+        public static Models.Ordem AlterarOrdem(string ordemId, string clienteId, string funcionarioServicoId, string precoOrdem, string dataRealizada, bool pago, string descricao, string dataLimite)
         {
 
             try
@@ -49,8 +52,12 @@ namespace Carteira_De_Clientes.Controllers
                 Models.Ordem ordem = ordemCrud.Get(idInt);
 
                 ordem.ClienteId = int.Parse(clienteId);
-                ordem.ServicoId = int.Parse(servicoId);
-
+                ordem.FuncionarioServicoId = int.Parse(funcionarioServicoId);
+                ordem.PrecoOrdem = precoOrdem;
+                ordem.DataRealizada = dataRealizada;
+                ordem.Pago = pago;
+                ordem.Descricao = descricao;
+                ordem.DataLimite = dataLimite;
                 ordemCrud.Alterar(ordem);
 
                 return ordem;

@@ -6,22 +6,20 @@ using Carteira_De_Clientes.Models.Generic;
 
 namespace Carteira_De_Clientes.Models
 {
-    public class OrdemDeServico : CreateReadUpdateDelete<OrdemDeServico>
+    public class FuncionarioServico : CreateReadUpdateDelete<FuncionarioServico>
     {
         public int Id { get; set; }
-        public Dones Done { get; set; }
         public int FuncionarioId { get; set; }
         public Funcionario Funcionario { get; set; }
         public int ServicoId { get; set; }
         public Servico Servico { get; set; }
 
-        public OrdemDeServico()
+        public FuncionarioServico()
         {
         }
 
-        public OrdemDeServico(string done, int funcionarioId, int servicoId)
+        public FuncionarioServico(int funcionarioId, int servicoId)
         {
-            Done = (Dones)Enum.Parse(typeof(Dones), done);
             this.FuncionarioId = FuncionarioId;
             this.ServicoId = servicoId;
         }

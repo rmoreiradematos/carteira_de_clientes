@@ -8,20 +8,32 @@ namespace Carteira_De_Clientes.Models
 {
     public class Ordem : CreateReadUpdateDelete<Ordem>
     {
-        public int Id { get; set; }
+         public int Id { get; set; }
+        public int FuncionarioServicoId { get; set; }
+        public FuncionarioServico FuncionarioServico { get; set; }
+        public string PrecoOrdem { get; set; }
+        public string DataRealizada { get; set; }
+        public bool Pago { get; set; }
+        public string Descricao { get; set; }
+        public string DataLimite { get; set; }
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
-        public int ServicoId { get; set; }
-        public Servico Servico { get; set; }
+
 
         public Ordem()
         {
         }
 
-        public Ordem(int clienteId, int servicoId)
+        public Ordem(int clienteId, int funcionarioServicoId, string precoOrdem, string dataRealizada, bool pago, string descricao, string dataLimite)
         {
             this.ClienteId = clienteId;
-            this.ServicoId = servicoId;
+            this.FuncionarioServicoId = funcionarioServicoId;
+            this.PrecoOrdem = precoOrdem;
+            this.DataRealizada = dataRealizada;
+            this.Pago = pago;
+            this.Descricao = descricao;
+            this.DataLimite = dataLimite;
+            this.FuncionarioServicoId = funcionarioServicoId;
         }
     }
 }

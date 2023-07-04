@@ -5,9 +5,9 @@ namespace Carteira_De_Clientes.Controllers
     public class Servico
     {
         public static Models.Servico servicoCrud = new();
-        public static Models.Servico CadastrarCliente(string nome, string preco)
+        public static Models.Servico CadastrarCliente(string nome, string precoServico)
         {
-            Models.Servico servico = new(nome, preco);
+            Models.Servico servico = new(nome, precoServico);
             return servicoCrud.Cadastrar(servico);
         }
 
@@ -32,7 +32,7 @@ namespace Carteira_De_Clientes.Controllers
             return servicos;
         }
 
-        public static Models.Servico AlterarServico(string servicoId, string nome, string preco)
+        public static Models.Servico AlterarServico(string servicoId, string nome, string precoServico)
         {
 
             try
@@ -41,7 +41,7 @@ namespace Carteira_De_Clientes.Controllers
                 Models.Servico servico = servicoCrud.Get(idInt);
 
                 servico.Nome = nome;
-                servico.Preco = preco;
+                servico.PrecoServico = precoServico;
 
                 servicoCrud.Alterar(servico);
 

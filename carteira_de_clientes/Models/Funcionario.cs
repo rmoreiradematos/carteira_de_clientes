@@ -13,19 +13,19 @@ namespace Carteira_De_Clientes.Models
         public string Nome { get; set; }
         public string Senha { get; set; }
         public string Email { get; set; }
-        public Roles Role { get; set; }
+        public Roles Funcao { get; set; }
         public double Salario { get; set; }
 
         public Funcionario()
         {
         }
-        public Funcionario(string nome, string senha, string email, string role, double salario)
+        public Funcionario(string nome, string senha, string email, string funcao, double salario)
         {
             this.Nome = nome;
             this.Senha = senha;
             this.Email = email;
-            Role = (Roles)Enum.Parse(typeof(Roles), role);
-            Salario = salario;
+            this.Funcao = (Roles)Enum.Parse(typeof(Roles), funcao);
+            this.Salario = salario;
         }
     }
 }

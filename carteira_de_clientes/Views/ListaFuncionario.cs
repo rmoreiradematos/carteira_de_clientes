@@ -151,7 +151,7 @@ namespace View
                 foreach (var item in collectionFuncionarios)
                 {
 
-                    string[] linhaFuncionario = { item.Id.ToString(), item.Nome, item.Role.ToString(), item.Email, item.Salario.ToString() };
+                    string[] linhaFuncionario = { item.Id.ToString(), item.Nome, item.Funcao.ToString(), item.Email, item.Salario.ToString() };
 
                     funcionarioGridView.Rows.Add(linhaFuncionario);
                 }
