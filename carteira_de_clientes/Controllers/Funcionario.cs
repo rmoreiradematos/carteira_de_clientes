@@ -8,9 +8,9 @@ namespace Carteira_De_Clientes.Controllers
     {
         public static Models.Funcionario funcionarioCrud = new();
 
-        public static Models.Funcionario CadastrarFuncionario(string nome, string senha, string email, string role, string salario)
+        public static Models.Funcionario CadastrarFuncionario(string nome, string senha, string email, string funcao, string salario)
         {
-            Models.Funcionario funcionario = new(nome, Controllers.Login.GenerateHashCode(StringToInt(senha)).ToString(), email, role, double.Parse(salario));
+            Models.Funcionario funcionario = new(nome, Controllers.Login.GenerateHashCode(StringToInt(senha)).ToString(), email, funcao, double.Parse(salario));
             return funcionarioCrud.Cadastrar(funcionario);
         }
 
@@ -52,7 +52,7 @@ namespace Carteira_De_Clientes.Controllers
             return funcionario;
         }
 
-        public static Models.Funcionario AlterarFuncionario(string funcionarioId, string nome, string email, string role, string salario)
+        public static Models.Funcionario AlterarFuncionario(string funcionarioId, string nome, string email, string funcao, string salario)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Carteira_De_Clientes.Controllers
 
                 funcionario.Nome = nome;
                 funcionario.Email = email;
-                funcionario.Role = (Models.Generic.Roles)Enum.Parse(typeof(Models.Generic.Roles), role);
+                funcionario.Funcao = (Models.Generic.Roles)Enum.Parse(typeof(Models.Generic.Roles), funcao);
                 funcionario.Salario = Double.Parse(salario);
 
                 funcionarioCrud.Alterar(funcionario);

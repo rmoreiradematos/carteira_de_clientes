@@ -21,13 +21,12 @@ namespace Banco
         public DataBase() { }
         public DataBase(DbContextOptions<DataBase> options) : base(options) { }
 
-        public DbSet<OrdemDeServico> OrdemDeServicos { get; set; }
+        public DbSet<FuncionarioServico> FuncionarioServicos { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<Contrato> Contratos { get; set; }
         public DbSet<Ordem> Ordens { get; set; }
         public DbSet<Servico> Servicos { get; set; }
-        private string _connectionString = "Server=localhost;User Id=root;Database=senhas;";
+        private string _connectionString = "Server=localhost;User Id=root;Database=CarteiraDeClientes;";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

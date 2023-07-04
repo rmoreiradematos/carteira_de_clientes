@@ -197,7 +197,7 @@ namespace View
             this.txtNome.Text = funcionario.Nome;
             this.txtEmail.Text = funcionario.Email;
             this.txtSalario.Text = funcionario.Salario.ToString();
-            this.comboBoxPerfil.SelectedItem = funcionario.Role;
+            this.comboBoxPerfil.SelectedItem = funcionario.Funcao;
             this.maskedTxtSenha.Text = funcionario.Senha;
             this.maskedTxtSenha.Enabled = false;
         }

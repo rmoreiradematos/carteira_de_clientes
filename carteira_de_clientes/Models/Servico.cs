@@ -10,16 +10,16 @@ namespace Carteira_De_Clientes.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Preco { get; set; }
+        public string PrecoServico { get; set; }
 
         public Servico()
         {
         }
 
-        public Servico(string nome, string preco)
+        public Servico(string nome, string precoServico)
         {
             this.Nome = nome;
-            this.Preco = preco;
+            this.PrecoServico = precoServico;
         }
     }
 }

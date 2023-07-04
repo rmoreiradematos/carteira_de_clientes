@@ -2,6 +2,7 @@
 using Banco;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace carteira_de_clientes.Migrations
 {
     [DbContext(typeof(DataBase))]
-    partial class DataBaseModelSnapshot : ModelSnapshot
+    [Migration("20230704223031_teste")]
+    partial class teste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +44,44 @@ namespace carteira_de_clientes.Migrations
                     b.ToTable("Clientes");
                 });
 
+            modelBuilder.Entity("Carteira_De_Clientes.Models.Contrato", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DateContract")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DateDone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DateLimit")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("FuncionarioId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("Contratos");
+                });
+
             modelBuilder.Entity("Carteira_De_Clientes.Models.Funcionario", b =>
                 {
                     b.Property<int>("Id")
@@ -51,12 +92,12 @@ namespace carteira_de_clientes.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Funcao")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<double>("Salario")
                         .HasColumnType("double");
@@ -70,10 +111,34 @@ namespace carteira_de_clientes.Migrations
                     b.ToTable("Funcionarios");
                 });
 
-            modelBuilder.Entity("Carteira_De_Clientes.Models.FuncionarioServico", b =>
+            modelBuilder.Entity("Carteira_De_Clientes.Models.Ordem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("Ordens");
+                });
+
+            modelBuilder.Entity("Carteira_De_Clientes.Models.OrdemDeServico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Done")
                         .HasColumnType("int");
 
                     b.Property<int>("FuncionarioId")
@@ -88,47 +153,7 @@ namespace carteira_de_clientes.Migrations
 
                     b.HasIndex("ServicoId");
 
-                    b.ToTable("FuncionarioServicos");
-                });
-
-            modelBuilder.Entity("Carteira_De_Clientes.Models.Ordem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DataLimite")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("DataRealizada")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("FuncionarioServicoId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Pago")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("PrecoOrdem")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("FuncionarioServicoId");
-
-                    b.ToTable("Ordens");
+                    b.ToTable("OrdemDeServicos");
                 });
 
             modelBuilder.Entity("Carteira_De_Clientes.Models.Servico", b =>
@@ -141,7 +166,7 @@ namespace carteira_de_clientes.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("PrecoServico")
+                    b.Property<string>("Preco")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -150,7 +175,53 @@ namespace carteira_de_clientes.Migrations
                     b.ToTable("Servicos");
                 });
 
-            modelBuilder.Entity("Carteira_De_Clientes.Models.FuncionarioServico", b =>
+            modelBuilder.Entity("Carteira_De_Clientes.Models.Contrato", b =>
+                {
+                    b.HasOne("Carteira_De_Clientes.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Carteira_De_Clientes.Models.Funcionario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Carteira_De_Clientes.Models.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Funcionario");
+
+                    b.Navigation("Servico");
+                });
+
+            modelBuilder.Entity("Carteira_De_Clientes.Models.Ordem", b =>
+                {
+                    b.HasOne("Carteira_De_Clientes.Models.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Carteira_De_Clientes.Models.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Servico");
+                });
+
+            modelBuilder.Entity("Carteira_De_Clientes.Models.OrdemDeServico", b =>
                 {
                     b.HasOne("Carteira_De_Clientes.Models.Funcionario", "Funcionario")
                         .WithMany()
@@ -167,25 +238,6 @@ namespace carteira_de_clientes.Migrations
                     b.Navigation("Funcionario");
 
                     b.Navigation("Servico");
-                });
-
-            modelBuilder.Entity("Carteira_De_Clientes.Models.Ordem", b =>
-                {
-                    b.HasOne("Carteira_De_Clientes.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Carteira_De_Clientes.Models.FuncionarioServico", "FuncionarioServico")
-                        .WithMany()
-                        .HasForeignKey("FuncionarioServicoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("FuncionarioServico");
                 });
 #pragma warning restore 612, 618
         }
