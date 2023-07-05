@@ -128,7 +128,7 @@ namespace View
         {
             Carteira_De_Clientes.Models.Servico servico = Carteira_De_Clientes.Controllers.Servico.GetServico(servicoId.ToString());
             this.txtId.Text = servicoId.ToString();
-            this.txtNome.Text = servico.Nome;
+            this.txtNome.Text = servico.Nome.ToString();
             this.txtPrecoServico.Text = servico.PrecoServico;
         }
 

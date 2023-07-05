@@ -54,8 +54,6 @@ namespace View
         private void SetupLayout()
         {
 
-
-
             adicionarFuncionarioButton.Text = "Novo";
             adicionarFuncionarioButton.Location = new Point(270, 10);
             adicionarFuncionarioButton.Click += new EventHandler(adicionarFuncionarioButton_Click);
@@ -98,9 +96,9 @@ namespace View
             funcionarioGridView.ColumnCount = 5;
 
             funcionarioGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Green;
-            funcionarioGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.LightGreen;
+            funcionarioGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             funcionarioGridView.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                new Font(funcionarioGridView.Font, FontStyle.Bold);
 
             funcionarioGridView.Name = "funcionarioGridView";
             funcionarioGridView.Location = new Point(8, 8);
@@ -172,14 +170,14 @@ namespace View
                             this.funcionarioGridView.SelectedRows[0].Index !=
                             this.funcionarioGridView.Rows.Count - 1)
             {
-                string idClienteSelecionado = funcionarioGridView.Rows[this.funcionarioGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
-                Funcionario telaFuncionario = new Funcionario(Int32.Parse(idClienteSelecionado));
+                string idFuncionarioSelecionado = funcionarioGridView.Rows[this.funcionarioGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
+                Funcionario telaFuncionario = new Funcionario(Int32.Parse(idFuncionarioSelecionado));
                 telaFuncionario.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
                 telaFuncionario.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Nenhum cliente foi selecionado!");
+                MessageBox.Show("Nenhum funcionario foi selecionado!");
             }
         }
 

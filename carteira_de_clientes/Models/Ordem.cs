@@ -8,7 +8,7 @@ namespace Carteira_De_Clientes.Models
 {
     public class Ordem : CreateReadUpdateDelete<Ordem>
     {
-         public int Id { get; set; }
+        public int Id { get; set; }
         public int FuncionarioServicoId { get; set; }
         public FuncionarioServico FuncionarioServico { get; set; }
         public string PrecoOrdem { get; set; }

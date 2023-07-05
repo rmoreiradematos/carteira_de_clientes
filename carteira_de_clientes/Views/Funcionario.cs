@@ -82,7 +82,7 @@ namespace View
             txtSalario = new TextBox();
             txtSalario.Location = new Point(80, 300);
             txtSalario.Size = new Size(200, 100);
-           
+
             lblSenha = new Label();
             lblSenha.Text = "Senha:";
             lblSenha.AutoSize = true;
@@ -92,7 +92,7 @@ namespace View
             maskedTxtSenha.Location = new Point(80, 360);
             maskedTxtSenha.Size = new Size(200, 100);
             maskedTxtSenha.ForeColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
-         
+
             btnVoltar = new Button();
             btnVoltar.Text = "Voltar";
             btnVoltar.Location = new Point(500, 10);
@@ -106,7 +106,7 @@ namespace View
             btnConfirmar.AutoSize = true;
             btnConfirmar.Click += new EventHandler(adicionarFuncionarioButton_Click);
             btnConfirmar.BackColor = Color.Snow;
- 
+
             buttonPanel.Controls.Add(btnConfirmar);
             buttonPanel.Controls.Add(btnVoltar);
             buttonPanel.Height = 50;
@@ -137,7 +137,8 @@ namespace View
 
             try
             {
-                String nome = txtNome.Text;
+                //String nome = txtNome.Text;
+                String nome = txtNome.SelectedText.ToString();
                 String email = txtEmail.Text;
                 String salario = txtSalario.Text;
                 String role = comboBoxPerfil.SelectedItem.ToString();

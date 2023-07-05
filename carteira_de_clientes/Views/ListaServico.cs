@@ -16,7 +16,7 @@ namespace View
 
         public ListaServico()
         {
-            this.Text = "Listagem de Servico";
+            this.Text = "Listagem de Serviço";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
@@ -97,36 +97,36 @@ namespace View
         {
             this.Controls.Add(servicoGridView);
 
-           servicoGridView.ColumnCount = 3;
+            servicoGridView.ColumnCount = 3;
 
-           servicoGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-           servicoGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-           servicoGridView.ColumnHeadersDefaultCellStyle.Font =
+            servicoGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            servicoGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            servicoGridView.ColumnHeadersDefaultCellStyle.Font =
                 new Font(servicoGridView.Font, FontStyle.Bold);
 
-           servicoGridView.Name = "servicoGridView";
-           servicoGridView.Location = new Point(8, 8);
-           servicoGridView.Size = new Size(600, 400);
-           servicoGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-           servicoGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-           servicoGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-           servicoGridView.GridColor = Color.Black;
-           servicoGridView.BackgroundColor = System.Drawing.Color.LightSlateGray;
+            servicoGridView.Name = "servicoGridView";
+            servicoGridView.Location = new Point(8, 8);
+            servicoGridView.Size = new Size(600, 400);
+            servicoGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            servicoGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            servicoGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            servicoGridView.GridColor = Color.Black;
+            servicoGridView.BackgroundColor = System.Drawing.Color.LightSlateGray;
 
-           servicoGridView.RowHeadersVisible = false;
+            servicoGridView.RowHeadersVisible = false;
 
-           servicoGridView.Columns[0].Name = "Id";
-           servicoGridView.Columns[0].Width = 115;
-           servicoGridView.Columns[1].Name = "Tipo do Serviço";
-           servicoGridView.Columns[1].Width = 420;
-           servicoGridView.Columns[2].Name = "Preço do Serviço";
-           servicoGridView.Columns[2].Width = 260;
+            servicoGridView.Columns[0].Name = "Id";
+            servicoGridView.Columns[0].Width = 115;
+            servicoGridView.Columns[1].Name = "Tipo do Serviço";
+            servicoGridView.Columns[1].Width = 420;
+            servicoGridView.Columns[2].Name = "Preço do Serviço";
+            servicoGridView.Columns[2].Width = 260;
 
-           servicoGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-           servicoGridView.MultiSelect = false;
-           servicoGridView.Dock = DockStyle.Fill;
+            servicoGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            servicoGridView.MultiSelect = false;
+            servicoGridView.Dock = DockStyle.Fill;
 
-           servicoGridView.CellFormatting += new DataGridViewCellFormattingEventHandler(servicoGridView_CellFormatting);
+            servicoGridView.CellFormatting += new DataGridViewCellFormattingEventHandler(servicoGridView_CellFormatting);
         }
 
         private void PopulateDataGridView()
@@ -139,7 +139,7 @@ namespace View
             {
                 foreach (var item in collectionServicos)
                 {
-                    string[] linhaServico = { item.Id.ToString(), item.Nome, item.PrecoServico};
+                    string[] linhaServico = { item.Id.ToString(), item.Nome, item.PrecoServico };
 
                     servicoGridView.Rows.Add(linhaServico);
                 }

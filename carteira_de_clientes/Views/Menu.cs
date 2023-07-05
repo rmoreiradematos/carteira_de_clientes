@@ -38,7 +38,7 @@ namespace Carteira_De_Clientes
             labels.Add("FUNCIONARIOS", btnFuncionario_Click);
             labels.Add("CLIENTES", btnCliente_Click);
             labels.Add("SERVIÇO", btnServico_Click);
-            labels.Add("ORDEM DE SERVIÇO", btnOrdemServico_Click);
+            labels.Add("GERENCIAR ATIVIDADES", btnOrdemServico_Click);
             labels.Add("GRAFICOS", btnGrafico_Click);
             labels.Add("SAIR", btnSair_Click);
 
@@ -166,6 +166,20 @@ namespace Carteira_De_Clientes
 
         private void btnOrdemServico_Click(object sender, EventArgs e)
         {
+
+            this.contentPanel.BringToFront();
+            this.contentPanel.Controls.Clear();
+
+            ListaFuncionarioServico listaFuncionarioServicoForms = new ListaFuncionarioServico();
+            listaFuncionarioServicoForms.StartPosition = FormStartPosition.CenterScreen;
+            listaFuncionarioServicoForms.FormBorderStyle = FormBorderStyle.None;
+            listaFuncionarioServicoForms.WindowState = FormWindowState.Maximized;
+            listaFuncionarioServicoForms.TopLevel = false;
+            listaFuncionarioServicoForms.AutoScroll = true;
+            this.contentPanel.Controls.Add(listaFuncionarioServicoForms);
+            listaFuncionarioServicoForms.Show();
+
+
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
 
