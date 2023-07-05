@@ -5,7 +5,7 @@ namespace Carteira_De_Clientes.Controllers
     public class Servico
     {
         public static Models.Servico servicoCrud = new();
-        public static Models.Servico CadastrarCliente(string nome, string precoServico)
+        public static Models.Servico CadastrarServico(string nome, string precoServico)
         {
             Models.Servico servico = new(nome, precoServico);
             return servicoCrud.Cadastrar(servico);

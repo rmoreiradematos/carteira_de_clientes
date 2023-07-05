@@ -81,6 +81,14 @@ namespace Carteira_De_Clientes
 
         private void btnServico_Click(object? sender, EventArgs e)
         {
+            this.contentPanel.BringToFront();
+            this.contentPanel.Controls.Clear();
+
+            ListaServico listaServicoForm = new ListaServico();
+            this.contentPanel.Controls.Add(listaServicoForm);
+            listaServicoForm.Show();
+
+
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
 
