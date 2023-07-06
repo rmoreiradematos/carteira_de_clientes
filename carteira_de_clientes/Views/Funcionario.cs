@@ -137,8 +137,7 @@ namespace View
 
             try
             {
-                //String nome = txtNome.Text;
-                String nome = txtNome.SelectedText.ToString();
+                String nome = txtNome.Text;
                 String email = txtEmail.Text;
                 String salario = txtSalario.Text;
                 String role = comboBoxPerfil.SelectedItem.ToString();

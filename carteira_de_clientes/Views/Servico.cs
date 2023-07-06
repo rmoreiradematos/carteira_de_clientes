@@ -101,12 +101,12 @@ namespace View
                 if (this.txtId.Text != null && Int32.TryParse(this.txtId.Text, out int idServico))
                 {
                     Carteira_De_Clientes.Controllers.Servico.AlterarServico(this.txtId.Text, nomeServico,precoServico);
-                    MessageBox.Show("Servico atualizado com sucesso!");
+                    MessageBox.Show("Serviço atualizado com sucesso!");
                 }
                 else
                 {
                     Carteira_De_Clientes.Controllers.Servico.CadastrarServico(nomeServico, precoServico);
-                    MessageBox.Show("Servico cadastrado com sucesso!");
+                    MessageBox.Show("Serviço cadastrado com sucesso!");
                 }
 
                 this.Close();

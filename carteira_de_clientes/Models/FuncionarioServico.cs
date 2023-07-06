@@ -20,7 +20,7 @@ namespace Carteira_De_Clientes.Models
 
         public FuncionarioServico(int funcionarioId, int servicoId)
         {
-            this.FuncionarioId = FuncionarioId;
+            this.FuncionarioId = funcionarioId;
             this.ServicoId = servicoId;
         }
     }

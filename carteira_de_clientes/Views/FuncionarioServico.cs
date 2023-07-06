@@ -29,10 +29,12 @@ namespace View
         public FuncionarioServico(int? funcionarioServicoId)
         {
             this.Text = "Cadastro de Gerenciamento de Atividades";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
-
-            this.Size = new Size(600, 600);
+            this.BackColor = System.Drawing.Color.LightSlateGray;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(700, 350);
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Size = new Size(800, 600);
 
             lblId = new Label();
             lblId.Text = "Id:";
@@ -108,13 +110,12 @@ namespace View
         {
             try
             {
-
                 Carteira_De_Clientes.Models.Funcionario funcionarioSelecionado = this.buscarFuncionarioSelecionadoCombobox();
                 Carteira_De_Clientes.Models.Servico servicoSelecionado = this.buscarServicoSelecionadoCombobox();
 
-                if (this.txtId.Text != null && Int32.TryParse(this.txtId.Text, out int idFuncionarioServico))
+                if (!string.IsNullOrEmpty(this.txtId.Text) && Int32.TryParse(this.txtId.Text, out int idFuncionarioServico))
                 {
-                    Carteira_De_Clientes.Controllers.FuncionarioServico.AlterarFuncionarioServico(this.txtId.Text, funcionarioSelecionado.Id.ToString(), servicoSelecionado.Id.ToString());
+                    Carteira_De_Clientes.Controllers.FuncionarioServico.AlterarFuncionarioServico(idFuncionarioServico.ToString(), funcionarioSelecionado.Id.ToString(), servicoSelecionado.Id.ToString());
                     MessageBox.Show("Gerenciamento de Atividade atualizado com sucesso!");
                 }
                 else
@@ -127,8 +128,7 @@ namespace View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-
+                MessageBox.Show("Erro em ConfirmarFuncionarioServicoButton_click: " + ex.Message);
             }
         }
 
@@ -166,17 +166,17 @@ namespace View
 
                 comboboxServico.SelectedIndex = 0;
             }
-        } 
+        }
 
         private Carteira_De_Clientes.Models.Funcionario buscarFuncionarioSelecionadoCombobox()
         {
-            Carteira_De_Clientes.Models.Funcionario funcionarioSelecionado = new Carteira_De_Clientes.Models.Funcionario();
+            Carteira_De_Clientes.Models.Funcionario funcionarioSelecionado = null;
 
             if (comboboxFuncionario.SelectedItem != null)
             {
                 String nomeFuncionario = comboboxFuncionario.SelectedItem.ToString();
 
-                funcionarioSelecionado = this.listFuncionario.Where(item => item.Nome.Equals(nomeFuncionario)).FirstOrDefault();
+                funcionarioSelecionado = this.listFuncionario.FirstOrDefault(item => item.Nome.Equals(nomeFuncionario));
             }
 
             return funcionarioSelecionado;
@@ -184,17 +184,19 @@ namespace View
 
         private Carteira_De_Clientes.Models.Servico buscarServicoSelecionadoCombobox()
         {
-            Carteira_De_Clientes.Models.Servico servicoSelecionado = new Carteira_De_Clientes.Models.Servico();
+            Carteira_De_Clientes.Models.Servico servicoSelecionado = null;
 
             if (comboboxServico.SelectedItem != null)
             {
                 String nomeServico = comboboxServico.SelectedItem.ToString();
 
-                servicoSelecionado = this.listServico.Where(item => item.Nome.Equals(nomeServico)).FirstOrDefault();
+                servicoSelecionado = this.listServico.FirstOrDefault(item => item.Nome.Equals(nomeServico));
+
             }
 
             return servicoSelecionado;
-        }        
+        }
+
 
         private void setarDadoFuncionarioServicoEdicao(int? funcionarioServicoId)
         {

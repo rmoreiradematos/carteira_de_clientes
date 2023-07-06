@@ -82,7 +82,7 @@ namespace View
             buttonPanel.Dock = DockStyle.Bottom;    
             
             this.Size = new Size(600, 400);
-            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
+            this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ControlBox = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Controls.Add(this.buttonPanel);
@@ -106,7 +106,7 @@ namespace View
             funcionarioServicoGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             funcionarioServicoGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             funcionarioServicoGridView.GridColor = Color.Black;
-            funcionarioServicoGridView.BackgroundColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
+            funcionarioServicoGridView.BackgroundColor = System.Drawing.Color.LightSlateGray;
 
             funcionarioServicoGridView.RowHeadersVisible = false;
 
