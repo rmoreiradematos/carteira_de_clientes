@@ -161,8 +161,14 @@ namespace View
             {
                 string idServicoSelecionado = servicoGridView.Rows[this.servicoGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
                 Servico telaServico = new Servico(Int32.Parse(idServicoSelecionado));
-                telaServico.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
-                telaServico.ShowDialog();
+                
+                if (telaServico != null)
+                {
+                    telaServico.AlterarVisibilidadeId(true);
+                    telaServico.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
+                    telaServico.ShowDialog();
+
+                }
             }
             else
             {

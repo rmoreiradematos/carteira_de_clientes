@@ -83,6 +83,10 @@ namespace View
             buttonPanel.Height = 50;
             buttonPanel.Dock = DockStyle.Bottom;
 
+            
+            lblId.Visible = false;
+            txtId.Visible = false;
+
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.lblComboboxFuncionario);
@@ -96,6 +100,13 @@ namespace View
             {
                 this.setarDadoFuncionarioServicoEdicao(funcionarioServicoId);
             }
+        }
+
+
+        public void AlterarVisibilidadeId(bool visivel)
+        {
+            lblId.Visible = visivel;
+            txtId.Visible = visivel;
         }
 
 

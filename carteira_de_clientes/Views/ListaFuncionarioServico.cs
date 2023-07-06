@@ -79,8 +79,8 @@ namespace View
             buttonPanel.Controls.Add(deletarFuncionarioServicoButton);
             buttonPanel.Controls.Add(voltarButton);
             buttonPanel.Height = 50;
-            buttonPanel.Dock = DockStyle.Bottom;    
-            
+            buttonPanel.Dock = DockStyle.Bottom;
+
             this.Size = new Size(600, 400);
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ControlBox = false;
@@ -137,7 +137,7 @@ namespace View
                     Carteira_De_Clientes.Models.Funcionario funcionarioFuncionarioServico = Carteira_De_Clientes.Controllers.Funcionario.GetFuncionario(item.FuncionarioId.ToString());
                     Carteira_De_Clientes.Models.Servico servicoFuncionarioServico = Carteira_De_Clientes.Controllers.Servico.GetServico(item.ServicoId.ToString());
 
-                    string[] linhaFuncionarioServico = { item.Id.ToString(), funcionarioFuncionarioServico.Nome, servicoFuncionarioServico.Nome};
+                    string[] linhaFuncionarioServico = { item.Id.ToString(), funcionarioFuncionarioServico.Nome, servicoFuncionarioServico.Nome };
 
 
                     funcionarioServicoGridView.Rows.Add(linhaFuncionarioServico);
@@ -148,7 +148,7 @@ namespace View
         private void adicionarFuncionarioServicoButton_Click(object sender, EventArgs e)
         {
             FuncionarioServico telaFuncionarioServico = new FuncionarioServico(null);
-            telaFuncionarioServico.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);            
+            telaFuncionarioServico.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
             telaFuncionarioServico.ShowDialog();
         }
 
@@ -160,8 +160,14 @@ namespace View
             {
                 string idFuncionarioServicoSelecionado = funcionarioServicoGridView.Rows[this.funcionarioServicoGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
                 FuncionarioServico telaFuncionarioServico = new FuncionarioServico(Int32.Parse(idFuncionarioServicoSelecionado));
-                telaFuncionarioServico.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
-                telaFuncionarioServico.ShowDialog();
+
+                if (telaFuncionarioServico != null)
+                {
+                    telaFuncionarioServico.AlterarVisibilidadeId(true);
+                    telaFuncionarioServico.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
+                    telaFuncionarioServico.ShowDialog();
+
+                }
             }
             else
             {
@@ -200,7 +206,7 @@ namespace View
         {
             PopulateDataGridView();
             this.funcionarioServicoGridView.Refresh();
-        }        
+        }
 
         private void voltarButton_Click(object sender, EventArgs e)
         {

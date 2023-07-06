@@ -32,6 +32,7 @@ namespace View
             this.FormBorderStyle = FormBorderStyle.None;
             this.Size = new Size(800, 600);
 
+
             lblId = new Label();
             lblId.Text = "Id:";
             lblId.AutoSize = true;
@@ -72,12 +73,12 @@ namespace View
             comboBoxPerfil.TabIndex = 0;
             this.setComboBoxPerfil();
             comboBoxPerfil.Text = " ";
-            
+
             lblSalario = new Label();
             lblSalario.Text = "Salário:";
             lblSalario.AutoSize = true;
             lblSalario.Location = new Point(20, 300);
-            
+
             txtSalario = new TextBox();
             txtSalario.Location = new Point(80, 300);
             txtSalario.Size = new Size(200, 100);
@@ -86,7 +87,7 @@ namespace View
             lblSenha.Text = "Senha:";
             lblSenha.AutoSize = true;
             lblSenha.Location = new Point(20, 360);
-            
+
             maskedTxtSenha = new MaskedTextBox();
             maskedTxtSenha.Location = new Point(80, 360);
             maskedTxtSenha.Size = new Size(200, 100);
@@ -111,6 +112,10 @@ namespace View
             buttonPanel.Height = 50;
             buttonPanel.Dock = DockStyle.Bottom;
 
+            lblId.Visible = false;
+            txtId.Visible = false;
+
+
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.lblSenha);
@@ -131,6 +136,13 @@ namespace View
             }
         }
 
+
+        public void AlterarVisibilidadeId(bool visivel)
+        {
+            lblId.Visible = visivel;
+            txtId.Visible = visivel;
+        }
+
         private void adicionarFuncionarioButton_Click(object sender, EventArgs e)
         {
 
@@ -143,7 +155,7 @@ namespace View
 
                 if (this.txtId.Text != null && Int32.TryParse(this.txtId.Text, out int idFuncionario))
                 {
-                    
+
                     Carteira_De_Clientes.Controllers.Funcionario.AlterarFuncionario(this.txtId.Text, nome, email, role, salario);
                     MessageBox.Show("Funcionario atualizado com sucesso!");
                 }

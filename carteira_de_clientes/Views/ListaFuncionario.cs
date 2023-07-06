@@ -68,12 +68,12 @@ namespace View
             deletarFuncionarioButton.Location = new Point(430, 10);
             deletarFuncionarioButton.Click += new EventHandler(deletarFuncionarioButton_Click);
             deletarFuncionarioButton.BackColor = Color.Snow;
-            
+
             voltarButton.Text = "Voltar";
             voltarButton.Location = new Point(510, 10);
             voltarButton.Click += new EventHandler(voltarButton_Click);
             voltarButton.BackColor = Color.Snow;
-            
+
             buttonPanel.Controls.Add(adicionarFuncionarioButton);
             buttonPanel.Controls.Add(atualizarFuncionarioButton);
             buttonPanel.Controls.Add(deletarFuncionarioButton);
@@ -172,8 +172,15 @@ namespace View
             {
                 string idFuncionarioSelecionado = funcionarioGridView.Rows[this.funcionarioGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
                 Funcionario telaFuncionario = new Funcionario(Int32.Parse(idFuncionarioSelecionado));
-                telaFuncionario.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
-                telaFuncionario.ShowDialog();
+
+                if (telaFuncionario != null)
+                {
+                    telaFuncionario.AlterarVisibilidadeId(true);
+                    telaFuncionario.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
+                    telaFuncionario.ShowDialog();
+
+                }
+
             }
             else
             {

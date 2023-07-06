@@ -163,8 +163,14 @@ namespace View
             {
                 string idClienteSelecionado = clienteGridView.Rows[this.clienteGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
                 Cliente telaCliente = new Cliente(Int32.Parse(idClienteSelecionado));
-                telaCliente.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
-                telaCliente.ShowDialog();
+
+                if (telaCliente != null)
+                {
+                    telaCliente.AlterarVisibilidadeId(true);
+                    telaCliente.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
+                    telaCliente.ShowDialog();
+
+                }
             }
             else
             {

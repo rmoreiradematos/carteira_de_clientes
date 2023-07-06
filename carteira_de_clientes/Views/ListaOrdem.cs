@@ -79,8 +79,8 @@ namespace View
             buttonPanel.Controls.Add(deletarOrdemButton);
             buttonPanel.Controls.Add(voltarButton);
             buttonPanel.Height = 50;
-            buttonPanel.Dock = DockStyle.Bottom;    
-            
+            buttonPanel.Dock = DockStyle.Bottom;
+
             this.Size = new Size(600, 400);
             this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ControlBox = false;
@@ -154,7 +154,7 @@ namespace View
                     Carteira_De_Clientes.Models.FuncionarioServico funcionarioServicoOrdem = Carteira_De_Clientes.Controllers.FuncionarioServico.GetFuncionarioServico(item.FuncionarioServicoId.ToString());
                     Carteira_De_Clientes.Models.Cliente clienteOrdem = Carteira_De_Clientes.Controllers.Cliente.GetCliente(item.ClienteId.ToString());
 
-                    string[] linhaOrdem = { item.Id.ToString(), clienteOrdem.Nome, funcionarioServicoOrdem.Id.ToString(), item.PrecoOrdem, item.DataRealizada, item.Pago.ToString(), item.Descricao, item.DataLimite};
+                    string[] linhaOrdem = { item.Id.ToString(), clienteOrdem.Nome, funcionarioServicoOrdem.Id.ToString(), item.PrecoOrdem, item.DataRealizada, item.Pago.ToString(), item.Descricao, item.DataLimite };
 
 
                     ordemGridView.Rows.Add(linhaOrdem);
@@ -165,9 +165,10 @@ namespace View
         private void adicionarOrdemButton_Click(object sender, EventArgs e)
         {
             Ordem telaOrdem = new Ordem(null);
-            telaOrdem.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);            
+            telaOrdem.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
             telaOrdem.ShowDialog();
         }
+
 
         private void atualizarOrdemButton_Click(object sender, EventArgs e)
         {
@@ -177,12 +178,18 @@ namespace View
             {
                 string idOrdemSelecionado = ordemGridView.Rows[this.ordemGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
                 Ordem telaOrdem = new Ordem(Int32.Parse(idOrdemSelecionado));
-                telaOrdem.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
-                telaOrdem.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Nenhuma Ordem de Serviço foi selecionada!");
+
+                if (telaOrdem != null)
+                {
+                    telaOrdem.AlterarVisibilidadeId(true);
+
+                    telaOrdem.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
+                    telaOrdem.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Nenhuma Ordem de Serviço foi selecionada!");
+                }
             }
         }
 
@@ -217,7 +224,7 @@ namespace View
         {
             PopulateDataGridView();
             this.ordemGridView.Refresh();
-        }        
+        }
 
         private void voltarButton_Click(object sender, EventArgs e)
         {

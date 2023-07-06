@@ -168,6 +168,14 @@ namespace View
             }
         }
 
+        public void AlterarVisibilidadeId(bool visivel)
+        {
+            lblId.Visible = visivel;
+            txtId.Visible = visivel;
+            lblId.Visible = false;
+            txtId.Visible = false;
+        }
+
         private void setComboBoxPerfil()
         {
 
@@ -212,40 +220,36 @@ namespace View
         private void adicionarFuncionarioServicosCombobox()
         {
             comboboxFuncionarioServico.Items.Clear();
+
             IEnumerable<Carteira_De_Clientes.Models.FuncionarioServico> collectionFuncionarioServico = Carteira_De_Clientes.Controllers.FuncionarioServico.GetAllFuncionarioServicos();
             IEnumerable<Carteira_De_Clientes.Models.Funcionario> collectionFuncionario = Carteira_De_Clientes.Controllers.Funcionario.GetAllFuncionarios();
 
-
-            // if (collectionFuncionarioServico != null && collectionFuncionarioServico.Count() > 0 && collectionFuncionario != null && collectionFuncionario.Count() > 0)
-            // {
-            //     this.listFuncionarioServico.AddRange(collectionFuncionarioServico.ToList());
-            //     this.listFuncionario.AddRange(collectionFuncionario.ToList());
-
-            //     foreach (var funcionarioServico in collectionFuncionarioServico)
-            //     {
-            //         foreach (var funcionario in collectionFuncionario)
-            //         {
-            //             comboboxFuncionarioServico.Items.Add("ID: " + funcionarioServico.Id + " / Contem: " + funcionario.Nome);
-            //         }
-            //     }
-
-            //     comboboxFuncionarioServico.SelectedIndex = 0;
-            // }
-
-
-            if (collectionFuncionarioServico != null && collectionFuncionarioServico.Count() > 0 )
+            if (collectionFuncionarioServico != null && collectionFuncionario != null)
             {
-                this.listFuncionarioServico.AddRange(collectionFuncionarioServico.ToList());
+                var funcionarios = collectionFuncionario.ToList();
 
-                    foreach (var funcionarioServico in collectionFuncionarioServico)
+                foreach (var funcionarioServico in collectionFuncionarioServico)
+                {
+                    var funcionario = funcionarios.FirstOrDefault(f => f.Id == funcionarioServico.FuncionarioId);
+
+                    if (funcionario != null)
                     {
-                        //comboboxFuncionarioServico.Items.Add("ID: " + funcionarioServico.Id);
-                        comboboxFuncionarioServico.Items.Add(funcionarioServico.Id);
-                    }
+                        string itemText = $"ID: {funcionarioServico.Id} / Funcionario: {funcionario.Nome}";
 
+                        if (!comboboxFuncionarioServico.Items.Contains(itemText))
+                        {
+                            comboboxFuncionarioServico.Items.Add(itemText);
+                        }
+                    }
+                }
+            }
+
+            if (comboboxFuncionarioServico.Items.Count > 0)
+            {
                 comboboxFuncionarioServico.SelectedIndex = 0;
             }
         }
+
 
         private void adicionarClientesCombobox()
         {
