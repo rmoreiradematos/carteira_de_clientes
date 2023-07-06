@@ -82,7 +82,7 @@ namespace Carteira_De_Clientes
         private void btnServico_Click(object? sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+            ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
 
             foreach (Control control in Controls)
             {
@@ -110,7 +110,7 @@ namespace Carteira_De_Clientes
 
             //Muda a cor do botao
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+           ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
             foreach (Control control in Controls)
             {
                 if (control is Button button && button != clickedButton)
@@ -130,7 +130,7 @@ namespace Carteira_De_Clientes
 
 
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+             ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
 
             foreach (Control control in Controls)
             {
@@ -145,7 +145,7 @@ namespace Carteira_De_Clientes
         private void btnGrafico_Click(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+             ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
 
             foreach (Control control in Controls)
             {
@@ -159,7 +159,7 @@ namespace Carteira_De_Clientes
         private void btnOrdemServico_Click(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+              clickedButton.ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
 
             // Define a cor preta para os outros botões
             foreach (Control control in Controls)

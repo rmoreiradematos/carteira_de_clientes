@@ -47,7 +47,7 @@ namespace View
             txtNome = new TextBox();
             txtNome.Location = new Point(70, 10);
             txtNome.Size = new Size(200, 100);
-            txtNome.ForeColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
+            txtNome.ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
             txtNome.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             lblEmail = new Label();
@@ -60,7 +60,7 @@ namespace View
             txtEmail = new TextBox();
             txtEmail.Location = new Point(380, 10);
             txtEmail.Size = new Size(200, 100);
-            txtEmail.ForeColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
+            txtEmail.ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
             txtEmail.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             lblPerfil = new Label();
@@ -76,7 +76,7 @@ namespace View
             comboBoxPerfil.TabIndex = 0;
             this.setComboBoxPerfil();
             comboBoxPerfil.Text = " ";
-            comboBoxPerfil.ForeColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
+            comboBoxPerfil.ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
             comboBoxPerfil.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             lblSalario = new Label();
@@ -89,7 +89,7 @@ namespace View
             txtSalario = new TextBox();
             txtSalario.Location = new Point(70, 190);
             txtSalario.Size = new Size(200, 100);
-            txtSalario.ForeColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
+            txtSalario.ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
             txtSalario.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             lblSenha = new Label();
@@ -102,7 +102,7 @@ namespace View
             maskedTxtSenha = new MaskedTextBox();
             maskedTxtSenha.Location = new Point(380, 190);
             maskedTxtSenha.Size = new Size(200, 100);
-            maskedTxtSenha.ForeColor = System.Drawing.ColorTranslator.FromHtml("#748E83");
+            maskedTxtSenha.ForeColor = System.Drawing.ColorTranslator.FromHtml("#808080");
             maskedTxtSenha.Font = new System.Drawing.Font("Roboto", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             maskedTxtSenha.UseSystemPasswordChar = true;
 
