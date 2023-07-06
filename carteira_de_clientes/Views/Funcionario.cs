@@ -21,7 +21,6 @@ namespace View
         Label lblSenha;
         Button btnConfirmar;
         Button btnVoltar;
-        ProgressBar pbTest;
 
         public Funcionario(int? funcionarioId)
         {

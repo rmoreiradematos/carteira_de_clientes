@@ -35,11 +35,11 @@ namespace Carteira_De_Clientes
             this.FormClosing += TelaLogin_FormClosing;
 
             Dictionary<string, EventHandler> labels = new Dictionary<string, EventHandler>();
-            labels.Add("FUNCIONARIOS", btnFuncionario_Click);
+            labels.Add("FUNCIONÁRIOS", btnFuncionario_Click);
             labels.Add("CLIENTES", btnCliente_Click);
             labels.Add("SERVIÇO", btnServico_Click);
             labels.Add("GERENCIAR ATIVIDADES", btnOrdemServico_Click);
-            labels.Add("GRAFICOS", btnGrafico_Click);
+            labels.Add("ORDEM DE SERVIÇO", btnOrdem_Click);
             labels.Add("SAIR", btnSair_Click);
 
             new Botoes(labels, 6, this, 15, 350, true);
@@ -150,8 +150,22 @@ namespace Carteira_De_Clientes
 
         }
 
-        private void btnGrafico_Click(object sender, EventArgs e)
+        private void btnOrdem_Click(object sender, EventArgs e)
         {
+
+            this.contentPanel.BringToFront();
+            this.contentPanel.Controls.Clear();
+
+            ListaOrdem listaOrdemForms = new ListaOrdem();
+            listaOrdemForms.StartPosition = FormStartPosition.CenterScreen;
+            listaOrdemForms.FormBorderStyle = FormBorderStyle.None;
+            listaOrdemForms.WindowState = FormWindowState.Maximized;
+            listaOrdemForms.TopLevel = false;
+            listaOrdemForms.AutoScroll = true;
+            this.contentPanel.Controls.Add(listaOrdemForms);
+            listaOrdemForms.Show();
+
+
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
 

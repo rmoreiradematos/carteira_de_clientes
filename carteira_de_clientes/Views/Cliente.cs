@@ -23,7 +23,6 @@ namespace View
         Button btnConfirmar;
         Button btnVoltar;
 
-        ProgressBar pbTest;
 
 
         public Cliente(int? clienteId)

@@ -1,8 +1,8 @@
 namespace Carteira_De_Clientes.Models.Generic
 {
-    public enum Dones
+    public enum Paid
     {
-        Done,
-        NotDone
+        Pago,
+        Pendente
     }
 }

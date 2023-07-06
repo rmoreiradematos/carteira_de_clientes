@@ -21,7 +21,6 @@ namespace View
         Button btnConfirmar;
         Button btnVoltar;
 
-        ProgressBar pbTest;
 
         List<Carteira_De_Clientes.Models.Funcionario> listFuncionario = new List<Carteira_De_Clientes.Models.Funcionario>();
         List<Carteira_De_Clientes.Models.Servico> listServico = new List<Carteira_De_Clientes.Models.Servico>();
