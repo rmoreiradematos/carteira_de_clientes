@@ -1,3 +1,6 @@
+
+using System.Windows.Forms;
+
 namespace Carteira_De_Clientes
 {
 
@@ -10,6 +13,10 @@ namespace Carteira_De_Clientes
         private TextBox txbLogin;
         private TextBox txbSenha;
         private PictureBox picboxPremyer;
+
+        private PictureBox picboxLogin; 
+
+        private PictureBox picboxSenha;
         
         public Login()
         {
@@ -37,6 +44,7 @@ namespace Carteira_De_Clientes
             txbLogin.Name = "txbLogin";
             txbLogin.Focus();
             this.Controls.Add(txbLogin);
+            
 
 
             // TextBox Senha
@@ -59,23 +67,48 @@ namespace Carteira_De_Clientes
 
 
             // Label Login
-            lblLogin = new Label();
-            lblLogin.Location = new System.Drawing.Point(170, 311);
-            lblLogin.Size = new System.Drawing.Size(100, 40);
-            lblLogin.Font = new Font(lblLogin.Font.FontFamily, 10, FontStyle.Regular);
-            lblLogin.Text = "Login:";
-            this.Controls.Add(lblLogin);
+            Panel panelLogin = new Panel();
+            panelLogin.Location = new System.Drawing.Point(170, 311);
+            panelLogin.Size = new System.Drawing.Size(200, 40);
+            this.Controls.Add(panelLogin);
 
+            PictureBox picboxLogin = new PictureBox();
+            picboxLogin.Location = new System.Drawing.Point(0, 0);
+            picboxLogin.Size = new System.Drawing.Size(28, 22);
+            picboxLogin.Image = Image.FromFile(@"Views\assets\perfil.png");
+            picboxLogin.SizeMode = PictureBoxSizeMode.StretchImage;
+            panelLogin.Controls.Add(picboxLogin);
+
+            Label lblLogin = new Label();
+            lblLogin.Location = new System.Drawing.Point(35, 0);
+            lblLogin.Size = new System.Drawing.Size(100, 24);
+            lblLogin.Font = new Font(lblLogin.Font.FontFamily, 10, FontStyle.Regular);
+            lblLogin.Text = " ";
+            panelLogin.Controls.Add(lblLogin);
 
             // Label Senha
-            lblSenha = new Label();
-            lblSenha.Location = new System.Drawing.Point(170, 361);
-            lblSenha.Size = new System.Drawing.Size(100, 40);
+
+            Panel panelSenha = new Panel();
+            panelSenha.Location = new System.Drawing.Point(170, 361);
+            panelSenha.Size = new System.Drawing.Size(200, 40);
+            this.Controls.Add(panelSenha);
+
+            PictureBox picboxSenha = new PictureBox();
+            picboxSenha.Location = new System.Drawing.Point(0, 0);
+            picboxSenha.Size = new System.Drawing.Size(28, 22);
+            picboxSenha.Image = Image.FromFile(@"Views\assets\senha.png");
+            picboxSenha.SizeMode = PictureBoxSizeMode.StretchImage;
+            panelSenha.Controls.Add(picboxSenha);
+
+            Label lblSenha = new Label();
+            lblSenha.Location = new System.Drawing.Point(35, 0);
+            lblSenha.Size = new System.Drawing.Size(100, 24);
             lblSenha.Font = new Font(lblSenha.Font.FontFamily, 10, FontStyle.Regular);
-            lblSenha.Text = "Senha:";
-            this.Controls.Add(lblSenha);
+            lblSenha.Text = " ";
+            panelSenha.Controls.Add(lblSenha);
 
 
+            
             // PictureBox Premyer
             picboxPremyer = new PictureBox();
             picboxPremyer.Location = new System.Drawing.Point(150, 20);
