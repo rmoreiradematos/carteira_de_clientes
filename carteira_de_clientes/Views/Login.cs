@@ -23,7 +23,7 @@ namespace Carteira_De_Clientes
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ClientSize = new System.Drawing.Size(525, 600);
             this.Text = "Carteira de Clientes";
-            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
