@@ -26,13 +26,27 @@ namespace Banco
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Ordem> Ordens { get; set; }
         public DbSet<Servico> Servicos { get; set; }
-        private string _connectionString = "Server=localhost;User Id=root;Database=CarteiraDeClientes;";
+        private string _connectionString = "Server=localhost;User Id=root;Database=clientes;";
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Carteira_De_Clientes.Models.Funcionario>().HasData(
+                new Carteira_De_Clientes.Models.Funcionario
+                {
+                    Id = 1,
+                    Nome = "Rodrigo",
+                    Senha = Carteira_De_Clientes.Controllers.Login.GenerateHashCode(Carteira_De_Clientes.Controllers.Funcionario.StringToInt("rodrigo")).ToString(),
+                    Email = "rodrigo@gmail.com",
+                    Funcao = (Carteira_De_Clientes.Models.Generic.Roles)Enum.Parse(typeof(Carteira_De_Clientes.Models.Generic.Roles), "Admin"),
+                    Salario = 1500.00
+                }
+            );
 
-
-    }
+            base.OnModelCreating(modelBuilder);
+        }
+  }
 }

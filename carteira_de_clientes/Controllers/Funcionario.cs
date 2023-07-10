@@ -10,6 +10,14 @@ namespace Carteira_De_Clientes.Controllers
 
         public static Models.Funcionario CadastrarFuncionario(string nome, string senha, string email, string funcao, string salario)
         {
+            if(nome == "" || senha == "" || email == "" || funcao == "" || salario == "")
+            {
+                throw new Exception("Preencha todos os campos");
+            }
+            if(funcionarioCrud.GetAll().FirstOrDefault(x => x.Email == email) != null)
+            {
+                throw new Exception("Email já cadastrado");
+            }
             Models.Funcionario funcionario = new(nome, Controllers.Login.GenerateHashCode(StringToInt(senha)).ToString(), email, funcao, double.Parse(salario));
             return funcionarioCrud.Cadastrar(funcionario);
         }

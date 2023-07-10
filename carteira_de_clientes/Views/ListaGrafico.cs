@@ -5,16 +5,16 @@ using Carteira_De_Clientes;
 
 namespace View
 {
-    public class ListaCliente : Form
+    public class ListaGrafico : Form
     {
         private Panel buttonPanel = new Panel();
         private DataGridView clienteGridView = new DataGridView();
-        private Button adicionarClienteButton = new Button();
-        private Button atualizarClienteButton = new Button();
-        private Button deletarClienteButton = new Button();
+        private Button grafico1Button = new Button();
+        private Button grafico2Button = new Button();
+        private Button grafico3Button = new Button();
         private Button voltarButton = new Button();
 
-        public ListaCliente()
+        public ListaGrafico()
         {
             this.Text = "Listagem de Cliente";
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -29,8 +29,8 @@ namespace View
         private void ListaCliente_Load(System.Object sender, System.EventArgs e)
         {
             SetupLayout();
-            SetupDataGridView();
-            PopulateDataGridView();
+            // SetupDataGridView();
+            // PopulateDataGridView();
         }
 
         private void clienteGridView_CellFormatting(object sender,
@@ -59,29 +59,29 @@ namespace View
 
         private void SetupLayout()
         {
-            adicionarClienteButton.Text = "Novo";
-            adicionarClienteButton.Location = new Point(270, 10);
-            adicionarClienteButton.BackColor = Color.Snow;
-            adicionarClienteButton.Click += new EventHandler(adicionarClienteButton_Click);
+            grafico1Button.Text = "Grafico1";
+            grafico1Button.Location = new Point(270, 10);
+            grafico1Button.BackColor = Color.Snow;
+            grafico1Button.Click += new EventHandler(grafico1Button_Click);
 
-            atualizarClienteButton.Text = "Editar";
-            atualizarClienteButton.Location = new Point(350, 10);
-            atualizarClienteButton.BackColor = Color.Snow;
-            atualizarClienteButton.Click += new EventHandler(atualizarClienteButton_Click);
+            grafico2Button.Text = "Grafico2";
+            grafico2Button.Location = new Point(350, 10);
+            grafico2Button.BackColor = Color.Snow;
+            grafico2Button.Click += new EventHandler(Grafico2Button_Click);
 
-            deletarClienteButton.Text = "Excluir";
-            deletarClienteButton.Location = new Point(430, 10);
-            deletarClienteButton.BackColor = Color.Snow;
-            deletarClienteButton.Click += new EventHandler(deletarClienteButton_Click);
+            grafico3Button.Text = "Grafico3";
+            grafico3Button.Location = new Point(430, 10);
+            grafico3Button.BackColor = Color.Snow;
+            grafico3Button.Click += new EventHandler(grafico3Button_Click);
 
             voltarButton.Text = "Voltar";
             voltarButton.Location = new Point(510, 10);
             voltarButton.BackColor = Color.Snow;
             voltarButton.Click += new EventHandler(voltarButton_Click);
 
-            buttonPanel.Controls.Add(adicionarClienteButton);
-            buttonPanel.Controls.Add(atualizarClienteButton);
-            buttonPanel.Controls.Add(deletarClienteButton);
+            buttonPanel.Controls.Add(grafico1Button);
+            buttonPanel.Controls.Add(grafico2Button);
+            buttonPanel.Controls.Add(grafico3Button);
             buttonPanel.Controls.Add(voltarButton);
             buttonPanel.Height = 50;
             buttonPanel.Dock = DockStyle.Bottom;
@@ -133,29 +133,42 @@ namespace View
 
         private void PopulateDataGridView()
         {
-            clienteGridView.Rows.Clear();
+            // clienteGridView.Rows.Clear();
 
-            IEnumerable<Carteira_De_Clientes.Models.Cliente> collectionClientes = Carteira_De_Clientes.Controllers.Cliente.GetAllClientes();
+            // IEnumerable<Carteira_De_Clientes.Models.Cliente> collectionClientes = Carteira_De_Clientes.Controllers.Cliente.GetAllClientes();
 
-            if (collectionClientes != null && collectionClientes.Count() > 0)
-            {
-                foreach (var item in collectionClientes)
-                {
-                    string[] linhaCliente = { item.Id.ToString(), item.Nome, item.Endereco, item.Telefone};
+            // if (collectionClientes != null && collectionClientes.Count() > 0)
+            // {
+            //     foreach (var item in collectionClientes)
+            //     {
+            //         string[] linhaCliente = { item.Id.ToString(), item.Nome, item.Endereco, item.Telefone};
 
-                    clienteGridView.Rows.Add(linhaCliente);
-                }
-            }
+            //         clienteGridView.Rows.Add(linhaCliente);
+            //     }
+            // }
         }
 
-        private void adicionarClienteButton_Click(object sender, EventArgs e)
+        private void grafico1Button_Click(object sender, EventArgs e)
         {
-            Cliente telaCliente = new Cliente(null);
-            telaCliente.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
-            telaCliente.ShowDialog();
+            var pagouMasOServicoNaoFoiRealizado = Carteira_De_Clientes.Controllers.Grafico.PagouMasOServicoNaoFoiRealizado();
+            //  if (this.clienteGridView.SelectedRows.Count > 0 &&
+            //     this.clienteGridView.SelectedRows[0].Index !=
+            //     this.clienteGridView.Rows.Count - 1)
+            // {
+            //     string idClienteSelecionado = clienteGridView.Rows[this.clienteGridView.SelectedRows[0].Index].Cells[0].Value.ToString();
+            //     Cliente telaCliente = new Cliente(Int32.Parse(idClienteSelecionado));
+
+            //     if (telaCliente != null)
+            //     {
+            //         telaCliente.AlterarVisibilidadeId(true);
+            //         telaCliente.FormClosed += new FormClosedEventHandler(recarregarDadosGrid);
+            //         telaCliente.ShowDialog();
+
+            //     }
+            // }
         }
 
-        private void atualizarClienteButton_Click(object sender, EventArgs e)
+        private void Grafico2Button_Click(object sender, EventArgs e)
         {
             if (this.clienteGridView.SelectedRows.Count > 0 &&
                 this.clienteGridView.SelectedRows[0].Index !=
@@ -178,7 +191,7 @@ namespace View
             }
         }
 
-        private void deletarClienteButton_Click(object sender, EventArgs e)
+        private void grafico3Button_Click(object sender, EventArgs e)
         {
             if (this.clienteGridView.SelectedRows.Count > 0 &&
                 this.clienteGridView.SelectedRows[0].Index !=

@@ -23,7 +23,6 @@ namespace View
         Button btnConfirmar;
         Button btnVoltar;
 
-        ProgressBar pbTest;
 
 
         public Cliente(int? clienteId)
@@ -89,6 +88,10 @@ namespace View
             buttonPanel.Height = 50;
             buttonPanel.Dock = DockStyle.Bottom;
 
+            lblId.Visible = false;
+            txtId.Visible = false;
+
+
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.lblNome);
@@ -105,6 +108,13 @@ namespace View
             }
         }
 
+
+        public void AlterarVisibilidadeId(bool visivel)
+        {
+            lblId.Visible = visivel;
+            txtId.Visible = visivel;
+        }
+
         private void confirmarClienteButton_Click(object sender, EventArgs e)
         {
             try
@@ -115,12 +125,12 @@ namespace View
 
                 if (this.txtId.Text != null && Int32.TryParse(this.txtId.Text, out int idCliente))
                 {
-                    Carteira_De_Clientes.Controllers.Cliente.AlterarCliente(this.txtId.Text, nomeCliente,telefoneCliente, enderecoCliente );
+                    Carteira_De_Clientes.Controllers.Cliente.AlterarCliente(this.txtId.Text, nomeCliente, telefoneCliente, enderecoCliente);
                     MessageBox.Show("Cliente atualizado com sucesso!");
                 }
                 else
                 {
-                    Carteira_De_Clientes.Controllers.Cliente.CadastrarCliente(nomeCliente, enderecoCliente, telefoneCliente);
+                    Carteira_De_Clientes.Controllers.Cliente.CadastrarCliente(nomeCliente, telefoneCliente, enderecoCliente);
                     MessageBox.Show("Cliente cadastrado com sucesso!");
                 }
 

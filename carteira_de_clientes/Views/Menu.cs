@@ -35,12 +35,22 @@ namespace Carteira_De_Clientes
             this.FormClosing += TelaLogin_FormClosing;
 
             Dictionary<string, EventHandler> labels = new Dictionary<string, EventHandler>();
-            labels.Add("FUNCIONARIOS", btnFuncionario_Click);
-            labels.Add("CLIENTES", btnCliente_Click);
-            labels.Add("SERVIÇO", btnServico_Click);
-            labels.Add("ORDEM DE SERVIÇO", btnOrdemServico_Click);
-            labels.Add("GRAFICOS", btnGrafico_Click);
-            labels.Add("SAIR", btnSair_Click);
+            if(Carteira_De_Clientes.Controllers.UserSession.Role == "Admin")
+            {
+
+                labels.Add("FUNCIONÁRIOS", btnFuncionario_Click);
+                labels.Add("CLIENTES", btnCliente_Click);
+                labels.Add("SERVIÇO", btnServico_Click);
+                labels.Add("GERENCIAR ATIVIDADES", btnOrdemServico_Click);
+                labels.Add("ORDEM DE SERVIÇO", btnOrdem_Click);
+                labels.Add("GRÁFICOS", btnGrafico_Click);
+                labels.Add("SAIR", btnSair_Click);
+            }else
+            {
+                labels.Add("CLIENTES", btnCliente_Click);
+                labels.Add("ORDEM DE SERVIÇO", btnOrdem_Click);
+                labels.Add("SAIR", btnSair_Click);
+            }
 
             new Botoes(labels, 6, this, 15, 350, true);
 
@@ -79,8 +89,36 @@ namespace Carteira_De_Clientes
 
         }
 
+
+        private void btnGrafico_Click(object? sender, EventArgs e)
+        {
+            this.contentPanel.BringToFront();
+            this.contentPanel.Controls.Clear();
+
+            ListaGrafico listaGraficoForm = new ListaGrafico();
+            this.contentPanel.Controls.Add(listaGraficoForm);
+            listaGraficoForm.Show();
+            Button clickedButton = (Button)sender;
+            clickedButton.ForeColor = Color.Red;
+
+            foreach (Control control in Controls)
+            {
+                if (control is Button button && button != clickedButton)
+                {
+                    button.ForeColor = Color.Black;
+                }
+            }
+        }
         private void btnServico_Click(object? sender, EventArgs e)
         {
+            this.contentPanel.BringToFront();
+            this.contentPanel.Controls.Clear();
+
+            ListaServico listaServicoForm = new ListaServico();
+            this.contentPanel.Controls.Add(listaServicoForm);
+            listaServicoForm.Show();
+
+
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
 
@@ -142,8 +180,22 @@ namespace Carteira_De_Clientes
 
         }
 
-        private void btnGrafico_Click(object sender, EventArgs e)
+        private void btnOrdem_Click(object sender, EventArgs e)
         {
+
+            this.contentPanel.BringToFront();
+            this.contentPanel.Controls.Clear();
+
+            ListaOrdem listaOrdemForms = new ListaOrdem();
+            listaOrdemForms.StartPosition = FormStartPosition.CenterScreen;
+            listaOrdemForms.FormBorderStyle = FormBorderStyle.None;
+            listaOrdemForms.WindowState = FormWindowState.Maximized;
+            listaOrdemForms.TopLevel = false;
+            listaOrdemForms.AutoScroll = true;
+            this.contentPanel.Controls.Add(listaOrdemForms);
+            listaOrdemForms.Show();
+
+
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
 
@@ -158,6 +210,20 @@ namespace Carteira_De_Clientes
 
         private void btnOrdemServico_Click(object sender, EventArgs e)
         {
+
+            this.contentPanel.BringToFront();
+            this.contentPanel.Controls.Clear();
+
+            ListaFuncionarioServico listaFuncionarioServicoForms = new ListaFuncionarioServico();
+            listaFuncionarioServicoForms.StartPosition = FormStartPosition.CenterScreen;
+            listaFuncionarioServicoForms.FormBorderStyle = FormBorderStyle.None;
+            listaFuncionarioServicoForms.WindowState = FormWindowState.Maximized;
+            listaFuncionarioServicoForms.TopLevel = false;
+            listaFuncionarioServicoForms.AutoScroll = true;
+            this.contentPanel.Controls.Add(listaFuncionarioServicoForms);
+            listaFuncionarioServicoForms.Show();
+
+
             Button clickedButton = (Button)sender;
             clickedButton.ForeColor = Color.Red;
 

@@ -1,4 +1,5 @@
 using System;
+
 namespace Carteira_De_Clientes.Controllers
 {
 
@@ -7,6 +8,14 @@ namespace Carteira_De_Clientes.Controllers
         public static Models.Cliente clienteCrud = new();
         public static Models.Cliente CadastrarCliente(string nome, string telefone, string endereco)
         {
+            if (nome == "" || telefone == "" || endereco == "")
+            {
+                throw new Exception("Preencha todos os campos");
+            }
+            if (VerificarCliente(telefone))
+            {
+                throw new Exception("Telefone já cadastrado");
+            }
             Models.Cliente cliente = new(nome, telefone, endereco);
             return clienteCrud.Cadastrar(cliente);
         }
@@ -54,6 +63,16 @@ namespace Carteira_De_Clientes.Controllers
             }
         }
 
+        public static bool VerificarCliente(string telefone)
+        {
+            
+            Models.Cliente cliente = clienteCrud.GetAll().FirstOrDefault(x => joinTelefoneWithoutBlankSpaces(x.Telefone).Trim() == joinTelefoneWithoutBlankSpaces(telefone).Trim());
+            if (cliente != null)
+            {
+                return true;
+            }
+            return false;
+        }
         public static Models.Cliente ExcluirCliente(string id)
         {
             try
@@ -68,6 +87,17 @@ namespace Carteira_De_Clientes.Controllers
             {
                 throw new Exception("Erro ao excluir Cliente: " + e.Message);
             }
+        }
+
+        public static string joinTelefoneWithoutBlankSpaces(string telefone)
+        {
+            string[] telefoneArray = telefone.Split(" ");
+            string telefoneSemEspaco = "";
+            foreach (string item in telefoneArray)
+            {
+                telefoneSemEspaco += item;
+            }
+            return telefoneSemEspaco;
         }
     }
 }

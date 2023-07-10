@@ -9,14 +9,20 @@ namespace Carteira_De_Clientes.Controllers
         public static Models.Servico servicoCrud = new();
         public static Models.FuncionarioServico CadastrarFuncionarioServico(string funcionarioId, string servicoId)
         {
-            int intFuncionarioId = int.Parse(funcionarioId);
-            Models.Funcionario funcionario = funcionarioCrud.Get(intFuncionarioId);
+            try{
 
-            int intServicoId = int.Parse(servicoId);
-            Models.Servico servico = servicoCrud.Get(intServicoId);
+                int intFuncionarioId = int.Parse(funcionarioId);
+                Models.Funcionario funcionario = funcionarioCrud.Get(intFuncionarioId);
 
-            Models.FuncionarioServico funcionarioServico = new(funcionario.Id, servico.Id);
-            return funcionarioServicoCrud.Cadastrar(funcionarioServico);
+                int intServicoId = int.Parse(servicoId);
+                Models.Servico servico = servicoCrud.Get(intServicoId);
+
+                Models.FuncionarioServico funcionarioServico = new(intFuncionarioId, intServicoId);
+                return funcionarioServicoCrud.Cadastrar(funcionarioServico);
+            }catch(Exception e)
+            {
+                throw new Exception("Funcionario servico failed to parse");
+            }
         }
 
         public static Models.FuncionarioServico GetFuncionarioServico(string id)
