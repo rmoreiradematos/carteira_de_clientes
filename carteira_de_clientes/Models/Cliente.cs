@@ -17,7 +17,7 @@ namespace Carteira_De_Clientes.Models
         {
         }
 
-        public Cliente(string nome, string endereco, string telefone)
+        public Cliente(string nome, string telefone, string endereco)
         {
             this.Nome = nome;
             this.Endereco = endereco;

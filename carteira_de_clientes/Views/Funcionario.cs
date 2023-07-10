@@ -72,6 +72,7 @@ namespace View
             comboBoxPerfil.Size = new Size(200, 100);
             comboBoxPerfil.TabIndex = 0;
             this.setComboBoxPerfil();
+            this.comboBoxPerfil.SelectedItem = Carteira_De_Clientes.Models.Generic.Roles.Comum;
             comboBoxPerfil.Text = " ";
 
             lblSalario = new Label();

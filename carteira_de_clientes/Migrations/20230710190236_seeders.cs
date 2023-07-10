@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace carteira_de_clientes.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class seeders : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,7 +45,7 @@ namespace carteira_de_clientes.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Role = table.Column<int>(type: "int", nullable: false),
+                    Funcao = table.Column<int>(type: "int", nullable: false),
                     Salario = table.Column<double>(type: "double", nullable: false)
                 },
                 constraints: table =>
@@ -62,7 +62,7 @@ namespace carteira_de_clientes.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Preco = table.Column<string>(type: "longtext", nullable: false)
+                    PrecoServico = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -72,66 +72,25 @@ namespace carteira_de_clientes.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Contratos",
+                name: "FuncionarioServicos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
-                    FuncionarioId = table.Column<int>(type: "int", nullable: false),
-                    ServicoId = table.Column<int>(type: "int", nullable: false),
-                    DateLimit = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DateDone = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    DateContract = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contratos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Contratos_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Contratos_Funcionarios_FuncionarioId",
-                        column: x => x.FuncionarioId,
-                        principalTable: "Funcionarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Contratos_Servicos_ServicoId",
-                        column: x => x.ServicoId,
-                        principalTable: "Servicos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "OrdemDeServicos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Done = table.Column<int>(type: "int", nullable: false),
                     FuncionarioId = table.Column<int>(type: "int", nullable: false),
                     ServicoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrdemDeServicos", x => x.Id);
+                    table.PrimaryKey("PK_FuncionarioServicos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrdemDeServicos_Funcionarios_FuncionarioId",
+                        name: "FK_FuncionarioServicos_Funcionarios_FuncionarioId",
                         column: x => x.FuncionarioId,
                         principalTable: "Funcionarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrdemDeServicos_Servicos_ServicoId",
+                        name: "FK_FuncionarioServicos_Servicos_ServicoId",
                         column: x => x.ServicoId,
                         principalTable: "Servicos",
                         principalColumn: "Id",
@@ -145,8 +104,17 @@ namespace carteira_de_clientes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ClienteId = table.Column<int>(type: "int", nullable: false),
-                    ServicoId = table.Column<int>(type: "int", nullable: false)
+                    FuncionarioServicoId = table.Column<int>(type: "int", nullable: false),
+                    PrecoOrdem = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DataRealizada = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Pago = table.Column<int>(type: "int", nullable: false),
+                    Descricao = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    DataLimite = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ClienteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -158,37 +126,27 @@ namespace carteira_de_clientes.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Ordens_Servicos_ServicoId",
-                        column: x => x.ServicoId,
-                        principalTable: "Servicos",
+                        name: "FK_Ordens_FuncionarioServicos_FuncionarioServicoId",
+                        column: x => x.FuncionarioServicoId,
+                        principalTable: "FuncionarioServicos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Contratos_ClienteId",
-                table: "Contratos",
-                column: "ClienteId");
+            migrationBuilder.InsertData(
+                table: "Funcionarios",
+                columns: new[] { "Id", "Email", "Funcao", "Nome", "Salario", "Senha" },
+                values: new object[] { 1, "rodrigo@gmail.com", 0, "Rodrigo", 1500.0, "-1029791530" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contratos_FuncionarioId",
-                table: "Contratos",
+                name: "IX_FuncionarioServicos_FuncionarioId",
+                table: "FuncionarioServicos",
                 column: "FuncionarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contratos_ServicoId",
-                table: "Contratos",
-                column: "ServicoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrdemDeServicos_FuncionarioId",
-                table: "OrdemDeServicos",
-                column: "FuncionarioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrdemDeServicos_ServicoId",
-                table: "OrdemDeServicos",
+                name: "IX_FuncionarioServicos_ServicoId",
+                table: "FuncionarioServicos",
                 column: "ServicoId");
 
             migrationBuilder.CreateIndex(
@@ -197,28 +155,25 @@ namespace carteira_de_clientes.Migrations
                 column: "ClienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ordens_ServicoId",
+                name: "IX_Ordens_FuncionarioServicoId",
                 table: "Ordens",
-                column: "ServicoId");
+                column: "FuncionarioServicoId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contratos");
-
-            migrationBuilder.DropTable(
-                name: "OrdemDeServicos");
-
-            migrationBuilder.DropTable(
                 name: "Ordens");
 
             migrationBuilder.DropTable(
-                name: "Funcionarios");
+                name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "FuncionarioServicos");
+
+            migrationBuilder.DropTable(
+                name: "Funcionarios");
 
             migrationBuilder.DropTable(
                 name: "Servicos");

@@ -9,6 +9,10 @@ namespace Carteira_De_Clientes.Controllers
         public static Models.FuncionarioServico funcionarioServicoCrud = new();
         public static Models.Ordem CadastrarOrdem(string clienteId, string funcionarioServicoId, string precoOrdem, string dataRealizada, string pago, string descricao, string dataLimite)
         {
+            if(clienteId == "" || funcionarioServicoId == "" || precoOrdem == "" || pago == "" || descricao == "" || dataLimite == "")
+            {
+                throw new Exception("Preencha todos os campos");
+            }
             int intClienteId = int.Parse(clienteId);
             Models.Cliente cliente = clienteCrud.Get(intClienteId);
 

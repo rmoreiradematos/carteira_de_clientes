@@ -91,6 +91,8 @@ namespace Carteira_De_Clientes
             {
                 if (Controllers.Login.GetLogin(txbLogin.Text, txbSenha.Text))
                 {
+                    Carteira_De_Clientes.Controllers.UserSession.UserName = txbLogin.Text;
+                    Carteira_De_Clientes.Controllers.UserSession.Role = Carteira_De_Clientes.Controllers.Funcionario.GetFuncionarioByEmail(txbLogin.Text).Funcao.ToString();
                     Menu menu = new Menu();
                     menu.Show();
                     this.Hide();

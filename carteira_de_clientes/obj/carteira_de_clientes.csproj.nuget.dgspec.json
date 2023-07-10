@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vitor\\Desktop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {}
+    "C:\\Users\\rodri\\Desktop\\ProjetosDesktoop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vitor\\Desktop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {
+    "C:\\Users\\rodri\\Desktop\\ProjetosDesktoop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vitor\\Desktop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
+        "projectUniqueName": "C:\\Users\\rodri\\Desktop\\ProjetosDesktoop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
         "projectName": "carteira_de_clientes",
-        "projectPath": "C:\\Users\\vitor\\Desktop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
-        "packagesPath": "C:\\Users\\vitor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vitor\\Desktop\\carteira_de_clientes\\carteira_de_clientes\\obj\\",
+        "projectPath": "C:\\Users\\rodri\\Desktop\\ProjetosDesktoop\\carteira_de_clientes\\carteira_de_clientes\\carteira_de_clientes.csproj",
+        "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\rodri\\Desktop\\ProjetosDesktoop\\carteira_de_clientes\\carteira_de_clientes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vitor\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0-windows"
@@ -84,6 +84,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.2, 7.0.2]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.2, 7.0.2]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.2, 7.0.2]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.2, 7.0.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -95,7 +113,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.3.23178.7\\RuntimeIdentifierGraph.json"
         }
       }
     }

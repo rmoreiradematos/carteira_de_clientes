@@ -130,7 +130,7 @@ namespace View
                 }
                 else
                 {
-                    Carteira_De_Clientes.Controllers.Cliente.CadastrarCliente(nomeCliente, enderecoCliente, telefoneCliente);
+                    Carteira_De_Clientes.Controllers.Cliente.CadastrarCliente(nomeCliente, telefoneCliente, enderecoCliente);
                     MessageBox.Show("Cliente cadastrado com sucesso!");
                 }
 

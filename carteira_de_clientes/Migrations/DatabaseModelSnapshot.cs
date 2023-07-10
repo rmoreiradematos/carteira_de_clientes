@@ -68,6 +68,17 @@ namespace carteira_de_clientes.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Funcionarios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "rmoreiradematos@gmail.com",
+                            Funcao = 0,
+                            Nome = "Rodrigo",
+                            Salario = 1500.0,
+                            Senha = "-692273398"
+                        });
                 });
 
             modelBuilder.Entity("Carteira_De_Clientes.Models.FuncionarioServico", b =>
@@ -115,8 +126,8 @@ namespace carteira_de_clientes.Migrations
                     b.Property<int>("FuncionarioServicoId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Pago")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<int>("Pago")
+                        .HasColumnType("int");
 
                     b.Property<string>("PrecoOrdem")
                         .IsRequired()

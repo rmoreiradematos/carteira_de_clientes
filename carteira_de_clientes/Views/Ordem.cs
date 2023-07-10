@@ -32,6 +32,8 @@ namespace View
         Button btnConfirmar;
         Button btnVoltar;
 
+        string funcionarioServicoId;
+        string idServico;
         List<Carteira_De_Clientes.Models.FuncionarioServico> listFuncionarioServico = new List<Carteira_De_Clientes.Models.FuncionarioServico>();
         List<Carteira_De_Clientes.Models.Cliente> listCliente = new List<Carteira_De_Clientes.Models.Cliente>();
         List<Carteira_De_Clientes.Models.Funcionario> listFuncionario = new List<Carteira_De_Clientes.Models.Funcionario>();
@@ -53,7 +55,7 @@ namespace View
 
             txtId = new TextBox();
             txtId.Location = new Point(120, 60);
-            txtId.Size = new Size(200, 18);
+            txtId.Size = new Size(275, 18);
             txtId.Enabled = false;
 
 
@@ -64,7 +66,7 @@ namespace View
 
             comboboxFuncionarioServico = new ComboBox();
             comboboxFuncionarioServico.Location = new Point(120, 120);
-            comboboxFuncionarioServico.Size = new Size(200, 100);
+            comboboxFuncionarioServico.Size = new Size(275, 100);
             this.adicionarFuncionarioServicosCombobox();
 
 
@@ -75,7 +77,7 @@ namespace View
 
             comboboxCliente = new ComboBox();
             comboboxCliente.Location = new Point(120, 180);
-            comboboxCliente.Size = new Size(200, 100);
+            comboboxCliente.Size = new Size(275, 100);
             this.adicionarClientesCombobox();
 
 
@@ -85,9 +87,10 @@ namespace View
 
             comboBoxPerfil = new ComboBox();
             comboBoxPerfil.Location = new Point(120, 240);
-            comboBoxPerfil.Size = new Size(200, 100);
+            comboBoxPerfil.Size = new Size(275, 100);
             comboBoxPerfil.TabIndex = 0;
             this.setComboBoxPerfil();
+            this.comboBoxPerfil.SelectedItem = Carteira_De_Clientes.Models.Generic.Paid.Pendente;
             comboBoxPerfil.Text = " ";
 
             lblPrecoOrdem = new Label();
@@ -96,7 +99,7 @@ namespace View
 
             txtPrecoOrdem = new TextBox();
             txtPrecoOrdem.Location = new Point(120, 300);
-            txtPrecoOrdem.Size = new Size(200, 100);
+            txtPrecoOrdem.Size = new Size(275, 100);
 
 
             lblDataLimite = new Label();
@@ -105,7 +108,7 @@ namespace View
 
             txtDataLimite = new TextBox();
             txtDataLimite.Location = new Point(120, 360);
-            txtDataLimite.Size = new Size(200, 100);
+            txtDataLimite.Size = new Size(275, 100);
 
 
             lblDataRealizada = new Label();
@@ -114,7 +117,7 @@ namespace View
 
             txtDataRealizada = new TextBox();
             txtDataRealizada.Location = new Point(120, 420);
-            txtDataRealizada.Size = new Size(200, 100);
+            txtDataRealizada.Size = new Size(275, 100);
 
 
             lblDescricao = new Label();
@@ -123,7 +126,7 @@ namespace View
 
             txtDescricao = new TextBox();
             txtDescricao.Location = new Point(120, 480);
-            txtDescricao.Size = new Size(200, 100);
+            txtDescricao.Size = new Size(275, 100);
 
 
             btnConfirmar = new Button();
@@ -200,17 +203,25 @@ namespace View
             string descricao = txtDescricao.Text;
             string dataLimite = txtDataLimite.Text;
 
-            Carteira_De_Clientes.Models.FuncionarioServico funcionarioServicoSelecionado = this.buscarFuncionarioServicoSelecionadoCombobox();
-            Carteira_De_Clientes.Models.Cliente clienteSelecionado = this.buscarClienteSelecionadoCombobox();
+            Carteira_De_Clientes.Models.FuncionarioServico funcionarioServico = buscarFuncionarioServicoSelecionadoCombobox();
 
-            if (this.txtId.Text != null && Int32.TryParse(this.txtId.Text, out int idFuncionario))
+            Carteira_De_Clientes.Models.Cliente clienteSelecionado = this.buscarClienteSelecionadoCombobox();
+            
+
+            if(precoOrdem == "" || pago == "" || descricao == "" || dataLimite == "")
             {
-                Carteira_De_Clientes.Controllers.Ordem.AlterarOrdem(this.txtId.Text, clienteSelecionado.Id.ToString(), funcionarioServicoSelecionado.Id.ToString(), precoOrdem, dataRealizada, pago, descricao, dataLimite);
+                MessageBox.Show("Preencha todos os campos!");
+                return;
+            }
+
+            if (this.txtId.Text != null && Int32.TryParse(this.txtId.Text, out int funcionarioServicoId))
+            {
+                Carteira_De_Clientes.Controllers.Ordem.AlterarOrdem(this.txtId.Text, clienteSelecionado.Id.ToString(), funcionarioServico.Id.ToString(), precoOrdem, dataRealizada, pago, descricao, dataLimite);
                 MessageBox.Show("Ordem de Serviço atualizada com sucesso!");
             }
             else
             {
-                Carteira_De_Clientes.Controllers.Ordem.CadastrarOrdem(clienteSelecionado.Id.ToString(), funcionarioServicoSelecionado.Id.ToString(), precoOrdem, dataRealizada, pago, descricao, dataLimite);
+                Carteira_De_Clientes.Controllers.Ordem.CadastrarOrdem(clienteSelecionado.Id.ToString(), funcionarioServico.Id.ToString(), precoOrdem, dataRealizada, pago, descricao, dataLimite);
                 MessageBox.Show("Ordem de Serviço cadastrada com sucesso!");
             }
 
@@ -234,16 +245,20 @@ namespace View
 
                     if (funcionario != null)
                     {
-                        string itemText = $"ID: {funcionarioServico.Id} / Funcionario: {funcionario.Nome}";
+                        Carteira_De_Clientes.Models.Servico servico = Carteira_De_Clientes.Controllers.Servico.GetServico(funcionarioServico.ServicoId.ToString());
+                        string itemText = $"ID: {funcionarioServico.Id} | Serviço: {servico.Nome} | Funcionario: {funcionario.Nome}";
 
                         if (!comboboxFuncionarioServico.Items.Contains(itemText))
                         {
                             comboboxFuncionarioServico.Items.Add(itemText);
                         }
+                        this.funcionarioServicoId = funcionarioServico.Id.ToString();
+                        this.idServico = servico.Id.ToString();
                     }
                 }
             }
 
+            Console.WriteLine(comboboxFuncionarioServico.Items);
             if (comboboxFuncionarioServico.Items.Count > 0)
             {
                 comboboxFuncionarioServico.SelectedIndex = 0;
@@ -276,9 +291,13 @@ namespace View
 
             if (comboboxFuncionarioServico.SelectedItem != null)
             {
-                String nomeFuncionarioServico = comboboxFuncionarioServico.SelectedItem.ToString();
+                string nomeFuncionarioServico = comboboxFuncionarioServico.SelectedItem.ToString();
 
-                funcionarioServicoSelecionado = this.listFuncionarioServico.FirstOrDefault(item => item.Id.ToString().Equals(nomeFuncionarioServico));
+                string[] filtro = nomeFuncionarioServico.Split('|');
+
+                string servicoFiltrado = splitBoxfuncionario(filtro[0]).Trim();
+
+                funcionarioServicoSelecionado = Carteira_De_Clientes.Controllers.FuncionarioServico.GetFuncionarioServico(servicoFiltrado);
             }
 
             return funcionarioServicoSelecionado;
@@ -317,6 +336,16 @@ namespace View
             this.txtDataLimite.Text = ordem.DataLimite;
         }
 
+        public static string splitBoxfuncionario(string textoFuncionario)
+        {
+            string[] partes = textoFuncionario.Split('|');
 
+            foreach (string parte in partes)
+            {
+                string[] detalhes = parte.Split(':');
+                return detalhes[1];
+            }
+            return partes[0];
+        }
     }
 }

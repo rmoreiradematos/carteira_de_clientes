@@ -7,6 +7,10 @@ namespace Carteira_De_Clientes.Controllers
         public static Models.Servico servicoCrud = new();
         public static Models.Servico CadastrarServico(string nome, string precoServico)
         {
+            if(nome == "" || precoServico == "")
+            {
+                throw new Exception("Preencha todos os campos");
+            }
             Models.Servico servico = new(nome, precoServico);
             return servicoCrud.Cadastrar(servico);
         }
