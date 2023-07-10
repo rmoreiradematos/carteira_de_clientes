@@ -27,7 +27,7 @@ namespace Carteira_De_Clientes
             //TelaMenuPrincipal
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Text = "Carteira de Clientes";
-            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.BackColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.FormBorderStyle = FormBorderStyle.None;
@@ -43,7 +43,7 @@ namespace Carteira_De_Clientes
                 labels.Add("SERVIÇO", btnServico_Click);
                 labels.Add("GERENCIAR ATIVIDADES", btnOrdemServico_Click);
                 labels.Add("ORDEM DE SERVIÇO", btnOrdem_Click);
-                labels.Add("GRÁFICOS", btnGrafico_Click);
+                // labels.Add("GRÁFICOS", btnGrafico_Click);
                 labels.Add("SAIR", btnSair_Click);
             }else
             {
@@ -99,7 +99,7 @@ namespace Carteira_De_Clientes
             this.contentPanel.Controls.Add(listaGraficoForm);
             listaGraficoForm.Show();
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+            clickedButton.ForeColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");
 
             foreach (Control control in Controls)
             {
@@ -120,7 +120,7 @@ namespace Carteira_De_Clientes
 
 
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+            clickedButton.ForeColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");
 
             foreach (Control control in Controls)
             {
@@ -148,7 +148,7 @@ namespace Carteira_De_Clientes
 
             //Muda a cor do botao
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+            clickedButton.ForeColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");
             foreach (Control control in Controls)
             {
                 if (control is Button button && button != clickedButton)
@@ -168,8 +168,7 @@ namespace Carteira_De_Clientes
 
 
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
-
+            clickedButton.ForeColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");
             foreach (Control control in Controls)
             {
                 if (control is Button button && button != clickedButton)
@@ -197,7 +196,7 @@ namespace Carteira_De_Clientes
 
 
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+            clickedButton.ForeColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");
 
             foreach (Control control in Controls)
             {
@@ -225,7 +224,7 @@ namespace Carteira_De_Clientes
 
 
             Button clickedButton = (Button)sender;
-            clickedButton.ForeColor = Color.Red;
+            clickedButton.ForeColor = System.Drawing.ColorTranslator.FromHtml("#b5bac9");
 
             // Define a cor preta para os outros botões
             foreach (Control control in Controls)
